@@ -1,0 +1,29 @@
+<div ng-switch-when="txt_2_img" class="mag_txt_2_img mag_txt_2_img{$field.field_id}">
+	<ul style="background-color:{$field.field_bgcolor};" num="{$field.field_num}">
+		{foreach item=item from=$field.field_items key=key}
+		{if $key lt $field.field_num}
+		<li class="li{$key+1}" style="border-color:{$field.item_bordercolor}">
+			<a href="{$item.linkurl}">
+				<div class="txtimgbox">
+					<div class="txtimg_infobox">
+						<div class="txtimg_title" style="color:{$item.title_color};font-size:{$field.title_fz};">{$item.title_info}</div>
+						<div class="txtimg_descibe" style="color:{$item.descibe_color};font-size:{$field.descibe_fz};">{$item.descibe_info}</div>
+					</div>
+					<div class="txtimg_imgbox">
+						{if $item.is_localimg == '0' && $item.field_img}
+						<img class="" src="{$item.field_img}">
+						{elseif $item.is_localimg == '1' && $item.field_img}
+						<img class="" src="{$IMAGE_PATH}/micromagazine/img/thememodal/{$item.field_img}">
+						{/if}
+					</div>
+					<div class="clearfix"></div>	
+				</div>
+			</a>
+		</li>
+		{/if}
+		{/foreach}
+		<div class="clearfix"></div>
+	</ul>
+</div>
+
+

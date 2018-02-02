@@ -1,0 +1,52 @@
+<div class="mag_prd_1_list mag_prd_1_list{$field.field_id}">
+{literal}
+<style>
+.mag_prd_1_list{/literal}{$field.field_id}{literal} .price{{/literal}color:{$field.pricecolor};font-size:{$field.price_fz};background-color: {$field.pricebgcolor};{literal}}
+.mag_prd_1_list{/literal}{$field.field_id}{literal} .prdbuybtn{{/literal}color:{$field.buycolor};font-size:{$field.buy_fz};background-color: {$field.buybgcolor};{literal}}
+.mag_prd_1_list{/literal}{$field.field_id}{literal} .pricebox .prdbuybtn:before,.mag_prd_1_list{/literal}{$field.field_id}{literal} .pricebox .prdbuybtn:after{{/literal}border-right-color:{$field.buybgcolor};{literal}}
+.mag_prd_1_list{/literal}{$field.field_id}{literal} .pricebox .price_arrowr{{/literal}border-top-color:{$field.prdbgcolor};border-bottom-color:{$field.prdbgcolor};border-left-color:{$field.pricebgcolor};{literal}}
+.mag_prd_1_list{/literal}{$field.field_id}{literal} .prdtaglabel{{/literal}color:{$field.hotcolor};background-color: {$field.hotbgcolor};{literal}}
+.mag_prd_1_list{/literal}{$field.field_id}{literal} .shopbuybtn{{/literal}color:{$field.shopcolor};background-color: {$field.shopbgcolor};border-color: {$field.shopbordercolor};font-size:{$field.shop_fz};{literal}}
+</style>
+{/literal}
+	<div class="prd_itemsbox" style="padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};background-color:{$field.field_bgcolor};">
+		<ul class="prd_items theme_prd_1_list">
+			{foreach item=item from=$field.field_items key=key}
+			<li style="margin-bottom:{$field.prd_mb};">
+				<a href="{if $item.groupbuy_act.groupbuy_url}{$item.groupbuy_act.groupbuy_url|urldecode}{elseif $item.url}{$item.url|urldecode}{else}javascript:void(0);{/if}" style="background-color:{$field.prdbgcolor};{if $field.isborder eq '1'}border-color:{$field.bordercolor};{else}border:none;{/if}">
+					{if $field.picfloat neq 'fl'}
+					<div class="pic" style="{if $field.picradius eq '1'}border-radius:100%;-webkit-border-radius :100%;{else}border-radius:none;{/if}">
+						<img src="{$item.img_url}">
+					</div>
+					{/if}
+					<div class="prdinfobox" style="text-align : {$field.infoalign}; {if $field.ishot eq '1'}padding-bottom: 20px;{/if}">
+						<div class="title" style="color:{$field.titlecolor};font-size:{$field.title_fz};">{$item.prdtitle}</div>
+						<div class="pricebox">
+							<div class="price"><span style="font-size:{$field.priceprefix_fz};}">{$field.priceprefix}</span>
+								{if $item.CreditLevelActInfo|@count}
+									{$item.CreditLevelActInfo.price}
+								{else}
+									{$item.prdprice}
+								{/if}
+							</div>
+							{if $field.isbuy neq '1'}<div class="price_arrowr"></div>{/if}
+							{if $field.isbuy eq '1'}<div class="prdbuybtn">{$field.buycon}</div>{/if}
+						</div>
+						{if $item.CreditLevelActInfo|@count}
+							<div class="pastprice" style="color:{$field.pricecolor};">原价：￥{$item.prdprice}</div>
+						{/if}
+						{if $field.isshopbtn eq '1'}<div class="shopbuybtn">{$field.shopcon}</div>{/if}
+					</div>
+					{if $field.picfloat neq 'fl'}
+					<div class="pic" style="{if $field.picradius eq '1'}border-radius:100%;-webkit-border-radius :100%;{else}border-radius:none;{/if}">
+						<img src="{$item.item_pic}">
+					</div>
+					{/if}
+					<!-- <div class="clearfix"></div> -->
+				</a>
+				{if $field.ishot eq '1'}<div class="prdtaglabel">{$field.hotcon}</div>{/if}
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>

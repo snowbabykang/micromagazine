@@ -1,0 +1,28 @@
+<div class="mag_pic_sticker mag_pic_sticker{$field.field_id}"> 
+	<div class="pic_stickerbox" style="padding:{$field.field_pd};background-color:{$field.field_bgcolor};">
+		<a href="javascript:void(0);">
+			{if $field.is_localimg == '0' && $field.field_bgimg}
+			<img class="bgimg" src="{$field.field_bgimg}">
+			{elseif $field.is_localimg == '1' && $field.field_bgimg}
+			<img class="bgimg" src="{$IMAGE_PATH}/micromagazine/img/thememodal/{$field.field_bgimg}">
+			{/if}
+			<div class="sticker_con" style="border-color: {$field.con_bordercolor};">
+				<div class="sticker_conbox" style="background-color:{$field.con_bgcolor};">
+					<div class="maintitle" style="font-size: {$field.title_fz};color:{$field.title_color};padding-bottom:{$field.pic_sticker_pd}">
+						{$field.title_info}
+					</div>
+					{if $field.is_subtitle == '1'}
+					<div class="subtitle" style="font-size: {$field.subtitle_fz};color:{$field.subtitle_color};">
+						{$field.subtitle_info}
+					</div>
+					{/if}
+					{if $field.is_btn == '1'}
+					<div class="titlebtn">
+						<span style="background-color:{$field.btn_bgcolor};font-size: {$field.btn_fz};color:{$field.btn_color};">{$field.btn_info}</span>
+					</div>
+					{/if}
+				</div>
+			</div>
+		</a>
+	</div>
+</div>

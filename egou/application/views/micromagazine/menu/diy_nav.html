@@ -1,0 +1,30 @@
+<div class="mag_menu">
+	<ul class="menu_nav" style="background-color:{$navigation.info.bgcolor};">
+		{foreach item=nav from=$navigation.info.navlist key=key}
+		<li class="{if $nav.nav_link|in_array:$current_url}active{/if}">
+			<a href="{$nav.nav_link}" style="color:{if $nav.nav_link|in_array:$current_url}{$navigation.info.lightcolor}{else}{$navigation.info.color}{/if};position:relative;">
+				{if $nav.nav_link|in_array:$current_url}   <!-- 选中状态 -->
+					{if $nav.nav_lightimg}
+						<img class="activeimg" src="{$nav.nav_lightimg}_180x180.jpg">
+					{else}
+						{if $key == 0}<i class="navicon icon_home_fill"></i>{/if}
+						{if $key == 1}<i class="navicon icon_classfiy_fill"></i>{/if}
+						{if $key == 2}<i class="navicon icon_cart_fill"></i><span class="menu_cartnum" style="background-color:{$navigation.info.lightcolor};"></span>{/if}
+						{if $key == 3}<i class="navicon icon_user_fill"></i>{/if}
+					{/if}
+				{else}   <!-- 未选中状态 -->
+					{if $nav.nav_imgurl}
+						<img src="{$nav.nav_imgurl}_180x180.jpg" class="nav_img">
+					{else}
+						{if $key == 0}<i class="navicon icon_home"></i>{/if}
+						{if $key == 1}<i class="navicon icon_classfiy"></i>{/if}
+						{if $key == 2}<i class="navicon icon_cart"></i><span class="menu_cartnum" style="background-color:{$navigation.info.lightcolor};"></span>{/if}
+						{if $key == 3}<i class="navicon icon_user"></i>{/if}
+					{/if}
+				{/if}
+				<p>{$nav.nav_title}</p>
+			</a>
+		</li>
+		{/foreach}
+	</ul>
+</div>

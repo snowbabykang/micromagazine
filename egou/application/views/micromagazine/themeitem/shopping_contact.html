@@ -1,0 +1,22 @@
+<div class="mag_shopping_contact mag_shopping_contact{$field.field_id}">
+	<div class="shopping_contactbox" style="background-color: {$field.field_bgcolor}">
+		<div class="fl">
+			<a href="{$home_url}">
+			<div class="shopping_img fl">
+				{if $shop_logo}
+				<img src="{$shop_logo}" alt="" />
+				{else}
+				<img src="{$IMAGE_PATH}/micromagazine/img/thememodal/icon_svg/wxlogo.svg" alt="" />
+				{/if}
+			</div>
+			<div class="fl shopping_name" style="color:{$field.fz_color}">{if $shop_name}{$shop_name}{else}微信商城{/if}</div>
+			</a>
+		</div>
+		<div class="fr">
+			<a href="{if $field.contact_phone}tel:{$field.contact_phone}{else}javascript:void(0);{/if}">
+				<i class="icon_phone fl" style="color: {$field.phone_color}"></i><span class="fl contact_info" style="color:{$field.fz_color}">{$field.contact_info}</span>
+			</a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>

@@ -1,0 +1,74 @@
+<!--购物车导航-->
+<div class="cart_nav">
+	<a class="cart_a icon_cart" href="{$HOST}/index.php/weixin/order/shoppingshow?viewer=&from=&sid={$sid}">
+		<span class="cart_num cnum">0</span>
+	</a>
+</div>
+<!-- 弹窗信息  -->
+<div class="alert_tips"></div>
+{*<link rel="stylesheet" href="{$IMAGE_PATH}/micromagazine/weixin/css/sku.css"/>*}
+<!-- 底部滑出的购物信息      -----------S---------- -->
+<div class="tools_wrap out" id="prd_bottom">
+	<div class="bg"></div>
+	<div class="content">
+		<div class="priceimginfo ui_border_b">
+			<div class="imagebox">
+            	 <img src="" />
+        	</div>
+        	<div class="prdtitlebox">
+	            <span class="prd_title_line line1"></span>
+					<div class="prd_price">
+						<div class="nowprice"></div>
+						<div class="pastprice"></div>
+						<span class="discountmark"></span>
+					</div>
+			</div>
+			<div class="price_close icon_close"></div> 
+		</div>
+		<div class="prd_sku ui_border_b"></div>
+		<div class="prd_buycount">
+			<div class="fl">数量</div>
+			<div class="fr">
+				<span class="quantity fl">剩余：<span class="quantity_num"></span></span>
+				<div class="prdnumbox ui_border_radius fr">
+					<span class="icon_minus btn_minus ui_border_r disabled"></span>
+					<span class="prdnum_val"><input class="prd_num" type="number" disabled value="1" axnum="10000"/></span>
+					<span class="icon_add btn_add ui_border_l"></span>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="fix_foot ui_border_t pos_a">
+			<span class="wx_btn ui_border_radius btncart">加入购物车</span>
+			<span class="wx_btn ui_border_radius redbtn btnbuy">立即购买</span>
+			<span class="wx_btn ui_border_radius redbtn zc_btn">众筹</span>
+			<span class="wx_btn ui_border_radius graybtn unsale_btn">该商品已下架</span>
+		</div>
+	</div>
+</div>
+<script src="{$IMAGE_PATH}/micromagazine/weixin/js/selectsku_20160535.js"></script>
+
+{literal}
+<script language="javascript">
+	/* 查询用户活动期间购买该商品的次数是否到达上限，若为真则不能再次购买 */
+	/* $('.nowBuy').on('click', function(e){
+		var prdid = $(this).closest('li').attr('replaceid');
+			$.ajax({
+				async: true,
+				type: "POST",
+				url: mag.HOST+'/weixin/order/fullreducedexist',
+				data: "sid=" + mag.sid + "&sina_uid=" + mag.sina_uid + "&num_iid=" + prdid,
+				success: function(msg) {
+					if(msg == 1){
+						$('.btncart').hide();
+						$('.btnbuy').hide();
+						$('.unsale_btn').text('您的购买次数已到达上限').css('display', 'block');
+					} else {
+					    $('.unsale_btn').hide().text('该商品已下架');
+					}
+			    }
+			});
+	}) */
+</script>
+{/literal}
+

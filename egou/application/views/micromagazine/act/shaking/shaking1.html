@@ -1,0 +1,26 @@
+<div class="mag_shake mag_shake{$field.field_id}">
+	<audio id="audioShack" src="{$HOST_STATIC}/js/new/images/wave.mp3" style="display:none;" preload="load"></audio>
+	<audio id="audioSuccess" src="{$HOST_STATIC}/js/new/images/success.mp3" style="display:none;" preload="load"></audio>
+	<div class="shaking_con">
+		<img src="{$styles.bgimg}">
+		<div class="shaking_body"  id="J_sstart">
+			<img src="{$field.field_wheelimg}" class="shaking_conbg">
+			<img src="{$field.field_handimg}" class="shaking_hand">
+			<img src="{$field.field_shadeimg}" class="shaking_shade">
+		</div>
+		<div class="shaking_infobox" style="text-align: center;">
+			<div class="shaking_info" style="color:{$field.field_color2};background-color:{$field.field_color1}">
+				{if $smarty.now lt $actinfo[0].start_time} 活动尚未开始
+				{elseif $smarty.now gt $actinfo[0].end_time} 活动已经结束
+				{else}
+				你还有<span id="count">{if $count < 0}0{else}{$count}{/if}</span>次机会
+				{/if}
+			</div>
+		</div>
+	</div>
+	<div style="color:{$field.field_color3};font-size:12px;text-align: center;">
+		<a class="a_link j_pop" style="color:{$field.field_color3};">活动说明</a> |
+		<a class="a_link" href="{$HOST}/index.php/weixin/shop/show?cid={$seller_id}" style="color:{$field.field_color3};">商城主页</a> |
+		<a class="a_link" href="{$HOST}/index.php/act/normal/prizelist?sid={$seller_id}&a_id={$a_id}" style="color:{$field.field_color3};">中奖记录</a>
+	</div>
+</div>

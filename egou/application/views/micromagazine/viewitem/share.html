@@ -1,0 +1,15 @@
+<div class="mag_share mag_share{$field.field_id}">
+	{if $field.field_style == 'diy' && $field.field_shareimg}
+	<div class="share-img" style="margin:{$field.field_mt} 0 {$field.field_mb};padding: 0 {$field.field_pr} 0 {$field.field_pl};">
+		<img src="{$field.field_shareimg}">
+	</div>
+	{elseif $field.field_style == 'default'}
+	<div class="share-btn" style="margin:{$field.field_mt} 0 {$field.field_mb};padding: 0 {$field.field_pr} 0 {$field.field_pl};">
+		<span class="btn fl"><img src="{$IMAGE_PATH}/weixin/sites/public/icon_msg.png">发送给朋友</span>
+        <span class="btn fr"><img src="{$IMAGE_PATH}/weixin/sites/public/icon_timeline.png">分享给朋友圈</span>
+	</div>
+	{/if}
+	<div class="share-cover">
+		<img src='{$IMAGE_PATH}/weixin/sites/public/guide.png' align='absMiddle'>
+	</div>
+</div>

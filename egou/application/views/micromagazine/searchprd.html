@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>搜索商品</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+    {*index.css form.css product.css sku.css*}
+	<link rel="stylesheet" href="{$IMAGE_PATH}/micromagazine/weixin/css/style_mgz_20171121.css"/>  	
+	{literal}
+	<style>
+	</style>
+	{/literal}
+</head>
+<body>
+<div class="mag_searchprd">
+	<div class="search-holder searchprdbox"
+		style="padding:8px 8px 0;background-color: #f8f7f5;">
+		<div class="holder-inner"><i class="search-icon icon_searchprd"></i>{$title}</div>
+	</div>
+</div>
+<div class="prd_itemsbox catepage_items" >
+	<ul class="prd_items mod-two-title defaultskin" style="padding:8px;"></ul>
+</div>
+{if 'search'|in_array:$navigation.function && $navigation.status eq '1'}
+{include file="micromagazine/menu/diy_nav.html"}
+{else}
+{include file="micromagazine/menu/common_nav.html"}
+{/if}
+<div class="alert_tips"></div>
+{include file="weixin/common/copyright.phtml"}
+{literal}
+<script type="text/javascript">
+var mag = {
+	HOST : "{/literal}{$HOST}{literal}",
+	sid : "{/literal}{$sid}{literal}",
+	storeid : "{/literal}{$storeid}{literal}",
+	getprdlisturl : "{/literal}{$HOST}{literal}/index.php/weixin/shop/searchprd?sid={/literal}{$sid}{literal}&title={/literal}{$title}{literal}&storeid={/literal}{$storeid}{literal}",
+	searchprdurl : "{/literal}{$HOST}{literal}/index.php/weixin/shop/search?sid={/literal}{$sid}{literal}",
+};
+</script>
+{/literal}
+
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/weixin/js/zepto.min.js"></script>
+<script type="text/javascript" src="{$HOST_STATIC}/moblie/js/core/fastclick.mini_20160524.js"></script>
+<script type="text/javascript" src="{$HOST_STATIC}/moblie/js/plugs/lazyload.js"></script>
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/weixin/js/searchbar.js"></script>
+{literal}
+<script type="application/javascript">
+/*弹层*/
+function showTips(a){
+	var alertText = $(".alert_tips").html(a).show();
+	setTimeout(function(){
+		alertText.hide();
+	}, 2000)
+}
+$(".searchprdbox").searchBar({
+	defvalue : "{/literal}{if $title}{$title}{else}{/if}{literal}",
+	onsearch: function(text){
+		$.ajax({
+			type: "POST",
+			data:{"sid" : mag.sid,"type":2,"title":text,"storeid":mag.storeid},
+			url: mag.HOST+"/index.php/weixin/shop/searchnote",
+			success: function(msg) {
+				location.href = mag.searchprdurl+"&title=" + text+"&storeid=" + mag.storeid;
+			}
+		});
+	},
+	getTagsData: {
+		his: function(plug, callback) {
+			$.ajax({
+				type: "POST",
+				data:{"sid" : mag.sid,"type":1,"storeid":mag.storeid},
+				url: mag.HOST+"/index.php/weixin/shop/searchnote",
+				success: function(msg) {
+					callback(JSON.parse(msg).result);
+				}
+			});
+		}
+	},
+	onhisClear:function(){
+		if (confirm('确定清除')) {
+			$.ajax({
+				type: "POST",
+				data:{"sid" : mag.sid,"storeid":mag.storeid},
+				url: mag.HOST+"/index.php/weixin/shop/delhistory",
+				success: function(msg) {
+					var data = JSON.parse(msg);
+					if(data.code == 1){
+						showTips("删除失败");
+					}
+				}
+			});
+		};
+	}
+});
+
+var lock = 0;
+; (function(a) {
+	a.fn.scrollPagination = function(b) {
+		var c = {
+			nop: 10,
+			offset: 0,
+			error: "加载完毕!",
+			delay: 0,
+			scroll: true
+		};
+		if (b) {
+			a.extend(c, b)
+		}
+		return this.each(function() {
+			$this = a(this);
+			$settings = c;
+			var f = $settings.offset;
+			var d = false;
+			if ($settings.scroll == true) {
+				$initmessage = "更多.."
+			} else {
+				$initmessage = "更多"
+			}
+			
+			if (!lock) { //a("#noload").val() != "1"
+				if (a(".prd_items li").length <= 4) {
+					var info = "";
+				} else {
+					var info =  $initmessage;
+				}
+				if(a(".loading-bar").length <= 0){
+					$this.append('<div class="loading-bar">'+info+'</div>');
+				};
+			}
+			function e() {
+				a.post(mag.getprdlisturl, {
+					action: "scrollpagination",
+					pagenum: $settings.nop,
+					offset: f,
+				},
+				function(g) {
+					var json = eval('(' + g + ')');
+					if (json.productlist == "") {
+						var html = '<p>没有相关搜索的商品</p><a href="javascript:history.go(-1)">返回上一页</a>';
+						$this.find(".loading-bar").addClass('nodata').html(html).show().unbind("click");
+					} else {
+						f = f + $settings.nop;
+						if (!lock) {
+							$this.find(".prd_items").append(json.productlist);
+							if (!json.next) { //没有更多了
+								lock = 1; 
+							}
+							if (lock) {
+								$this.find(".loading-bar").html("没有更多了").hide(1000);
+							}
+							if (a(".prd_items li").length <= 4) {
+							} else {
+								$this.find(".loading-bar").html($initmessage)
+							}
+							d = false
+						}
+					}
+				})
+			}
+			e(); 
+			if ($settings.scroll == true) {
+				a(window).scroll(function() {
+					if (a(window).scrollTop() + a(window).height() > $this.height() && !d) {
+						d = true;
+						if (!lock) {
+							$this.find(".loading-bar").html("正在加载中...");
+							setTimeout(function() {
+								e(); 
+							}, $settings.delay);
+						}
+					}
+				})
+			}
+			$this.find(".loading-bar").click(function() {
+				if (!lock) {
+					if (d == false) {
+						d = true;
+						e();
+					}
+				} else {
+					$this.find(".loading-bar").html("")
+				}
+			})
+		})
+	}
+})($);
+(function(){
+	$('.catepage_items').scrollPagination({
+		nop     : 6, 
+		offset  : 10, 
+		error   : '加载完毕!', 
+		delay   : 0, 
+		scroll  : true 
+	});
+})();
+</script>
+{/literal}
+</div>
+{include file="weixin/common/bottom.phtml"}
+</body>
+</html>

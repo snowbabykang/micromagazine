@@ -1,0 +1,82 @@
+{if $field.field_isshow}
+{literal}
+<style>
+.mag_store .cont-head{ background-color: #1e1d22;color: #fff;}
+.mag_store .cont-head .list-item {box-sizing: border-box;}
+.mag_store .cont-head .item_img {margin-right: .5rem;width: 3rem;height: 3rem;}
+.mag_store .list-item {padding: .575rem .75rem;}
+.mag_store .list-item, .mag_store .list-item+.list-item {position: relative;}
+.mag_store .cell-item, .mag_store .list-item {display: -webkit-flex;display: -webkit-box;display: flex;-webkit-flex-wrap: wrap;flex-wrap: wrap;-webkit-align-items: center;-webkit-box-align: center;align-items: center;width: 100%;}
+.mag_store .item-inner,.mag_store  .item-title {display: block;overflow: hidden;-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;}
+.mag_store .item-desc{overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;word-break: break-all;margin-top: .5em;line-height: 1.3;font-size: .6rem;color: #999;}
+.mag_store .item_after {margin-left: .5rem;text-align: right;color: #999;}
+.mag_store .cont-head .btns {display: inline-block;border: 1px solid rgba(255,255,255,0.50);border-radius: 100%;font-size: 12px;width: 2em;height: 2em;text-align: center;color: inherit;line-height: 2em;}
+.mag_store .btns + .btns {margin-left: .3rem;}
+.mag_store .icon_location{background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAFUUlEQVRoQ+1ZS1IjORDNFBHyEvcJGk4AnKDhBN2coNsbq7wa5gQMJxj3yiVvgBMMfYIxJxj3CRpOMGYJEUgTr0JyyLLKZZWrZ4KIqQ1EWFWVLz8vM18xvfGL37j99D+AVATLsvzIzMf4zVp7yswz9/+8KIpvXUa9swhMJpMDZr5k5k9E1N9g5MJae2etvRqNRg+7gukEgNb6koh+c17+TkQzGLm3t7cYDofz6XR6/Pr62hdCnFprPzHzkTN8LKW8GgwGi7ZAdgJwfX3df3l5+ZOIkC6PRHShlLprMmYymZwKIW6I6D0RzaWUZ21BtAYQGX8rpbzINUJrDRCfrbUPvV7vJPd+OKo1AK31H0SEfL9VSn1p8nrd7x4EIqGUOsl9TisAk8nkixDimojulVKnuS+Nz2utwVIfiOhKKVXV0rZXNgCXOj/ANMaYwxST4Mzz8/NnFyFvy12v17tNpQkYTAiBZy6klIc5qZQNQGt9QUS/16WOK1CkV4pKwTaDVKEHqfSrUmr80yLgw83MJ6DI8EWgS2vtX55OmfnGGIMz8DDqBGlCxpiz0WhUNTd/Bfdm1UKbCFhQplLqIJHLaEygxmRhl2U5ZuZfwDpFURzW3V+XmqmoZAFw6QHeXyve4LdHKeVxXR5rrT3I8ziVfHRTEapLqVYArLXfiqIAhS4vrTXY49Ja+7UoCtRJ8vLnUoxTluUdM380xgxGoxF6ROPVCkAqApsMi4B6ElijzP8UgO8NqeiEAHwdENEa2/wbKbTka6XUu9CwgMspxVA4686ApZI9pCzLH8yMqXaN4TqpATxEaw0u35dSvosLNfDunJkHIc06mkT3BtWu1YlrkH/jHUqprVN764PeA015GowFWGbA9WAdeLUaOay133u93mkMftsUjCORDWCbF7mCRrHuBy98IqJx3azjHZOqjU1UlA0gDHUqjaK6WA56cecNz+U8c+cIuDqo5vg202PKm0EPWesvTY0gOwKOTbBRoSNnT4+xQdF0uzYj/RQALgqtZ/iosVUdvO1u0SoCXUUh6gvZ3ocdrQHg5oA5Wq2Vfi1t6t6dslCi+2Le38+ZIF0KYhjE4vNkjDluqxHtFAFniB/Oti7osHBzeb8TGo0fEnTfO6XUeRNzBIrGzqLAzhEIhrQqlZo8GuzUT1LKg5wFPuWY1gCm0yn22yc/sGmtfU4nd96IuVbOYNAD+OFweN8UvVYp5OjuA5RmIoLavNyHw8kxWGoWzHyWmEbR/KBWLJeZUAhww94DM88xCIKdmoq7NgJe22FmqAmVVB5d99ZayOUr62OotHnNM5YhYyXP3QOnVKpFeEEAgLohpfyaSrckAKc2wzCv7UC4nRlj0H1nm7zigM+cAj03xpwLIUCX2AOSo3RMzYgylGz8dSqHP7KmZq8AiDyFm26ZeRzrP015GoGojm9jfOq5LsXgTAyPuFbU7BUAvrPiZdDxm/JvE5AQRFvj48gwM1SLo7BzrwDQWmOl6zfN+U0R8L+7iCLs2dJ76h2ptTOOAHbZoxxdZlswXZwLVPGlMhhHYMnl1tqbrr5j7Wp88P2t+g4ROniNhRxKqMPVPusWc3yUa+TkXQ1N5Dy+doY0jsHvIlTtkjTqcg2Vv7KYO07GyIBGMxdCPOYyVB3TGGPeu0+z6Dmgz1CerwQBKeU47gWNo4QbEZBaMSfHDWdFLkc3xcoZHOpba1caopdaaiJX9R4iwoBY++GwEUAcViEEjEBTOmZmeGmte7ZIJXR1jB9VdPFNYVsKzwKwyTAUGgSs6AykyANjDMSt+KP2w7ZGbnpvZwBaeL2TW948gH8AyfZ8Xlnu7p0AAAAASUVORK5CYII=) no-repeat center center;
+ width: 16px;height: 16px;display: inline-block;background-size: 16px;vertical-align: -3px;margin-right: 4px;}
+.mag_store .go-to {color:#0894ec;font-size:0.8rem;}
+.mag_store .busniesstime{border-top: 1px solid rgba(255, 255, 255, 0.28);}
+.mag_store .icon-ring{background-image:url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTAxNzUwODQ1ODk5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI5MjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNDgiIGhlaWdodD0iNDgiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTIzOC45MzMzMzMgMjczLjA2NjY2NyAwIDI3My4wNjY2NjdsMCA0NzcuODY2NjY3IDIzOC45MzMzMzMgMCA0NDMuNzMzMzMzIDIzOC45MzMzMzNMNjgyLjY2NjY2NyAzNC4xMzMzMzMgMjM4LjkzMzMzMyAyNzMuMDY2NjY3IDIzOC45MzMzMzMgMjczLjA2NjY2N3pNNjguMjY2NjY3IDM0MS4zMzMzMzNsMTcwLjY2NjY2NyAwIDAgMzQxLjMzMzMzM0w2OC4yNjY2NjcgNjgyLjY2NjY2NyA2OC4yNjY2NjcgMzQxLjMzMzMzM3pNNjE0LjQgODc3LjIyNjY2N2wtMzA3LjItMTYzLjg0TDMwNy4yIDMxNC4wMjY2NjdsMzA3LjItMTYzLjg0TDYxNC40IDg3Ny4yMjY2Njd6IiBwLWlkPSIyOTIzIiBmaWxsPSIjOTk5OTk5Ij48L3BhdGg+PHBhdGggZD0iTTgwNS41NDY2NjcgNjU4Ljc3MzMzM2MtNi44MjY2NjctNi44MjY2NjctMTMuNjUzMzMzLTYuODI2NjY3LTIwLjQ4LTYuODI2NjY3LTEwLjI0IDAtMTcuMDY2NjY3IDMuNDEzMzMzLTIzLjg5MzMzMyAxMC4yNGwwIDMuNDEzMzMzYy0xMC4yNCAxMy42NTMzMzMtMTAuMjQgMzQuMTMzMzMzIDMuNDEzMzMzIDQ3Ljc4NjY2N2wxNTcuMDEzMzMzIDEzNi41MzMzMzNjNi44MjY2NjcgNi44MjY2NjcgMTMuNjUzMzMzIDYuODI2NjY3IDIwLjQ4IDYuODI2NjY3IDEwLjI0IDAgMTcuMDY2NjY3LTMuNDEzMzMzIDIzLjg5MzMzMy0xMC4yNGwwLTMuNDEzMzMzYzEwLjI0LTEzLjY1MzMzMyAxMC4yNC0zNC4xMzMzMzMtMy40MTMzMzMtNDcuNzg2NjY3TDgwNS41NDY2NjcgNjU4Ljc3MzMzM3oiIHAtaWQ9IjI5MjQiIGZpbGw9IiM5OTk5OTkiPjwvcGF0aD48cGF0aCBkPSJNNzg1LjA2NjY2NyAzNDEuMzMzMzMzYzYuODI2NjY3IDAgMTcuMDY2NjY3LTMuNDEzMzMzIDIwLjQ4LTYuODI2NjY3bDE1Ny4wMTMzMzMtMTMzLjEyYzEzLjY1MzMzMy0xMy42NTMzMzMgMTcuMDY2NjY3LTM0LjEzMzMzMyAzLjQxMzMzMy00Ny43ODY2NjctNi44MjY2NjctNi44MjY2NjctMTcuMDY2NjY3LTEwLjI0LTI3LjMwNjY2Ny0xMC4yNC02LjgyNjY2NyAwLTE3LjA2NjY2NyAzLjQxMzMzMy0yMC40OCA2LjgyNjY2N2wtMTU3LjAxMzMzMyAxMzMuMTJjLTEzLjY1MzMzMyAxMy42NTMzMzMtMTcuMDY2NjY3IDM0LjEzMzMzMy0zLjQxMzMzMyA0Ny43ODY2NjdDNzY4IDMzNy45MiA3NzQuODI2NjY3IDM0MS4zMzMzMzMgNzg1LjA2NjY2NyAzNDEuMzMzMzMzeiIgcC1pZD0iMjkyNSIgZmlsbD0iIzk5OTk5OSI+PC9wYXRoPjxwYXRoIGQ9Ik0xMDI0IDUxMmMwLTE3LjA2NjY2Ny0xMy42NTMzMzMtMzQuMTMzMzMzLTM0LjEzMzMzMy0zNC4xMzMzMzNMNzg1LjA2NjY2NyA0NzcuODY2NjY3Yy0xNy4wNjY2NjcgMC0zNC4xMzMzMzMgMTMuNjUzMzMzLTM0LjEzMzMzMyAzNC4xMzMzMzNMNzUwLjkzMzMzMyA1MTJjMCAxNy4wNjY2NjcgMTMuNjUzMzMzIDM0LjEzMzMzMyAzNC4xMzMzMzMgMzQuMTMzMzMzTDk4OS44NjY2NjcgNTQ2LjEzMzMzM0MxMDEwLjM0NjY2NyA1NDYuMTMzMzMzIDEwMjQgNTMyLjQ4IDEwMjQgNTEyTDEwMjQgNTEyeiIgcC1pZD0iMjkyNiIgZmlsbD0iIzk5OTk5OSI+PC9wYXRoPjwvc3ZnPg==');
+width: 16px;height: 16px;display: inline-block;background-size: 16px;margin-right: 4px;opacity: 0.7;}
+.mag_store .d1 {height:auto;overflow:hidden;white-space:nowrap;font-size:0.7rem;}
+.mag_store .d2 {margin:0px auto;}
+.mag_store .div2 {width:auto;height:auto;float:left;overflow:hidden;}
+.storestate .tag{display: inline-block;line-height:1;font-size: .55rem;min-width: .55rem;min-height: .55rem;vertical-align: 1px;position: relative;
+border-color: transparent;border-radius: .12rem;padding:.2rem .15rem;margin-top:0.2rem}
+.storestate .tag.bg-gray{background: #999;}
+.storestate .tag.bg-success{background-color: #04be02;}
+.storestate .tag.bg-danger{background-color: #ef4f4f;}
+</style>
+{/literal}
+<div class="mag_store mag_store{$field.field_id}">
+		<div class="cont-head">
+          <div class="list-item">
+          	<div class="cell-item">
+              <img class="item_img" src="{$store_info.logo}_180x180.jpg" alt="">
+              <div class="item-inner">
+				<div class="location"> <i class="icon_location va-1"></i>{if $distance}{$distance}km{/if}
+					<span class="gotostore go-to link" data-lng="{$store_info.longitude}" data-lat="{$store_info.latitude}" data-shopName='{$store_info.name}'
+            		data-adrInfo='{$store_info.address}'>到这去></span>
+				</div> 
+                   <div class="item-desc">
+                   	<div class="cell-item">
+                   		<i class="icon-ring va-1"></i>
+                   		<div class="item-inner">
+                   			<div class="d1" id="div1">
+							   <div class="scroll" id="scroll">
+							     <div class="div2" id="div2">
+					            	{if $store_info.notice}{$store_info.notice}{else}欢迎光临{$store_info.name}{/if}
+							  	 </div>
+							     <div id="div3" class="div2"></div>
+							 </div>
+							</div>
+                   		</div>
+                   	</div>
+	            </div>
+	         </div>
+			<div class="item_after">
+                <a class="btns" href="tel:{$store_info.telephone}"><i class="icon_phone"></i></a>
+                <a class="btns" href="{$YWK_HOST}/index.php/storeweixin/shop/show?key=storeLbs&sid={$sid}&store_id={$store_info.id}"><i class="icon_classfiy"></i></a>
+		</div>
+            </div>
+		<div class="cell-item">
+			<div class="item-label storestate" style="width: 2.5rem;margin-right: .5rem;">
+			{if $open_state eq 0} <span class="tag bg-success" style="">正在营业</span>
+			{elseif $open_state eq 1}<span class="tag bg-gray">暂停接单</span>
+			{elseif $open_state eq 2}<span class="tag bg-danger">暂停发货</span>
+			{elseif $open_state eq 3}<span class="tag bg-gray">商家休息</span>{/if}
+		</div>
+		{if $store_info.business_time}
+               <div class="item-inner border-t busniesstime">
+                   <div class="item-desc" style="font-size:10px;">营业时间：
+                   {foreach from=$store_info.business_time item=item key = key}
+                   {$item.start_time}~{if $item.type == 2}次日{/if}{$item.end_time}&nbsp;&nbsp;
+                   {/foreach}
+                   </div>
+                  </div>
+    		{/if}
+                  </div>
+              </div>
+          </div>
+</div>
+{/if}

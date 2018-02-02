@@ -1,0 +1,15 @@
+<div class="mag_imglist mag_imglist{$field.field_id}" style="background-color: {$field.field_bgcolor};margin: {$field.field_mt} 0 {$field.field_mb} 0;padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};">
+	{foreach item=img from=$field.field_imgs key=key}
+	<div class="singleimglist imglist_{$field.field_arrange}" {if $field.field_arrange neq 'one'}style="padding-right:{$field.field_imgspace}"{/if}>
+		<a class="pos_r" {if $img.img_link}href="{$img.img_link|urldecode}"{/if} style="border-radius: {$field.field_radius};-webkit-border-radius: {$field.field_radius};overflow:hidden;">
+			{if $field.field_arrange eq 'one'}
+			<img src="{$img.img_url}_800x800.jpg">
+			{else}
+			<img src="{$img.img_url}">
+			{/if}
+			<p class="imgtitle {$field.field_showtitle}">{$img.img_title}</p>
+		</a>
+	</div>
+	{/foreach}
+	<div class="clearfix"></div>
+</div>

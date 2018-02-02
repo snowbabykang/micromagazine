@@ -1,0 +1,55 @@
+{literal}
+<style>
+.mag_storestatic .a_link {padding: 2px 4px; border-radius: 2px;}
+.mag_storestatic .ui-tab-nav li {text-align: left; padding:0 .75rem;}
+.mag_storestatic .more_menu {line-height: 45px; display: inline-block; padding: 0 .75rem;}
+.mag_storestatic .va-1 {vertical-align: -.1em;}
+.mag_storestatic .list-loader{text-align: center; padding: 5px; color: #888;}
+.mag_storestatic .icon-shop {width: 1rem;}
+.mag_storestatic .list-none {padding: 60px 20px; text-align: center; color: #888;}
+
+.mag_storestatic i, .tools_wrap i {font-style: normal;}
+.tools_wrap.fill .content {top: 0;}
+.tools_wrap.fill .content:after {display: none;}
+.tools_wrap.fill .content .item-inner {padding: 0;}
+.tools_wrap.fill .title {background: #1e1d22; color: #fff; height: 44px;}
+.tools_wrap.fill .menu-cont {
+	position: absolute; top: 44px; bottom: 0; width: 100%; left: 0;
+	-webkit-overflow-scrolling: touch; overflow: auto;
+}
+.tools_wrap .list-item,.tools_wrap .cell-item {	
+	display: -webkit-flex; display: -webkit-box; display: flex;
+	-webkit-flex-wrap: wrap; flex-wrap: wrap;
+	-webkit-align-items: center; -webkit-box-align: center;
+	align-items: center; width: 100%;
+}
+.tools_wrap .list-item,.tools_wrap .cell-item,.tools_wrap .item-inner {-webkit-box-sizing: border-box; box-sizing: border-box;}
+.tools_wrap .cell-link:active {background-color: rgba(0, 0, 0, 0.1);}
+.notdiybuy{color: #999;}
+</style>
+{/literal}
+<div class="mag_storestatic mag_storestatic{$field.field_id}">
+	<ul class="sticky_div ui-tab-nav">
+		<li><a href="{$YWK_HOST}/index.php/storeweixin/shop/show?key=storeLbs&sid={$sid}&store_id={$storeid}" class="a_link cell-link">
+			<img class="icon-shop" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADOUlEQVRYR6VXzVncMBCdsfcOVMCmAqACHCzOkAqyW0GWCoAKWCoAKgic0RCnAqADqCDkLnvyjT+Jzz+yZG9027U1evPmaeYZYcLKsmyepukJIp4CwDYA7NvtLwDwwcz3ZVk+FEXxNjYsjnlRDp7NZjcAkMn7zPyOiHLIh92/zcxzRNy1vwtjzHIMkCgApdQFAJzbg++SJFk/Pj5Kxr11fHy8X1XVChG/24cXWuvLUJKDALIs207T9MbS/WCMWY3JSA6zjK0B4ISZb8uyPCuKwrHVwjMIIM/zW8mEma+JaDWmVN138jxfI+IPAUFES18MLwBHOzPfEdFik8PdHpcIAJxprYWVMANW6c+I+Kq1rkX3v0spVTDzXlmWB90y9hhwiBHxYEhsUwEppSSRXz5GWwBEeLPZ7M9Y6oUtATNGnEqpexGl1rp1ZutHnueniPizqqrl09PT7VCmkhEzyw2pATDzGyIutdbF0J6jo6NFkiQ3zPyNiARMvVoAnPiMMTtD10buOjM/22ZUg2TmhTShUNkcuwBwqbWW3uIFIBkcdmlqZmWpzIwxcwfSBpfOWGitpU17l1KKAeB3U9xdBmoKQ+pXSklD6R0kwJj5kIh2AgB68XsAmHmXiL4MBcnzXOr91gVpr9qciGpd+JYF/xJiwKvUZjDX3ZpCbQgs2DVtCR6aZfKKMCamNE0LRNwT9ctYRkSZhq9lWWYx8XY7YguAU3hXqQN0ynxwnVI00WuzPua6yfk6oWTFIR1M7YTyvtSfmT+6GukBcPUcGh4bHi5sXfkanHcaitIBYMs3PKYCcMMNAN6JyFm4zzBeAA0tSG2/Tj20U/sXEeyQsAcNiVKqpi1kJmLAYl6gNwu6ARuuaNDRBBqWc1RBUxM1pU0QIW/ngDS95JixHgUggV33AwCp5zLkimVMy/fCWC85CoCAsNdzzcwy0S6I6LozJVfMfI6IKNY85Cea+0YDkE3W90tt94QN6RU22JXN+jVJksUUKzcJgENub4iYii37319hJdaOfYLdCIAEsiak/l4wxqyHhlDsqm4MIBZ47PNJAKwQ3Qeo94yqqt7HCjDaiLoniOsRzxjJruX5Ykz8AyG+Bj+psKfRAAAAAElFTkSuQmCC">
+			<span class="va-1">{$storename}</span></a></li>
+		<span class="more_menu cell-link j_menu_open"><i class="result">所有分类</i><span class="icon_rightarrow va-1"></span><span>
+	</ul>
+	<div class="prd_itemsbox catepage_items">
+		<div class="list-none" hidden>暂无商品数据</div>
+		<ul class="prd_items mod-two-title defaultskin"></ul>
+	</div>
+</div>
+
+<div class="tools_wrap fill" id="menu_bottom">
+	<div class="bg close-menu"></div>
+	<div class="content">
+		<div class="list-item title">
+			<p class="item-inner">选择分类</p>
+			<p class="icon_close close-menu"></p>
+		</div>
+		<div class="menu-cont">
+            <ul class="menu-list"></ul>
+        </div>
+	</div>
+</div>

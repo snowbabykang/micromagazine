@@ -1,0 +1,29 @@
+<div class="mag_three_colprd mag_three_colprd{$field.field_id}">
+	<div class="prd_itemsbox" style="padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};background-color:{$field.field_bgcolor};">
+		<ul class="prd_items theme_three_colprd">
+			{foreach item=item from=$field.field_items key=key}
+			<li style="padding:{$field.prdlipadding};">
+				<a href="{if $item.groupbuy_act.groupbuy_url}{$item.groupbuy_act.groupbuy_url|urldecode}{elseif $item.url}{$item.url|urldecode}{else}javascript:void(0);{/if}" style="background-color:{$field.prdbgcolor};padding:{$field.prdpadding};{if $field.isborder eq '1'}border-color:{$field.bordercolor};{else}border:none;{/if}">
+					<div class="pic" style="{if $field.picradius eq '1'}border-radius:100%;-webkit-border-radius :100%;{else}border-radius:none;{/if}">
+						<img src="{$item.img_url}">
+					</div>
+					{if $field.istitle eq '1' || $field.isprice eq '1'}
+					<div class="prdinfobox" style="text-align : {$field.infoalign};color:{$field.prdboxcolor};background-color: {$field.prdboxbgcolor};">
+						{if $field.istitle eq '1'}<div class="title" style="font-size:{$field.title_fz}">{$item.prdtitle}</div>{/if}
+						{if $field.isprice eq '1'}
+							<div class="price" style="font-size:{$field.price_fz}">
+								{if $item.CreditLevelActInfo|@count}
+									￥{$item.CreditLevelActInfo.price}
+								{else}
+									￥{$item.prdprice}
+								{/if}
+							</div>
+						{/if}
+					</div>
+					{/if}
+				</a>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<div class="mag_title mag_title{$field.field_id}">
+{literal}
+<style>
+.mag_title{/literal}{$field.field_id}{literal} div{{/literal}
+	font-weight:{$field.field_isbold};
+	font-size:{$field.field_fz};
+	text-indent:{$field.field_isindent};
+	padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};
+	background-color: {$field.field_bgcolor};
+	margin: {$field.field_mt} 0 {$field.field_mb} 0;{literal}
+}
+.mag_title{/literal}{$field.field_id}{literal} .title_three span:after{{/literal}border-color:{$field.field_stylecolor};{literal}border-right-color: transparent;}
+</style>
+{/literal}
+	{if $field.field_style eq 'zero'}
+		<div class="title_zero" style="text-align:{$field.field_align};color: {$field.field_color};"><p>{$field.field_con}</p></div>
+	{elseif $field.field_style eq 'one'}
+		<div class="title_one"><p style="border-left-color:{$field.field_stylecolor};color: {$field.field_color};">{$field.field_con}</p></div>
+	{elseif $field.field_style eq 'two'}
+		<div class="title_two"><p><span style="border-bottom-color: {$field.field_stylecolor};color: {$field.field_color};">{$field.field_con}</span></p></div>
+	{elseif $field.field_style eq 'three'}
+		<div class="title_three"><span style="background-color: {$field.field_stylecolor};color: {$field.field_color};">{$field.field_con}</span></div>
+	{/if}
+</div>

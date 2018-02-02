@@ -1,0 +1,30 @@
+<div class="mag_menu ">
+	<ul class="menu_nav common_nav">
+		<li class="{if $home_url|in_array:$current_url}active{/if}">
+			<a href="{$home_url}">
+				<i class="icon_home normalicon"></i>
+				<i class="icon_home_fill lighticon" style="display: none;"></i>
+				<p>首页</p>
+			</a>
+		</li>
+		<li>
+			<a href="{$HOST}/index.php/weixin/shop/getcatslistphone?sid={$sid}&t=item">
+				<i class="icon_classfiy"></i>
+				<i class="icon_classfiy_fill" style="display: none;"></i>
+				<p>分类</p>
+			</a>
+		</li>
+		<li>
+			<a href="{$HOST}/index.php/weixin/order/shoppingshow?sid={$sid}">
+				<i class="icon_cart"></i><span class="menu_cartnum"></span>
+				<p>购物车</p>
+			</a>
+		</li>
+		<li>
+			<a href="{$HOST}/index.php/weixin/shop/show?vmall=ShowBuyerOrder:{$sid}&sid={$sid}">
+				<i class="icon_user"></i>
+				<p>个人中心</p>
+			</a>
+		</li>
+	</ul>
+</div>

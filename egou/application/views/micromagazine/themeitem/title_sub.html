@@ -1,0 +1,28 @@
+<div class="mag_title_sub mag_title_sub{$field.field_id}"> 
+	<div class="titlesubbox {if $field.is_borderb == '1'}hasborderb{/if}" style="padding:{$field.field_pd};background-color:{$field.field_bgcolor};">
+		<a href="{if $field.linkurl}{$field.linkurl}{else}javascript:void(0);{/if}" style="background-color:{$field.img_bgcolor};">
+			{if $field.is_localimg == '0' && $field.field_bgimg}
+			<img class="titlebgimg" src="{$field.field_bgimg}">
+			{elseif $field.is_localimg == '1' && $field.field_bgimg}
+			<img class="titlebgimg" src="{$IMAGE_PATH}/micromagazine/img/thememodal/{$field.field_bgimg}">
+			{/if}
+			<div class="titlesub_con{$field.subtitle_float} {if $field.field_bgimg}titlesub_conimg{else}titlesub_con{/if}"
+				style="padding:{$field.titleinfo_pt} 10px {$field.titleinfo_pb};">
+				<div class="maintitle" style="font-size: {$field.title_fz};color:{$field.title_color};padding-bottom:{$field.title_sub_pd};text-align:{$field.title_align};">
+					{$field.title_info}
+				</div>
+				{if $field.is_subtitle == '1'}
+				<div class="subtitle" style="font-size: {$field.subtitle_fz};color:{$field.subtitle_color};text-align:{$field.title_align};">
+					{$field.subtitle_info}
+				</div>
+				{/if}
+				{if $field.is_btn == '1'}
+				<div class="titlebtn" style="text-align:{$field.title_align};">
+					<span style="font-size: {$field.btn_fz};color:{$field.btn_color};">{$field.btn_info}</span>
+				</div>
+				{/if}
+				<div class="clearfix"></div>
+			</div>
+		</a>
+	</div>
+</div>

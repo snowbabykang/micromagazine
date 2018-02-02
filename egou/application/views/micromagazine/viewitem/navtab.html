@@ -1,0 +1,69 @@
+<div class="mag_navtab mag_navtab{$field.field_id}">
+	<div class="ui-detail-comments ui-tab" id="scrollthis">
+	    <ul class="sticky_div ui-tab-nav">
+	    	{foreach item=item from=$field.field_navs key=key}
+			<li class="ui_border_b {if $key == 0}current{/if}">{$item.title}</li>
+			{/foreach}
+	    </ul>
+	    <div class="ui-tab-cont">
+        	<ul class="ui-tab-content navtabwidth" data-len = "{$field.field_navs|@count}">
+        		{foreach item=item from=$field.field_navs key=key}
+				<li {if $key==0}style="height:auto;" class="current"{/if}>
+					{if $item.type eq 'prd'}
+						<ul class="prd_items navtab_prd {if $item.prdtype}{$item.prdtype}{else}mod-col-list{/if}">
+							{foreach item=x from=$item.content}
+							<li replaceid="{$x.dataid}">
+								<a href="{$x.prd}">
+									<div class="pic">
+										<img src="{$x.pic}">
+										{if $item.prdtype == "mod_prd_list"}<div class="price">￥{$x.price}</div>{/if}
+									</div>
+									{if $item.prdtype !== "mod_prd_list"}
+									<div class="prdinfo">
+										<div class="title">{$x.title}</div>
+										<div class="price">
+											<span class="fl nowprice">{if $x.price}￥{$x.price}{else}暂无报价{/if}</span>
+											<div class="morearea nowBuy"><span class="havecart cartfont"><i class="icon_addcart"></i></span></div>
+											<div style="clear:both"></div>
+										</div>
+									</div>
+									{/if}
+								</a>
+							</li>
+							{/foreach}
+						</ul>
+					{elseif $item.type eq 'mag'}
+						<ul class="navtabcontentlist">
+							{foreach item=x from=$item.content}
+							<li data-id="{$x.id}">
+								<a href="{$x.url}">
+									<div class="pic"><img src="{$x.img}"></div>
+									<div class="navtabcon">
+										<div class="title">{$x.title}</div>
+										<span class="subtitle">{$x.subtitle}</span>
+									</div>
+								</a>
+							</li>
+							{/foreach}
+						</ul>
+					{elseif $item.type eq 'imgtxt'}
+						<ul class="navtabcontentlist">
+							{foreach item=x from=$item.content}
+							<li data-id="{$x.id}">
+								<a href="{$x.url}">
+									<div class="pic"><img src="{$x.img}"></div>
+									<div class="navtabcon">
+										<div class="title">{$x.title}</div>
+										<span class="subtitle">{$x.subtitle}</span>
+									</div>
+								</a>
+							</li>
+							{/foreach}
+						</ul>
+					{/if}
+				</li>
+				{/foreach}
+		     </ul> 
+		</div>
+	</div>	
+</div>

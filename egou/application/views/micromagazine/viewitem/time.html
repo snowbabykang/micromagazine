@@ -1,0 +1,22 @@
+<div class="mag_time mag_time{$field.field_id}">
+{literal}
+<style>
+.mag_time{/literal}{$field.field_id}{literal} span{
+	{/literal}
+	width:{$field.field_size};
+	height:{$field.field_size};
+	line-height:{$field.field_size};
+	background-color: {$field.field_timebgcolor};
+	color: {$field.field_timefcolor};
+	font-size: {$field.field_timefz};
+	{literal}
+}
+</style>
+{/literal}
+	<div style="font-size:{$field.field_fz};background-color: {$field.field_bgcolor};color: {$field.field_color};
+		padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};margin: {$field.field_mt} 0 {$field.field_mb} 0;text-align: center;">{$field.field_con}
+		{if $field.field_time}
+		<div style="display:inline-block;" class="endtime" rel="{$field.field_time}"></div>
+		{/if}
+	</div>
+</div>

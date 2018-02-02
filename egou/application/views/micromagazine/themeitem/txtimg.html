@@ -1,0 +1,28 @@
+<div class="mag_txtimg mag_txtimg{$field.field_id}" style="padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};background-color:{$field.field_bgcolor};">
+	{if $field.txtimgfloat eq 'left'}
+	<div class="txtimg_borderbox">
+		<div class="txtimg_imgbox" style="{if $field.is_border eq '1'}border-color:{$field.border_color};padding:5px;{else}border:none;padding:0px;{/if}">
+			<img src="{$field.imgurl}">
+		</div>
+	</div>
+	{/if}
+	<div class="txtimg_infobox" style="padding-left:{if $field.txtimgfloat eq 'right'}0px{else}8px{/if};">
+		{if $field.is_title eq '1'}
+		<div class="txtimg_title" style="color:{$field.title_color};font-size:{$field.title_fz};">{$field.field_title}</div>
+		{/if}
+		{if $field.is_descibe eq '1'}
+		<div class="txtimg_descibe" style="color:{$field.descibe_color};font-size:{$field.descibe_fz};">{$field.field_descibe}</div>
+		{/if}
+		{if $field.is_btn eq '1'}
+		<div class="txtimg_btn" style="color:{$field.btn_color};font-size:{$field.btn_fz};border-color:{$field.btn_color};">{$field.field_btn}</div>
+		{/if}
+	</div>
+	{if $field.txtimgfloat eq 'right'}
+	<div class="txtimg_borderbox">
+		<div class="txtimg_imgbox" style="{if $field.is_border eq '1'}border-color:{$field.border_color};padding:5px;{else}border:none;padding:0px;{/if}">
+			<img src="{$field.imgurl}">
+		</div>
+	</div>
+	{/if}
+	<div class="clearfix"></div>	
+</div>

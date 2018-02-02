@@ -1,0 +1,160 @@
+{if $field.field_prdtheme neq 'defaultskin' && $field.field_makeup eq 'mod-two-title'}
+{literal}
+<style>
+.mag_product{/literal}{$field.field_id}{literal} .mod-two-title li a{{/literal}
+	padding:{$field.field_prdstyle.bgpadding};
+	background-color:{$field.field_prdstyle.bgcolor};
+	overflow: hidden;
+	box-shadow:{$field.field_prdstyle.bgshadow};
+	border-radius:{$field.field_prdstyle.bgradius};
+	-webkit-border-radius:{$field.field_prdstyle.bgradius};
+	-moz-border-radius:{$field.field_prdstyle.bgradius};{literal}}
+.mag_product{/literal}{$field.field_id}{literal} .mod-two-title li .prdinfo{{/literal}
+	background-color:{$field.field_prdstyle.infobgcolor};
+	padding:{$field.field_prdstyle.infopadding};{literal}}
+.mag_product{/literal}{$field.field_id}{literal} .mod-two-title li .prdinfo .title{{/literal}
+	-webkit-line-clamp:{$field.field_prdstyle.titleline};
+	margin:{$field.field_prdstyle.titlemargin};
+	height:{$field.field_prdstyle.titleheight};
+	line-height:{$field.field_prdstyle.titlelineheight};
+	text-align:{$field.field_prdstyle.titlealign};
+	color:{$field.field_prdstyle.titlecolor};
+	font-size:{$field.field_prdstyle.titlesize};{literal}}
+.mag_product{/literal}{$field.field_id}{literal} .mod-two-title li .prdinfo .price{{/literal}
+	color:{$field.field_prdstyle.pricecolor};
+	font-size:{$field.field_prdstyle.pricesize};
+	text-align:{$field.field_prdstyle.pricealign};
+	line-height:{$field.field_prdstyle.pricelineh};{literal}}	    		
+.mag_product{/literal}{$field.field_id}{literal} .mod-two-title li .prdinfo .havecart{{/literal}
+	background-color:{$field.field_prdstyle.buybgcolor};
+	border-radius:{$field.field_prdstyle.buyradius};
+	-webkit-border-radius:{$field.field_prdstyle.buyradius};
+	-moz-border-radius:{$field.field_prdstyle.buyradius};
+	padding:{$field.field_prdstyle.buypadding};
+	color:{$field.field_prdstyle.buycolor};
+	{literal}}	    		
+.mag_product{/literal}{$field.field_id}{literal} .mod-two-title li .prdinfo .havecart.cartfont{{/literal}
+	width:{$field.field_prdstyle.buysize};
+	height:{$field.field_prdstyle.buysize};
+	line-height:{$field.field_prdstyle.buysize};
+	font-size:{$field.field_prdstyle.buysize};{literal}}	
+.mag_product{/literal}{$field.field_id}{literal} .pinkskin li a{{/literal}
+	border-bottom: 3px solid {$field.field_prdstyle.buybgcolor};{literal}}
+.mag_product{/literal}{$field.field_id}{literal} .mod-two-title li .prdpricebtn{{/literal}
+	height:{$field.field_prdstyle.pricelineh};{literal}overflow:hidden;}
+.mag_product{/literal}{$field.field_id}{literal} .preselltag,.mag_product{/literal}{$field.field_id}{literal} .discountstyle,.mag_product{/literal}{$field.field_id}{literal} .specialtag
+		{{/literal}background-color: {$field.field_prdstyle.buybgcolor};{literal}}
+</style>
+{/literal}
+{/if}
+<div class="mag_product mag_product{$field.field_id}">
+	{if $field.field_items}
+	<div class="prd_itemsbox" style="background-color: {$field.field_bgcolor};margin:{$field.field_mt} 0 {$field.field_mb} 0;">
+		<ul class="prd_items {$field.field_makeup} {if $field.field_makeup eq 'mod-two-title'}{$field.field_prdtheme}{/if} {$field.field_class}" style="padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};">
+			{foreach item=item from=$field.field_items key=key}
+			<li replaceid="{$item.id}" {if $field_prdids neq "" && ($item.prdapprove eq 'unsale' || $item.prdnum eq 0)}class="prd_unsale" is_unsale="unsale"{/if}
+			 {if $item.prdpresell || $item.groupbuy_act || $item.prdcommonact}is_act="isact"{/if}>
+			{if $item.groupbuy_act}
+				<a href="{if $item.groupbuy_act.groupbuy_url}{$item.groupbuy_act.groupbuy_url|urldecode}{elseif $item.url}{$item.url|urldecode}{else}javascript:void(0);{/if}">
+			{else}
+				<a href="{if $item.url}{$item.url|urldecode}{else}javascript:void(0);{/if}">
+			{/if}	
+					<div class="pic">
+						{if $field.field_prdids eq ""}
+						<img src="{$item.img_url}">
+						{else}
+						<img src="{$item.img_url}_{$mod_param_arr[$field.field_makeup]}x{$mod_param_arr[$field.field_makeup]}.jpg">
+						{/if}
+						{if $field.field_makeup neq 'mod-col-list'}        <!-- 列表排列样式标签位置不一样 -->
+							{if $item.score_exchange}       <!-- {$CREDIT}换购保持最高优先级 -->
+								<div class="preselltag"><div class="tagcon">{$CREDIT}换购</div></div>
+							{else}	
+								{if $item.CrowdFundPrd}<div class="preselltag"><div class="tagcon">众筹</div></div>{/if}
+								{if $item.prdpresell}<div class="preselltag"><div class="tagcon">预售</div></div>{/if}
+								{if $item.groupbuy_act}<div class="preselltag"><div class="tagcon">组团购</div></div>{/if}
+								{if $item.prdcommonact}<div class="preselltag"><div class="tagcon">微团购</div></div>{/if}
+								{if $item.CreditLevelAct|@count && !$item.prdcommonact}
+									{if $item.CreditLevelAct.level.ActType  == "money"}
+										<div class="specialtag">立减</div>
+				                    {else}
+										{if $item.CreditLevelAct.level.Discount neq 1}<div class="specialtag">{$item.CreditLevelAct.level.Discount*10}折</div>{/if}
+				                    {/if}
+								{/if}	
+							{/if}
+						{/if}
+						{if $field.field_makeup eq 'mod_prd_list'}<div class="price">￥{$item.prdprice}</div>{/if}
+					</div>
+					{if $field.field_makeup neq 'mod_prd_list'}
+					<div class="prdinfo">
+						{if $field.field_makeup eq 'mod-col-list'}
+							{if $item.score_exchange}       <!-- 列表排列样式标签位置不一样 -->
+								<div class="preselltag"><div class="tagcon">{$CREDIT}换购</div></div>
+							{else}	
+								<div class="preselltag">
+								{if $item.CrowdFundPrd}<div class="tagcon">众筹</div>{/if}
+								{if $item.prdpresell}<div class="tagcon">预售</div>{/if}
+								{if $item.groupbuy_act}<div class="tagcon">组团购</div>{/if}
+								{if $item.prdcommonact}<div class="tagcon">微团购</div>{/if}
+								{if $item.CreditLevelAct|@count && !$item.prdcommonact}
+									{if $item.CreditLevelAct.level.ActType  == "money"}
+										<div class="tagcon">立减</div>
+				                    {else}
+										{if $item.CreditLevelAct.level.Discount neq 1}<div class="tagcon">{$item.CreditLevelAct.level.Discount*10}折</div>{/if}
+				                    {/if}
+								{/if}
+								</div>	
+							{/if}
+						{/if}  
+						<div class="title">{$item.prdtitle}</div>
+						<div class="price">
+							{if $item.score_exchange}   <!-- {$CREDIT}换购保持最高优先级 -->              <!-- 只有默认主题才有原价现价之分 -->
+								{if $item.score_exchange.exchange_price neq 0.00}
+									<span class="fl nowprice"><small>￥</small>{$item.score_exchange.exchange_price}</span>
+									{if $field.field_prdtheme eq 'defaultskin'}<div class="credit_change"><span class="plus">＋</span><span class="creditnum">{$item.score_exchange.exchange_score}<small>{$CREDIT}</small></span></div>{/if}
+								{else}
+									<span class="fl nowprice">{$item.score_exchange.exchange_score}<small>{$CREDIT}</small></span>
+								{/if}
+							{else}
+								<span class="fl nowprice">
+									{if $item.prdcommonact->act_info}
+									    
+										<small>￥</small>{$item.prdcommonact->act_info.ActPrice}
+									   
+									{elseif $item.CreditLevelActInfo|@count}
+										<small>￥</small>{$item.CreditLevelActInfo.price}
+									{else}
+										<small>￥</small>{$item.prdprice}
+									{/if}
+								</span>
+								{if $field.field_prdtheme eq 'defaultskin'}
+									{if $item.prdcommonact->act_info || $item.CreditLevelActInfo|@count}
+									   {if $item.prdcommonact->act_info.ActType!=1}
+										<span class="pastprice"><small>￥</small>{$item.prdprice}</span>
+									{/if}
+								{/if}
+								{/if}
+								{if $field.field_showcart eq 'havecart'}
+									{if $item.CrowdFundPrd}
+										<div class="morearea nowBuy" is_zc="zc" is_focus='{$item.zc_order_focus}'><span class="havecart {if $field.field_prdstyle.iscart == '1'}cartfont{else}cartinfo{/if} discountstyle">去众筹</span></div>
+									{else}
+									{if $field.field_prdtheme == 'defaultskin' || $field.field_prdstyle.iscart == '1'}
+									<div class="morearea nowBuy"><span class="havecart cartfont"><i class="icon_addcart"></i></span></div>
+									{elseif $field.field_prdstyle.iscart == '2'}
+									<div class="morearea nowBuy"><span class="havecart cartinfo">{$field.field_prdstyle.buyinfo}</span></div>
+									{/if}
+									{/if}
+								{/if}
+							{/if}
+							<div style="clear:both"></div>
+						</div>
+					</div>
+					{/if}
+				</a>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+	{/if}
+</div>
+
+

@@ -1,0 +1,43 @@
+<div class="mag_contact mag_contact{$field.field_id}">
+{literal}
+<style>
+.mag_contact{/literal}{$field.field_id}{literal} .contact_modal{{/literal}font-size:{$field.field_fz};
+		background-color: {$field.field_bgcolor};
+		color: {$field.field_color};
+		padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};
+	    margin: {$field.field_mt} 0 {$field.field_mb} 0;{literal}}
+.mag_contact{/literal}{$field.field_id}{literal} .contact_modal14{{/literal}margin: {$field.field_mt} 0 {$field.field_mb} 0;{literal}}
+</style>
+{/literal}
+	{if $field.field_modal eq 1}
+	<div class="contact_modal contact_modal1">
+		<a href="tel:{$field.field_tel}">
+			<div class="fl"><i class="icon_phone fl"></i>{$field.field_con}</div><div class="fr">{$field.field_tel}</div>
+			<div class="clearfix"></div>
+		</a>
+	</div>
+	{elseif $field.field_modal eq 2}
+	<div class="contact_modal contact_modal2" style="text-align:center">
+		<a href="tel:{$field.field_tel}">
+			<i class="icon_phone"></i>{$field.field_con}
+		</a>
+	</div>
+	{elseif $field.field_modal eq 3}
+	<div class="contact_modal contact_modal3">
+		<a href="tel:{$field.field_tel}">
+			<div class="fl" style="border-right:1px solid {$field.field_color};width:75%;box-sizing: border-box;">
+				<div style="font-size:{$field.field_phonefz};color: {$field.field_phonecolor};">{$field.field_tel}</div>
+				<div>{$field.field_con}</div>
+			</div>
+			<div class="fr" style="width:25%;text-align:center;"><i class="icon_phone" style="font-size:28px;"></i></div>
+			<div class="clearfix"></div>
+		</a>
+	</div>
+	{elseif $field.field_modal eq 4}
+	<div class="contact_modal4">
+		<a href="tel:{$field.field_tel}">
+			<img src="{$field.field_img}">
+		</a>
+	</div>
+	{/if}
+</div>

@@ -1,0 +1,9 @@
+<div class="mag_notice mag_notice{$field.field_id}">
+	<a href="{if $field.linkurl}{$field.linkurl|urldecode}{else}javascript:void(0);{/if}" style="display:block;font-size:{$field.field_fz};
+	background-color: {$field.field_bgcolor};
+	color: {$field.field_color};
+	padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};
+    margin: {$field.field_mt} 0 {$field.field_mb} 0;">
+	<div id="magnotice1" style=""><span id="magnotice2">{$field.field_con}</span><span id="magnotice3"></span></div>
+	</a>
+</div>

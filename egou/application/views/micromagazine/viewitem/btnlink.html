@@ -1,0 +1,12 @@
+<div class="mag_btnlink mag_btnlink{$field.field_id}" style="text-align:{$field.field_align}">
+	<a href="{if $field.linkurl}{$field.linkurl|urldecode}{else}javascript:void(0);{/if}" style="
+	font-size:{$field.field_fz};
+	background-color: {$field.field_bgcolor};
+	color: {$field.field_color};
+	border: 1px solid {$field.field_bordercolor};
+	padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};
+    margin: {$field.field_mt} {$field.field_mr} {$field.field_mb} {$field.field_ml};
+	text-align: center;display:{$field.field_isblock};border-radius: {$field.field_radius};-webkit-border-radius: {$field.field_radius};">
+		{$field.field_con}
+	</a>
+</div>

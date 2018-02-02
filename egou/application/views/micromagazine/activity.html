@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>{$title}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+	{*index.css form.css product.css sku.css*}
+	<link rel="stylesheet" href="{$IMAGE_PATH}/micromagazine/weixin/css/style_mgz_20171123.css"/> 	
+	<link rel="stylesheet" href="{$IMAGE_PATH}/diyform/weixin/css/form_2017.css"/> 
+	<link rel="stylesheet" href="{$IMAGE_PATH}/micromagazine/weixin/css/act_2017.css"/>
+	<link rel="stylesheet" href="{$HOST_STATIC}/modal/css/act_common_2017.css"/>
+	{*<link rel="stylesheet" href="{$IMAGE_PATH}/micromagazine/weixin/css/theme.css"/>*}
+	{literal}
+	<style>
+		body{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+		@media screen and (min-width:1000px){
+			.sidecode-qrc{ width:102px; height:102px; background-image:url({/literal}{if $selleroauthinfo.wx_id}https://open.weixin.qq.com/qr/code?username={$selleroauthinfo.wx_id}&style=1{elseif $selleroauthinfo.uid} https://open.weixin.qq.com/qr/code?username={$selleroauthinfo.uid}&style=1{/if}{literal});
+			  background-size: 102px 102px; background-repeat: no-repeat;}
+		}
+		.sidecode p{margin-bottom: 10px;}
+		@media screen and (max-width:999px){body{background-color: {/literal}{$styles.bgcolor}{literal};}#magazine_con{background-color: {/literal}{$styles.bgcolor}{literal};}}
+		#magazine_con{padding:{/literal}{$mgz_content.paddingt} {$mgz_content.paddingr} {if 'menu'|in_array:$field_type}55px{else}{$mgz_content.paddingb}{/if} {$mgz_content.paddingl}{literal};}
+		{/literal}{if 'dazhuanpan'|in_array:$field_type}{literal}
+		/* 转盘设置的主颜色 */
+		.actcolor1{color:{/literal}{$styles.color1}{literal};}	
+		.actcolor2{color:{/literal}{$styles.color2}{literal};}	
+		{/literal}{/if}{literal}
+</style>
+	{/literal}
+	{include file="weixin/common/loadjs.phtml"}
+</head>
+<body>
+<div id="magazine_con" class="page-content">
+	{$smarty_data}
+	{include file="weixin/common/copyright.phtml"}
+	{if $selleroauthinfo.wx_id || $selleroauthinfo.uid}
+	<div class="sidecode">
+		<div class="sidecode-qrc"></div>
+		<p>微信扫一扫<br/>
+		获取更多内容</p>
+	</div>
+	{/if}
+</div>
+<div class="alert_tips"></div>
+<div class="page_loading">
+	<div class="loading_mask">
+		<ul class="anm">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</div>
+{if 'form'|in_array:$field_type}
+<div id="formdialog" class="dialog">
+	<div class="dialog__overlay"></div>
+	<div class="dialog__content">
+		<span class="Jdialogclose iconxclose">&times;</span>
+		<div class="dialog-txt"></div>
+		<div class="dialog-footer"><a class="action Jdialogaction" href="javascript:void(0);">Close</a></div>
+	</div>
+</div>
+{/if}
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/weixin/js/zepto.min.js"></script>
+<script type="text/javascript" src="{$HOST_STATIC}/moblie/js/core/fastclick.mini_20160524.js"></script>
+<script type="text/javascript" src="{$HOST_STATIC}/modal/js/my.js"></script>
+<script type="text/javascript" src="{$HOST_STATIC}/moblie/js/plugs/lazyload.js"></script>
+{include file="activity/normal/common/award.phtml"}
+{if 'shaking'|in_array:$field_type}{include file="activity/normal/common/pop_info.phtml"}{/if}    <!-- 活动说明 -->
+{include file="weixin/common/wxconfig.phtml"}
+{include file="weixin/common/share.phtml"}
+{literal}
+<script type="text/javascript">
+var mag = {
+	HOST : "{/literal}{$HOST}{literal}",
+	sid : "{/literal}{$sid}{literal}",
+	credit_mark : '{/literal}{$CREDIT}{literal}',
+	seller_id:'{/literal}{$seller_id}{literal}',
+	cid : "{/literal}{$cid}{literal}",
+	sina_uid : "{/literal}{$sina_uid}{literal}",
+	is_system : "{/literal}{$MOBILE_PHONE_SYSTEM}{literal}",
+	istime : {/literal}{if 'time'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有倒计时模块
+	iscarousel : {/literal}{if 'carousel'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有轮播图模块
+	isshare : {/literal}{if 'share'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有分享模块
+	isvideo : {/literal}{if 'video'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有视频模块
+	ispuzzle : {/literal}{if 'puzzle'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有拼图模块
+	isform : {/literal}{if 'form'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有表单模块
+	isnotice : {/literal}{if 'notice'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有公告模块
+	issearchprd : {/literal}{if 'searchprd'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有搜索模块
+	isnavtab : {/literal}{if 'navtab'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有tab切换模块
+	serverTime : {/literal}{if $time} {$time} * 1000{else}0{/if}{literal},
+	subscribe : {/literal}{if $subscribe}{$subscribe}{else}0{/if}{literal},
+	shopIndex : "{/literal}{$home_url}{literal}",
+	isdzp : {/literal}{if 'dazhuanpan'|in_array:$field_type}1{else}0{/if}{literal},      //判断是否有大转盘模块
+	{/literal}{if 'dazhuanpan'|in_array:$field_type}{literal}
+	wheelmodel : {/literal}{$turntable_color}{literal},           //大转盘轮盘模块（画盘时需要）
+	winfo : {/literal}[{if $act_info.prizeinfo|@count eq '1'}'{$act_info.prizeinfo.0.name}', '谢谢参与', '{$act_info.prizeinfo.0.name}', '要加油哦',{else}{foreach from=$act_info.prizeinfo key=id item = i}'{$i.name}', '谢谢参与',{/foreach}{/if}]{literal},
+	{/literal}{/if}{literal}
+	defaultimg : "{/literal}{$HOST_STATIC}{literal}/images/activity/helpbuy/helpbuy-icon.jpg",
+	act_kind : "{/literal}{$act_kind}{literal}",
+	searchprdurl : "{/literal}{$SELLER_HOST}{literal}/index.php/weixin/shop/search?sid={/literal}{$sid}{literal}",
+};
+var actlink = "{/literal}{if 'dazhuanpan'|in_array:$field_type}turntable{elseif 'shaking'|in_array:$field_type}simpleset{/if}{literal}";
+//分享信息
+var title = "{/literal}{$rules.title}{literal}",//标题var desc
+imgUrl = '{/literal}{if $styles.shareimg}{$styles.shareimg}{else}{$HOST_STATIC}/js/new/images/share-zp.png{/if}{literal}',//活动图片
+desc = '{/literal}{if $rules.commonshare}{$rules.commonshare}{else}转转中大奖，小伙伴们都来看看哦~~{/if}{literal}',
+link='{/literal}{$SELLER_HOST}/index.php/act/normal/'+actlink+'?sid={$seller_id}&a_id={$a_id}{literal}',//活动链接
+appId='{/literal}{$appId}{literal}';//Appid
+
+</script>
+{/literal}
+<!--关注引导 S-->
+{if $subscribe eq 0}{include file="common/module/guide2follow.html"}{/if}
+<!-- <script type="text/javascript" src="{$HOST_STATIC}/moblie/js/core/jquery-1.7.2.min.js"></script> -->
+{literal}
+<script type="text/javascript">
+My.WxName = "{/literal}{$selleroauthinfo.wx_id}{literal}";
+My.FollowImg = "{/literal}{if $selleroauthinfo.wx_id}https://open.weixin.qq.com/qr/code?username={$selleroauthinfo.wx_id}&style=1{elseif $selleroauthinfo.uid} https://open.weixin.qq.com/qr/code?username={$selleroauthinfo.uid}&style=1{/if}{literal}";
+</script>
+{/literal}
+{if 'searchprd'|in_array:$field_type}<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/weixin/js/searchbar_20160602.js"></script>{/if}
+{if 'navtab'|in_array:$field_type}<script type="text/javascript" src="{$HOST_STATIC}/js/touch/ui.scroller.js"></script>{/if}
+<!-- 轮播图、表单模块需要引入的js   -->
+{if 'carousel'|in_array:$field_type}<script type="text/javascript" src="{$HOST_STATIC}/moblie/js/plugs/swipeinfo.mini_20160817.js"></script>
+{literal}
+<script language="javascript">
+var elem =document.getElementsByClassName('slider');
+for(i=0;i<elem.length;i++){
+	Swipe(elem[i], {
+		  startSlide: 0,
+		  auto: 3000,
+		  speed:300,
+		  continuous: true,
+		  mod:1,
+		  callback: function(_t,pos) {
+			  var bullets = _t.getElementsByClassName('carousel_dot')[0].getElementsByTagName('li');
+			  var y = bullets.length;
+			  while (y--) {
+				bullets[y].className = ' ';
+			  }
+			  bullets[pos].className = 'on';
+		  }
+	});
+}
+</script>
+{/literal}
+{/if}
+<!-- 基本模块js -->
+{if 'form'|in_array:$field_type}<script type="text/javascript" src="{$IMAGE_PATH}/diyform/weixin/js/FormValidator_plug_20160714.js"></script>{/if}
+<input type="hidden" value="{$count}" id="countInput">
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/weixin/js/index_20171123.js"></script>
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/weixin/js/act_common_20170314.js"></script>
+{literal}
+<script language="javascript"> 
+Act.init({
+    a_id: '{/literal}{$a_id}{literal}', //
+    seller_id:'{/literal}{$seller_id}{literal}',
+    user_id: '{/literal}{$user_id}{literal}',
+    cantplay: "{/literal}{if !$subscribe}nofollow{elseif !$count}对不起，您没有机会了{/if}{literal}", //
+    is_inter: {/literal}{if $rules.iscode eq "true"}"2"{else}"1"{/if}{literal}, //是否需要
+    inter: {/literal}{if $rules.code}{$rules.code}{else}0{/if}{literal}, //消耗多少
+    allTime: {/literal}{if $act_info.p_num}{$act_info.p_num}{else}-1{/if}{literal}, //共有几次机会
+    count: $("#count"),
+    awardinfo: "{/literal}{$rules.awardinfo}{literal}", //获奖提示
+    awardshare: "{/literal}{$rules.awardshare}{literal}", //获奖分享信息
+    loseinfo: "{/literal}{$rules.loseinfo}{literal}", //未获奖提示
+    loseshare: "{/literal}{if $rules.loseshare}{$rules.loseshare}{else}轻松中大奖，小伙伴们都来看看哦~~{/if}{literal}" //未获奖分享信息、
+});
+/**中奖的人列表加载**/
+var haswinnerlist = {/literal}{if $prize_list_show}{$prize_list_show}{else}''{/if}{literal},
+    winnerslist_url = '{/literal}{$SELLER_HOST}/index.php/act/normal/winnerpage?a_id={$a_id}&sid={$seller_id}{literal}',
+    winnerslist_data = '{/literal}{$SELLER_HOST}{literal}/index.php/act/normal/winnerslist';
+    
+  shareywk(); //配置分享
+  var chanceInput = $('#countInput'),
+      chance = chanceInput.val(); 
+  chance && Act.count.text(chance); //更新所剩机会
+  //所有页面返回需要更新的程序在这写
+</script>
+{/literal}
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/weixin/js/act_2017.js"></script>
+{* 直接点击购物车购买商品 *}
+{if $shopping_show}{include file="micromagazine/selectsku.html"}{/if}
+{literal}
+<script language="javascript"> 
+window.addEventListener('load', function() {
+	   FastClick.attach(document.body);  
+}, false);
+//loading
+window.onbeforeunload  = function(){
+	$(".page_loading").addClass("show");
+}  
+</script>
+{/literal}
+</div>
+{include file="weixin/common/bottom.phtml"}
+</body>
+</html>

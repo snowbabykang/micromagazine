@@ -1,0 +1,36 @@
+<div ng-switch-when="txt_bgimg" class="mag_txt_bgimg mag_txt_bgimg{$field.field_id}">
+	<ul style="background-color:{$field.field_bgcolor};padding:{$field.field_pd};" num="{$field.line_num}">
+		{foreach item=item from=$field.field_items key=key}
+		<li style="padding:{$field.item_margin}">
+			<a class="txtimgbox" href="{$item.linkurl}" style="background-color:{$item.bgcolor};border-radius:{$field.item_radius};">
+				<div class="txtimg_imgbox">
+					{if $item.is_localimg == '0' && $item.field_img}
+					<img class="" src="{$item.field_img}" style="border-radius:{$field.item_radius};">
+					{elseif $item.is_localimg == '1' && $item.field_img}
+					<img class="" src="{$IMAGE_PATH}/micromagazine/img/thememodal/{$item.field_img}" style="border-radius:{$field.item_radius};">
+					{/if}
+				</div>
+				<div class="txtimg_infobox align_{$field.title_align}" style="text-align:{$field.title_align};background-color:{$item.title_bgcolor};
+					padding:{$field.title_pd};border-radius:{$field.title_radius};top:{if $field.title_post || $field.title_post == '0'}{$field.title_post}px{else}auto{/if};
+					bottom:{if $field.title_posb || $field.title_posb == '0'}{$field.title_posb}px{else}auto{/if};
+					left:{if $field.title_posl || $field.title_posl == '0'}{$field.title_posl}px{else}auto{/if};
+					right:{if $field.title_posr || $field.title_posr == '0'}{$field.title_posr}px{else}auto{/if};">
+					<div  {if ($field.title_post || $field.title_post == '0') && ($field.title_posb || $field.title_posb == '0')}class="title_middle" style="left:{$field.title_pd};right:{$field.title_pd};"{/if}>
+						<div class="txtimg_title" style="color:{$item.title_color};font-size:{$field.title_fz};">{$item.title_info}</div>
+						{if $field.is_descibe == '1'}
+						<div class="txtimg_descibe" style="color:{$item.descibe_color};font-size:{$field.descibe_fz};">{$item.descibe_info}</div>
+						{/if}
+						{if $field.is_btn == '1'}
+						<div class="txtimg_btn" style="color:{$item.btn_color};font-size:{$field.btn_fz};border-color:{$item.btn_bordercolor};
+							background-color:{$item.btn_bgcolor};border-radius:{$field.btn_radius}">{$item.btn_info}
+						</div>
+						{/if}
+					</div>
+				</div>
+			</a>
+		</li>
+		{/foreach}
+	</ul>
+</div>
+
+

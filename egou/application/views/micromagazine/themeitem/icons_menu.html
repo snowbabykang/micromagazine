@@ -1,0 +1,20 @@
+<div class="mag_icons_menu mag_icons_menu{$field.field_id}">
+	<div class="icons_menubox icons_menubox_{$field.field_num}" style="background-color: {$field.field_bgcolor}">
+		<ul>
+			{foreach item=item from=$field.field_items key=key}
+			<li>
+				<a href="{if $item.link}{$item.link}{else}javascript:void(0);{/if}">
+					<div class="iconmenu_bgbox" style="background-color: {$item.bgcolor}">
+						{if $item.is_localimg == '0'}
+						<img src="{$item.imgurl}" alt=""/>
+						{elseif $item.is_localimg == '1'}
+						<img src="{$IMAGE_PATH}/micromagazine/img/thememodal/icon_svg/{$item.imgurl}" alt="" />
+						{/if}
+					</div>
+					<div class="iconmenu_title">{$item.title}</div>
+				</a>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>

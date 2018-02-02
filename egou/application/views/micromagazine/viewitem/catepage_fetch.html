@@ -1,0 +1,100 @@
+{foreach item=item from=$prd_info_arr}
+<li replaceid="{$item.id}" {if $item.prdapprove eq 'unsale' || $item.prdnum eq 0}class="prd_unsale" is_unsale="unsale"{/if}
+ {if $item.prdpresell || $item.groupbuy_act || $item.prdcommonact}is_act="isact"{/if}>
+{if $item.groupbuy_act}
+	<a href="{if $item.groupbuy_act.groupbuy_url}{$item.groupbuy_act.groupbuy_url|urldecode}{elseif $item.url}{$item.url|urldecode}{else}javascript:void(0);{/if}">
+{else}
+	<a href="{if $item.url}{$item.url|urldecode}{else}javascript:void(0);{/if}">
+{/if}	
+		<div class="pic">
+			<img src="{$item.img_url}_{$mod_param_arr[$field.field_makeup]}x{$mod_param_arr[$field.field_makeup]}.jpg">
+			{if $field.field_makeup neq 'mod-col-list'}        <!-- 列表排列样式标签位置不一样 -->
+				{if $item.score_exchange}       <!-- {$CREDIT}换购保持最高优先级 -->
+					<div class="preselltag"><div class="tagcon">{$CREDIT}换购</div></div>
+				{else}	
+					{if $item.CrowdFundPrd}<div class="preselltag"><div class="tagcon">众筹</div></div>{/if}
+					{if $item.prdpresell}<div class="preselltag"><div class="tagcon">预售</div></div>{/if}
+					{if $item.groupbuy_act}<div class="preselltag"><div class="tagcon">组团购</div></div>{/if}
+					{if $item.prdcommonact}<div class="preselltag"><div class="tagcon">微团购</div></div>{/if}
+					{if $item.CreditLevelAct|@count && !$item.prdcommonact}
+						{if $item.CreditLevelAct.level.ActType  == "money"}
+							<div class="specialtag">立减</div>
+	                    {else}
+							{if $item.CreditLevelAct.level.Discount neq 1}<div class="specialtag">{$item.CreditLevelAct.level.Discount*10}折</div>{/if}
+	                    {/if}
+					{/if}	
+				{/if}
+			{/if}
+			{if $field.field_makeup eq 'mod_prd_list'}<div class="price">￥{$item.prdprice}</div>{/if}
+		</div>
+		{if $field.field_makeup neq 'mod_prd_list'}
+		<div class="prdinfo">
+			{if $field.field_makeup eq 'mod-col-list'}
+				{if $item.score_exchange}       <!-- 列表排列样式标签位置不一样 -->
+					<div class="preselltag"><div class="tagcon">{$CREDIT}换购</div></div>
+				{else}	
+					<div class="preselltag">
+					{if $item.CrowdFundPrd}<div class="tagcon">众筹</div>{/if}
+					{if $item.prdpresell}<div class="tagcon">预售</div>{/if}
+					{if $item.groupbuy_act}<div class="tagcon">组团购</div>{/if}
+					{if $item.prdcommonact}<div class="tagcon">微团购</div>{/if}
+					{if $item.CreditLevelAct|@count && !$item.prdcommonact}
+						{if $item.CreditLevelAct.level.ActType  == "money"}
+							<div class="tagcon">立减</div>
+	                    {else}
+							{if $item.CreditLevelAct.level.Discount neq 1}<div class="tagcon">{$item.CreditLevelAct.level.Discount*10}折</div>{/if}
+	                    {/if}
+					{/if}
+					</div>	
+				{/if}
+			{/if}  
+			<div class="title">{$item.prdtitle}</div>
+			<div class="price">
+				{if $item.score_exchange}   <!-- {$CREDIT}换购保持最高优先级 -->              <!-- 只有默认主题才有原价现价之分 -->
+					<span class="fl nowprice">￥{$item.score_exchange.exchange_price}</span>
+					{if $field.field_prdtheme eq 'defaultskin'}<div class="credit_change"><span class="plus">＋</span><span class="creditnum">{$item.score_exchange.exchange_score}{$CREDIT}</span></div>{/if}
+				{else}
+					<span class="fl nowprice">
+						{if $item.prdcommonact->act_info}
+							￥{$item.prdcommonact->act_info.ActPrice}
+						{elseif $item.CreditLevelActInfo|@count}
+							￥{$item.CreditLevelActInfo.price}
+						{else}
+							￥{$item.prdprice}
+						{/if}
+					</span>
+					{if $field.field_prdtheme eq 'defaultskin'}
+						{if ($item.prdcommonact->act_info || $item.CreditLevelActInfo|@count) && $item.prdcommonact->act_info.ActType!=1}
+							<span class="pastprice">￥{$item.prdprice}</span>
+						{/if}
+					{/if}
+					{if $viewType eq 2}
+						<!-- 默认分类不需要加入购物车 -->
+					{elseif $viewType eq 1}   
+						<!-- 默认首页 -->
+						{if $item.CrowdFundPrd}
+							<div class="morearea nowBuy" is_zc="zc"><span class="havecart cartinfo discountstyle">去众筹</span></div>
+						{else}
+							<div class="morearea nowBuy"><span class="havecart cartfont"><i class="icon_addcart"></i></span></div>
+						{/if}
+					{else}  <!-- 自定义分类列表 -->
+						{if $field.field_showcart eq 'havecart'}
+							{if $item.CrowdFundPrd}
+								<div class="morearea nowBuy" is_zc="zc"><span class="havecart {if $field.field_prdstyle.iscart == '1'}cartfont{else}cartinfo{/if} discountstyle">去众筹</span></div>
+							{else}
+							{if $field.field_prdtheme == 'defaultskin' || $field.field_prdstyle.iscart == '1'}
+							<div class="morearea nowBuy"><span class="havecart cartfont"><i class="icon_addcart"></i></span></div>
+							{elseif $field.field_prdstyle.iscart == '2'}
+							<div class="morearea nowBuy"><span class="havecart cartinfo">{$field.field_prdstyle.buyinfo}</span></div>
+							{/if}
+							{/if}
+						{/if}
+					{/if}
+				{/if}
+				<div style="clear:both"></div>
+			</div>
+		</div>
+		{/if}
+	</a>
+</li>
+{/foreach}

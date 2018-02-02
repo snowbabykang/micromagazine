@@ -1,0 +1,14 @@
+<div class="mag_division mag_division{$field.field_id}">
+	<div style="background-color:{$field.field_bgcolor}; height: auto;overflow: hidden;">
+		<hr style="
+		{if $field.field_bordertype eq 'none'}
+		 border:none;height:{$field.field_blank};margin:0;
+		{else}
+		border-top-color:{$field.field_bordercolor};
+		border-top-style: {$field.field_bordertype};
+		border-top-width: {$field.field_borderwidth};
+	    margin: {$field.field_mt} {$field.field_mr} {$field.field_mb} {$field.field_ml};
+	    border-bottom:none;
+		{/if}"></hr>
+	</div>
+</div>

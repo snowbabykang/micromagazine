@@ -1,0 +1,21 @@
+<div class="mag_carousel mag_carousel{$field.field_id}" style="padding:{$field.field_pt} {$field.field_pr} {$field.field_pb} {$field.field_pl};background-color: {$field.field_bgcolor};margin: {$field.field_mt} 0 {$field.field_mb} 0;">
+	<div class="slider">
+		<div class="carousel_imgbox {$field.field_showtitle}">
+			{foreach item=img from=$field.field_imgs key=key}
+			<div class="carousel_img">
+				<a {if $img.img_link}href="{$img.img_link|urldecode}"{/if}>
+					<img src="{$img.img_url}">
+					<p class="imgtitle">{$img.img_title}</p>
+				</a>
+			</div>
+			{/foreach}
+		</div>
+		{if $field.field_imgs|@count neq 1}
+		<ul class="carousel_dot">
+			{foreach item=img from=$field.field_imgs key=key}
+			<li class="{if $key==0}on{/if}"></li>
+			{/foreach}
+		</ul>
+		{/if}
+	</div>
+</div>

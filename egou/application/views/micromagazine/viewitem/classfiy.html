@@ -1,0 +1,13 @@
+<div class="mag_classfiy mag_classfiy{$field.field_id}">
+	{if $field.field_items}
+	<ul class="classfiy_item" style="background-color: {$field.field_bgcolor};margin:{$field.field_mt} 0 {$field.field_mb} 0;border-top:1px solid {$field.field_bordercolor};">
+		{foreach item=item from=$field.field_items key=key}
+		<li style="border-bottom:1px solid {$field.field_bordercolor};">
+			<a href="{if $item.item_link}{$item.item_link|urldecode}{else}javascript:void(0);{/if}" 
+			style="line-height:{$field.field_lineh};font-size:{$field.field_fz};color:{$field.field_color};padding:0 {$field.field_pr} 0 {$field.field_pl};">
+				{$item.item_title}<i class="icon_rightarrow fr"></i></a>
+		</li>
+		{/foreach}
+	</ul>
+	{/if}
+</div>

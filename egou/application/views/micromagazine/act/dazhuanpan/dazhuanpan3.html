@@ -1,0 +1,33 @@
+<div class="mag_dzpinfo mag_dzpinfo{$field.field_id}">
+	{if $field.field_info eq 'text'}
+		<ul class="j_page_info_div info_cont">
+			<li class="info_li">
+				<h6 style="color:{$styles.color2};">活动奖项：</h6>
+				<p class="info_p" style="color:{$styles.color1};">
+					{foreach from=$act_info.prizeinfo item =i key=k}
+					<span>奖品{$k+1}：{$i.name}</span><br/>
+					{/foreach}
+				</p>
+			</li>
+			<li class="info_li">
+				<h6 style="color:{$styles.color2};">活动时间：</h6>
+				<p class="info_p"  style="color:{$styles.color1};">{$rules.starttime} 到 {$rules.endtime}</p>
+			</li>
+		    <li class="info_li">
+		        <h6 style="color:{$styles.color2};">活动说明:</h6>
+		        <p class="info_p" style="color:{$styles.color1};">
+		                                每人{if $rules.numtype eq 'day'}每天{/if}最多允许抽奖{$rules.num}次
+		            {if $rules.iscode eq "true"}，每次消耗{$rules.code}{$CREDIT}{/if}
+		            <br/>{$rules.describe}
+		        </p>
+		    </li>
+		</ul>
+	{else}
+		<img src="{$field.field_infoimg}">	
+	{/if}
+	<div class="actfooter" style="color:{$styles.color1};">
+		<a href="{$HOST}/index.php/weixin/shop/show?cid={$seller_id}"  style="color:{$styles.color1};">商城主页</a>
+		&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		<a href="{$HOST}/index.php/act/normal/prizelist?sid={$seller_id}&a_id={$a_id}"  style="color:{$styles.color1};">中奖记录</a>
+	</div>
+</div>

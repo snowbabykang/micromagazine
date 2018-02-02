@@ -1,0 +1,75 @@
+<div class="mag_s_1_product mag_s_1_product{$field.field_id}">
+	<div class="prd_itemsbox" style="background-color: {$field.field_bgcolor};padding-top:{$field.main_pt};padding-bottom:{$field.main_pb};">
+		<ul class="prd_items theme_s_1_product">
+			{foreach item=item from=$field.field_items key=key}
+			<li style="padding:{$field.li_pt} {$field.li_pr} {$field.li_pb} {$field.li_pl};
+					border-bottom-width:{$field.li_borderb_width};border-bottom-color:{$field.li_borderb_color}">
+				{if $item.groupbuy_act}
+				<a href="{if $item.groupbuy_act.groupbuy_url}{$item.groupbuy_act.groupbuy_url|urldecode}{elseif $item.url}{$item.url|urldecode}{else}javascript:void(0);{/if}" style="background-color: {$field.prd_bgcolor};">
+				{else}
+				<a href="{if $item.url}{$item.url|urldecode}{else}javascript:void(0);{/if}" style="background-color: {$field.prd_bgcolor};">
+				{/if}
+					<div class="prdpic" style="padding: {$field.img_pd};">
+						<div class="prdimgposr">
+							<img src="{$item.img_url}">
+							{if $item.score_exchange || $item.CrowdFundPrd || $item.prdpresell || $item.groupbuy_act || $item.prdcommonact || $item.prdcommonact || $item.CreditLevelAct|@count}
+							<div class="prdtaglabel prdtaglabel{$field.tag_type} prdtaglabel_{$field.tag_position}" style="background-color: {$field.tag_bgcolor};color: {$field.tag_color};">
+								<span class="prdtaglabel_info">
+								{if $item.score_exchange}{$CREDIT}换购
+								{elseif $item.CrowdFundPrd}众筹
+								{elseif $item.prdpresell}预售
+								{elseif $item.groupbuy_act}组团购
+								{elseif $item.prdcommonact}微团购
+								{elseif $item.CreditLevelAct|@count}
+									{if $item.CreditLevelAct.level.ActType  == "money"}
+										立减
+				                    {else}
+										{if $item.CreditLevelAct.level.Discount neq 1}{$item.CreditLevelAct.level.Discount*10}折{/if}
+				                    {/if}
+								{/if}
+								</span>
+							</div>
+							{/if}
+						</div>
+					</div>
+					<div class="prdinfobox prdinfobox_{$field.prdinfo_align}" style="text-align: {$field.prdinfo_align};padding-right:{$field.prdinfo_pr};padding-left:{$field.prdinfo_pl};">
+						<div class="prdtitle" style="color: {$field.prdtitle_color};">{$item.prdtitle}</div>
+						<div class="pricebox" >
+							{if $item.score_exchange}   <!-- {$CREDIT}换购保持最高优先级 --> 
+								<div class="price" style="color : {$field.price_color}">
+									<sub>￥</sub><span>{$item.score_exchange.exchange_price}</span>
+								</div>
+								{if !($field.prdinfo_align == 'left' && $field.is_btn == '1')}<div class="pastprice" ng-if="">＋{$item.score_exchange.exchange_score}{$CREDIT}</div>{/if}
+							{else}
+								<div class="price" style="color : {$field.price_color}">
+									<sub>￥</sub><span>{if $item.CreditLevelActInfo|@count}{$item.CreditLevelActInfo.price}{else}{$item.prdprice}{/if}</span>
+								</div>
+								{if $item.CreditLevelActInfo|@count && !($field.prdinfo_align == 'left' && $field.is_btn == '1')}
+									<div class="pastprice">￥{$item.prdprice}</div>
+								{/if}
+							{/if}
+							<div class="clearfix"></div>
+						</div>
+						{if $field.is_btn == '1'}
+							{if !($field.prdinfo_align == 'left' && $item.score_exchange)}
+								<!-- 一行排列还是{$CREDIT}换购的话就不展示按钮 -->
+							{else} 
+							<div class="prdbuybtn  prdbuybtn_{$field.prdinfo_align}" {if $item.CrowdFundPrd}is_zc="zc"{/if}
+								style="background-color: {$field.btn_bgcolor};color: {$field.btn_color};width: {$field.btn_width};border-radius:{$field.btn_radius};line-height: {$field.btn_height};">
+								{if $field.btn_info == 'cart'}
+								<span class="prd_iconcart"><img src="{$IMAGE_PATH}/micromagazine/img/thememodal/icon_svg/cart.svg"></span>
+								{else}
+								<span>{$field.btn_info}</span>
+								{/if}
+							</div>
+							{/if}
+						{/if}
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</li>
+			{/foreach}
+			<div class="clearfix"></div>
+		</ul>
+	</div>
+</div>

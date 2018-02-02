@@ -1,0 +1,21 @@
+<div class="mag_dzpwheel mag_dzpwheel{$field.field_id}">
+	<img src="{$styles.bgimg}">
+	<div class="wheel_cont">
+		<div class="j_wheel rAll">
+			<div id="wheel" chart=""> </div>
+		</div>
+		<div class="pointer-hoder">
+			<a class="pointer-btn" id="startbtn"><span>开始抽奖</span></a>
+		</div>
+	</div>
+	<div class="wheel_chance" style="color:{$styles.color1};">
+		<div style="font-size:18px;">
+			{if $smarty.now lt $result[0].start_time} 活动尚未开始
+			{elseif $smarty.now gt $result[0].end_time} 活动已经结束
+			{else}
+			您还有 <span id="count" style="color:{$styles.color2};">{if $count < 0}0{else}{$count}{/if}</span> 次机会
+			{/if}
+		</div>
+		<div>已有<span>{$act_info.lottery_count}</span>人参与活动</div>
+	</div>
+</div>

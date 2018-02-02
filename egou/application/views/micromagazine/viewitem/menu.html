@@ -1,0 +1,21 @@
+{if 'classify'|in_array:$navigation.function && $navigation.status eq '1' && $viewType eq 3}   <!-- 自定义分类页才会替换 -->
+{include file="micromagazine/menu/diy_nav.html"}
+{else}
+<div class="mag_menu mag_menu{$field.field_id}">
+	<ul class="menu_nav" style="border-top-color:{$field.field_bordercolor};background-color:{$field.field_bgcolor};
+			font-size:{$field.field_fz};padding:{$field.field_pt} 0 {$field.field_pb} 0;">
+		{foreach item=nav from=$field.field_navs key=key}
+		<li>
+			<a href="{$nav.nav_link|urldecode}" style="color:{$field.field_color};position:relative;">
+			{if !$nav.nav_imgurl && $key == 0}<i class="icon_home" style="font-size:{$field.field_iconsize};"></i>{/if}
+			{if !$nav.nav_imgurl && $key == 1}<i class="icon_classfiy" style="font-size:{$field.field_iconsize};"></i>{/if}
+			{if !$nav.nav_imgurl && $key == 2}<i class="icon_cart" style="font-size:{$field.field_iconsize};"></i><span class="menu_cartnum"></span>{/if}
+			{if !$nav.nav_imgurl && $key == 3}<i class="icon_user" style="font-size:{$field.field_iconsize};"></i>{/if}
+			{if $nav.nav_imgurl}<img src="{$nav.nav_imgurl}_180x180.jpg" style="height:{$field.field_imgsize};">{/if}
+			<p style="font-size:{$field.field_fz};">{$nav.nav_title}</p>
+			</a>
+		</li>
+		{/foreach}
+	</ul>
+</div>
+{/if}

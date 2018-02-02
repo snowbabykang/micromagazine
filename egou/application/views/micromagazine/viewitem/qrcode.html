@@ -1,0 +1,7 @@
+<div class="mag_qrcode mag_qrcode{$field.field_id}">
+{if $qrcodemodal}
+	<div style="text-align: center;background-color: {$field.field_bgcolor};padding:{$field.field_pt} 0 {$field.field_pb} 0;margin: {$field.field_mt} 0 {$field.field_mb} 0;">
+		<img src="{$fx_qrcodeurl}" {if $field.field_isshadow eq 1}style="box-shadow: 0 0 {$field.field_shadowsize} {$field.field_shadowcolor}"{/if}>
+	</div>
+{/if}
+</div>
