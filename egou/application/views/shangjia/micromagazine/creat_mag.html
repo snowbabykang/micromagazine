@@ -1,0 +1,66 @@
+<!-- 模块区域 -------------S -->
+	<div class="fl modalbox" ng-controller="modalnavCtr">
+		{include file="shangjia/micromagazine/modalbox.html"}
+	</div>
+	<!-- 模块区域 -------------E -->
+	
+	<!-- 展示 移动删除区域 -------------S -->
+    <div id="view_box" ng-controller="viewCtr">
+    <div class="view_box_wrap">
+	<div class=" veiwmovebox">
+		<div class="view-header">
+			<span class="btn btn-primary fr" style="margin: 15px 20px 0 0;" ng-click="showsetmagazine()">
+				{if $type eq 'activity' && $act_kind}活动规则设置
+				{elseif $type eq 'catepage'}分类页整体设置
+				{elseif $type eq 'store'}门店模板设置
+				{else}微杂志整体设置{/if}&gt;&gt;
+			</span>
+		</div>
+		<div class="view-main">
+			{if $type eq 'activity' && $act_kind}   <!-- 活动 -->
+			<div class="view-title" ng-bind="$storage.form.rules.title ? $storage.form.rules.title : '活动页面'"></div>
+			<div class="viewmodalsbox" id="scrolldIV" ng-model="$storage.form.form_fields"  ng-sortable="sortableConfig"
+			ng-style="{literal}{
+				'background-color':$storage.form.styles.bgcolor,
+				'padding-top':$storage.form.paddingt,'padding-right':$storage.form.paddingr,
+				'padding-bottom':$storage.form.paddingb,'padding-left':$storage.form.paddingl,'height':diyboxHeight,
+			}{/literal}">
+			{else}	   <!-- 微杂志 -->
+				<div class="view-title" ng-if="$storage.form.share.sharetitle">{literal}{{$storage.form.share.sharetitle | decodeURI}}{/literal}</div>
+				<div class="view-title" ng-if="!$storage.form.share.sharetitle">{if $type eq 'catepage'}分类页面{elseif $type eq 'store'}门店页面{else}微杂志页面{/if}</div>
+				<div class="viewmodalsbox" id="scrolldIV" ng-model="$storage.form.form_fields" ng-sortable="sortableConfig"
+				ng-style="{literal}{
+					'background-color':$storage.form.bgcolor,'padding-top':$storage.form.paddingt,'padding-right':$storage.form.paddingr,
+					'padding-bottom':$storage.form.paddingb,'padding-left':$storage.form.paddingl,'height':diyboxHeight,
+				}{/literal}">
+			{/if}
+				<div class="field_box angular_animate" ng-repeat="field in $storage.form.form_fields" ng-cloak ng-click="showcurrentitem(field.field_type,field.field_id,$index)"  
+					data-id="{literal}{{field.field_id}}{/literal}"	ng-class="{literal}{'{{field.field_type}}{{field.field_id}}': 'currenteditor'}[$storage.isShow]{/literal}">
+					<div class="modal_operatebtns">
+						<span class="upmove" ng-click="upmove_modal($storage.form.form_fields, $index);$event.stopPropagation();" title="上移"><i class="icon_up"></i></span>
+						<span class="downmove" ng-click="downmove_modal($storage.form.form_fields, $index);$event.stopPropagation();" title="下移"><i class="icon_down"></i></span>
+						<span class="editmove" ng-click="showcurrentitem(field.field_type,field.field_id);$event.stopPropagation();" title="编辑"><i class="icon_edit"></i></span>
+						<span class="delmove" ng-click="IsdeleteField($event,field.field_id,field.field_type);" ng-if="field.field_type !== act_name">
+							<i class="icon_del" title="删除"></i>
+						</span>
+					</div>
+					<div ng-switch="field.field_type">
+					{include file="shangjia/micromagazine/viewbox.html"}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="view-footer"></div>
+	</div>
+    </div>
+    </div>
+	<!-- 展示 移动删除区域 -------------E -->
+	
+	<!-- 编辑区域 -------------S -->
+	<div class="fl editattrbox">
+		<div ui-view="mainattrbox"></div>
+		<div ng-repeat="field in $storage.form.form_fields">
+			<div ui-view="editattrbox"></div>
+		</div>
+	</div>
+	<!-- 编辑区域 -------------E -->

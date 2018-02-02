@@ -1,0 +1,95 @@
+<div class="editmodalbox" ng-class="{literal}{'notice{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《公告》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview">公告内容：</td>
+			<td><input type="text" name="title_con" ng-model="field.field_con"  encodeuri value="{literal}{{field.field_con | decodeURI}}{/literal}" size="60"></td>
+			
+		</tr>
+		<tr>
+			<td class="wdview">跳转链接：</td>
+			<td>
+				<div class="input-append">
+					<input type="text" readonly size="25" ng-model="field.linkname">
+					<a href="javascript:void(0);" class="selecturl btn" selecturl type="btnlink" ng-model="field.linkurl"><i class="icon_link"></i></a>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">字体大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="12" max="26" step="2" value="{literal}{{field.field_fz}}{/literal}" ng-model="field.field_fz" slider></div> 
+				<div class="drag_num" ng-bind="field.field_fz">
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color:{literal}{{field.field_bgcolor}}{/literal}"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{color.notice.bgcolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">字体颜色：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_color" color="{literal}{{field.field_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_color"/>
+				    <span class="input-group-addon"><i style="background-color:{literal}{{field.field_color}}{/literal}"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_color" resetcolor color="{literal}{{color.notice.color}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pt}}{/literal}" ng-model="field.field_pt" slider></div>
+				<div class="drag_num" ng-bind="field.field_pt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pr}}{/literal}" ng-model="field.field_pr" slider></div>
+				<div class="drag_num" ng-bind="field.field_pr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pb}}{/literal}" ng-model="field.field_pb" slider></div>
+				<div class="drag_num" ng-bind="field.field_pb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pl}}{/literal}" ng-model="field.field_pl" slider></div>
+				<div class="drag_num" ng-bind="field.field_pl"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">外上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mt}}{/literal}" ng-model="field.field_mt" slider></div>
+				<div class="drag_num" ng-bind="field.field_mt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mb}}{/literal}" ng-model="field.field_mb" slider></div>
+				<div class="drag_num" ng-bind="field.field_mb"></div>
+			</td>
+		</tr>
+	</table>
+</div>

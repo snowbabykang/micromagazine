@@ -1,0 +1,83 @@
+<div class="editmodalbox show">
+	{if $diytype neq 'catepage'}    
+	<p class="edit_title">{if $diytype eq 'store'}门店{else}微杂志{/if}分享设置</p>
+	<div class="shareimgbox">
+		<div class="img_box selectimage" selectimage data-spec="300"  data-type="share" style="width:75px;" ng-model="$storage.form.share.shareimg">
+			<img ng-src="{literal}{{$storage.form.share.shareimg}}{/literal}"><i class="icon_plus" ng-if="!$storage.form.share.shareimg"></i>
+		</div>
+		<div class="img_info" style="margin-left:90px;">
+			<div class="mb10">
+				<span>分享标题</span>
+				<input type="text" ng-model="$storage.form.share.sharetitle"  encodeuri value="{literal}{{$storage.form.share.sharetitle | decodeURI}}{/literal}">
+			</div>
+			<div class="">
+				<span>分享内容</span>
+				<input type="text" ng-model="$storage.form.share.sharecontent" encodeuri value="{literal}{{$storage.form.share.sharecontent | decodeURI}}{/literal}">
+			</div>
+		</div>
+	</div>
+	<div class="alert">分享图片建议尺寸320px*320px</div>
+	{/if}
+	<p class="edit_title">{if $diytype eq 'catepage'}分类页{elseif $diytype eq 'store'}门店{else}微杂志{/if}整体设置</p>
+	<table>
+	{if $diytype neq 'catepage'}
+		<!-- <tr>
+			<td class="wdview">选择栏目：</td>
+			<td>
+				<div class="input-append">
+					<input type="text" readonly size="25" ng-model="field.lanmuname">
+					<input type="text" readonly size="25"  ng-model="field.lanmuid"  style="display: none;">
+					<a href="javascript:void(0);" class="selectlanmu btn">选择</a>
+				</div>
+			</td>
+		</tr> -->
+	{else}
+		<tr>
+			<td class="wdview">页面名称：</td>
+			<td>
+				<input type="text" ng-model="$storage.form.share.sharetitle" placeholder="请输入页面名称">
+			</td>
+		</tr>
+	{/if}
+		<tr>
+			<td class="wdview">背景颜色：</td>
+			<td>
+				<div class="input-group fl" colorpicker  ng-model="$storage.form.bgcolor"  color="{literal}{{$storage.form.bgcolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="$storage.form.bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color:{literal}{{$storage.form.bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="$storage.form.bgcolor" resetcolor color="{literal}{{color.bgcolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{$storage.form.paddingt}}{/literal}" ng-model="$storage.form.paddingt" slider></div>
+				<div class="drag_num" ng-bind="$storage.form.paddingt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{$storage.form.paddingr}}{/literal}" ng-model="$storage.form.paddingr" slider></div>
+				<div class="drag_num" ng-bind="$storage.form.paddingr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{$storage.form.paddingb}}{/literal}" ng-model="$storage.form.paddingb" slider></div>
+				<div class="drag_num" ng-bind="$storage.form.paddingb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{$storage.form.paddingl}}{/literal}" ng-model="$storage.form.paddingl" slider></div>
+				<div class="drag_num" ng-bind="$storage.form.paddingl"></div>
+			</td>
+		</tr>
+	</table>
+</div>

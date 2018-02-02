@@ -1,0 +1,59 @@
+<div class="editmodalbox" ng-class="{literal}{'video{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《视频》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview" style="vertical-align: top;padding-top:15px;">填写视频连接：</td>
+			<td> 
+				<div>
+					<div class="input-append">
+					    <input type="text" class="form-control" ng-model="field.field_url"/>
+					    <span class="btn btn-primary" ng-click="creat_videohtml($event,field)">生成视频</span>
+					</div>
+					<p class="info red"></p>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">外上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mt}}{/literal}" ng-model="field.field_mt" slider></div>
+				<div class="drag_num" ng-bind="field.field_mt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mb}}{/literal}" ng-model="field.field_mb" slider></div>
+				<div class="drag_num" ng-bind="field.field_mb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview" style="vertical-align: top;padding-top: 20px;">视频说明：</td>
+			<td>
+				<div class="alert alert-info" style="margin:0;">
+					<p>1、当前只支持优酷，腾讯，土豆的视频连接</p>
+					<p>2、当前视频禁止播放</p>
+					<p>3、以下为各种匹配格式，~代表任意字母数字等</p>
+					<p>4、优酷支持匹配格式<br/>http://v.youku.com/v_show/id_~~~~~~~~~~~~~~~.html </p>
+					<p>5、QQ支持匹配格式<br/>
+						http://v.qq.com/~/~/~/~/~~~~~~~~~~.html <br/>
+						http://v.qq.com/~/~/~~~~~~~~~~~~~.html?vid=~~~~~~~~~~ <br/>
+						
+					</p>
+					<p>6、土豆支持匹配格式<br/>
+						http://www.tudou.com/listplay/~~~~~~~~~~/~~~~~~~~~~/ <br/>            
+						http://www.tudou.com/albumplay/~~~~~~~~~~/~~~~~~~~~~.html<br/>
+						http://www.tudou.com/listplay/~~~~~~~~~~/~~~~~~~~~~.html <br/>
+						http://www.tudou.com/programs/view/~~~~~~~/
+					</p>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

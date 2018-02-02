@@ -1,0 +1,125 @@
+<div class="editmodalbox show">
+	<p class="edit_title">{literal}{{$storage.form.rules.name}}{/literal}规则设置</p>
+	<table>
+		<tr>
+			<td class="wdview">活动标题：</td>
+			<td><input type="text" name="title_con" ng-model="$storage.form.rules.title" limitcount count="30" required>
+				<span class="count-limit"><span class="remainwords1">15</span>/15</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">活动类型：</td>
+			<td>
+				<label class="switch_box" ng-class="{literal}{'true': 'on','false' : 'off'}[$storage.form.rules.iscode]{/literal}">
+					<input type="checkbox" ng-true-value="'true'" ng-false-value="'false'" ng-model="$storage.form.rules.iscode">
+					<span class="switch_info" data-oninfo="消{$CREDIT}" data-offinfo="免费" ng-bind="$storage.form.rules.iscode ? '消{$CREDIT}' : '免费'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr ng-class="$storage.form.rules.iscode == 'true' ? '' : 'hide'">
+			<td class="wdview">抽奖{$CREDIT}：</td>
+			<td><input type="text" name="title_con" ng-model="$storage.form.rules.code" placeholder="每次抽奖所需{$CREDIT}值（长度小于5的正整数）" required maxlength="5"></td>
+		</tr>
+		<tr>
+			<td class="wdview">活动时间：</td>
+			<td>
+				<input type="text" class="Wdate" ng-model="$storage.form.rules.starttime" acttime placeholder="活动开始时间" required>
+				~~
+				<input type="text" class="Wdate" ng-model="$storage.form.rules.endtime" acttime placeholder="活动结束时间" required>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">参与次数：</td>
+			<td>
+				<!-- 每人<select ng-model="$storage.form.rules.numtype" ng-options="y.value as y.text for y in {literal}[{value: 'only',text: '只'},{value: 'day',text: '每天'}]{/literal}"></select>
+				能参加<select ng-model="$storage.form.rules.num" ng-options="y for y in {literal}['1','2','3','4','5','6','7','8','9','10']{/literal}"></select>次 -->
+				每人<select ng-model="$storage.form.rules.numtype" ng-options="y.value as y.text for y in numtype_opt" class="shortwidth"></select>
+				能参加<select ng-model="$storage.form.rules.num" ng-options="y for y in num_opt" class="shortwidth"></select>次
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">同步标签：</td>
+			<td>
+				<div class="input-append">
+					<input type="text" readonly="" size="25" ng-model="$storage.form.rules.labeltag.name">
+					<a href="javascript:void(0);" class="btn add_label" choicelabel ng-model="$storage.form.rules.labeltag"  data-obj="others" choosed_label="{literal}{{$storage.form.rules.labeltag.id}}{/literal}"><i class="icon_tag"></i></a>
+					<!-- <span class="btn btn-primary hide" ng-click="confirmlabel($event,$storage.form.rules.labeltag)">确认生成</span> -->
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">活动主题：</td>
+			<td><input type="text" name="title_con" ng-model="$storage.form.rules.themetxt" limitcount count="60" class="longwidth" required placeholder="不能含有非法字符小于30字的描述">
+				<span class="count-limit"><span class="remainwords1">30</span>/30</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">活动描述：</td>
+			<td><textarea ng-model="$storage.form.rules.describe" class="longwidth" limitcount count="1000" required></textarea>
+				<span class="count-limit"><span class="remainwords1">500</span>/500</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">普通分享文字：</td>
+			<td>
+				<input type="text" name="title_con" ng-model="$storage.form.rules.commonshare" class="longwidth" required>
+				<div class="colorgray">分享文字是在微信转发或分享时候的提示文字</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">中奖分享文字：</td>
+			<td>
+				<input type="text" name="title_con" ng-model="$storage.form.rules.awardshare" class="longwidth" required>
+				<div class="colorgray">用<span class="colorred">"#奖品#"</span>代替奖品，例如：我中了#奖品#，大家快来玩啊！</div>	
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">未中奖分享文字：</td>
+			<td>
+				<input type="text" name="title_con" ng-model="$storage.form.rules.loseshare" class="longwidth" required>
+				<div class="colorgray">选填,未中奖时分享出来的提示文字</div>	
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">中奖提示文字：</td>
+			<td>
+				<input type="text" name="title_con" ng-model="$storage.form.rules.awardinfo" class="longwidth" required>
+				<div class="colorgray">中奖时提示的内容,可以用<span class="colorred">"#奖品#"</span>代替奖品</div>	
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">未中奖提示文字：</td>
+			<td>
+				<input type="text" name="title_con" ng-model="$storage.form.rules.loseinfo" class="longwidth" required>
+				<div class="colorgray">没中奖时提示的内容</div>		
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">奖项设置：</td>
+			<td>
+				<div ng-repeat = "x in $storage.form.rules.prize track by $index" class="prize_awardbox">
+					<p>奖品{literal}{{$index+1}}{/literal}：<input type="text" ng-model="x.name" limitcount count="30" placeholder="请输入奖品名称" required>
+						<span class="count-limit"><span class="remainwords1">15</span>/15</span>
+						<a href="javascript:void(0);" class="btn-link delprize" ng_click="delprize($storage.form.rules.prize,$index)">删除</a>
+					</p>
+					<p>
+						中奖率<input type="text" ng-model="x.rate" class="shortwidth" placeholder="最小0.01" required>%&nbsp;&nbsp;
+						奖品数量<input type="text" ng-model="x.num" class="shortwidth" placeholder="例如：12" required>
+					</p>
+					<div>
+						<select ng-model="x.type"  ng-change="changeprize(x)" ng-options="i.value as i.text for i in prizetype_opt"><option value="">奖品类型</option></select>
+						<span class="btn btn-primary hide" ng-click="confirmprize(x)">确认生成</span>
+						<span ng-if="x.type == '1'" class="btn btn-success couponchoice prizebtn" couponchoice ng-model="x.award" ng-bind="x.award.id ? x.award.name : '选择优惠券'"></span>
+						<span ng-if="x.type == '2'">{$CREDIT}<input type="text" class="shortwidth" placeholder="例如：20" ng-model="x.award.value"></span>
+						<span ng-if="x.type == '3'" class="btn btn-success delicardchoice prizebtn" delicardchoice ng-model="x.award" ng-bind="x.award.id ? x.award.name : '选择功能卡'"></span>
+						<span ng-if="x.type == '4'" class="btn btn-success delishoprpacketchoice prizebtn" delishoprpacketchoice ng-model="x.award" ng-bind="x.award.id ? x.award.name : '选择礼金'"></span>
+						<span ng-if="x.type == '5'" data-mark="magazine_urlback" class="btn btn-success selectmagurl prizebtn" selectmagurl ng-model="x.award" ng-bind="x.award.id ? x.award.name : '选择微杂志'"></span>
+						<span ng-if="x.type == '6'">补签机会<input type="text" class="shortwidth" placeholder="例如：2" ng-model="x.award.value"></span>
+					</div>
+				</div>
+				<div ng-if="$storage.form.rules.prize.length < 6"><span class="btn btn-primary" ng-click="addprize($storage.form.rules.prize)">新增奖项</span></div>
+			</td>
+		</tr>
+	</table>
+</div>

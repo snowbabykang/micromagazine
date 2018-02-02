@@ -1,0 +1,23 @@
+{literal}
+<div ng-switch-when="pic_sticker" ng-class="'mag_pic_sticker mag_pic_sticker'+field.field_id"> 
+	<div class="pic_stickerbox" style="padding:{{field.field_pd}};background-color:{{field.field_bgcolor}};">
+		<a href="javascript:void(0);">
+			<img class="bgimg" ng-src="{{field.field_bgimg}}" ng-if="field.is_localimg == '0' && field.field_bgimg">
+			<img class="bgimg" ng-src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/{{field.field_bgimg}}" ng-if="field.is_localimg == '1' && field.field_bgimg">
+			<div class="sticker_con" style="border-color: {{field.con_bordercolor}};">
+				<div class="sticker_conbox" style="background-color:{{field.con_bgcolor}};">
+					<div class="maintitle" style="font-size: {{field.title_fz}};color:{{field.title_color}};padding-bottom:{{field.pic_sticker_pd}}">
+						{{field.title_info}}
+					</div>
+					<div class="subtitle" ng-if="field.is_subtitle == '1'" style="font-size: {{field.subtitle_fz}};color:{{field.subtitle_color}};">
+						{{field.subtitle_info}}
+					</div>
+					<div class="titlebtn" ng-if="field.is_btn == '1'">
+						<span style="background-color:{{field.btn_bgcolor}};font-size: {{field.btn_fz}};color:{{field.btn_color}}">{{field.btn_info}}</span>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+{/literal}

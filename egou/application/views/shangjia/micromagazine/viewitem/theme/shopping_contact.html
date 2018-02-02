@@ -1,0 +1,20 @@
+{literal}
+<div ng-switch-when="shopping_contact" ng-class="'mag_shopping_contact mag_shopping_contact'+field.field_id">
+	<div class="shopping_contactbox" style="background-color: {{field.field_bgcolor}}">
+		<div class="fl">
+			<a href="javascript:void(0);">
+			<div class="shopping_img fl">
+				<img src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/icon_svg/wxlogo.svg" alt="" />
+			</div>
+			<div class="fl shopping_name" style="color:{{field.fz_color}}">微信商城</div>
+			</a>
+		</div>
+		<div class="fr">
+			<a href="javascript:void(0);">
+				<i class="icon_phone fl" style="color: {{field.phone_color}}"></i><span class="fl contact_info" style="color:{{field.fz_color}}">{{field.contact_info}}</span>
+			</a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+{/literal}

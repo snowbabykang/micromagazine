@@ -1,0 +1,368 @@
+<!-- 标题模块 -->
+{literal}
+<div ng-switch-when="title" ng-class="'mag_title mag_title'+field.field_id">
+<style>
+.mag_title{{field.field_id}} div{
+	font-weight:{{field.field_isbold}};
+	font-size:{{field.field_fz}};
+	text-indent:{{field.field_isindent}};
+	padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};
+	background-color: {{field.field_bgcolor}};
+	margin: {{field.field_mt}} 0 {{field.field_mb}} 0;
+}
+.mag_title{{field.field_id}} div p{margin-bottom: 0;}
+.mag_title{{field.field_id}} .title_three span:after{ content: "";border: 1em solid {{field.field_stylecolor}};border-left: none;border-right-color: transparent;  border-top-width:15px;border-right-width: 14px;border-bottom-width:15px;position: absolute;right: -14px;top: 0;}
+</style>
+	<div ng-if="field.field_style == 'zero'" style="text-align:{{field.field_align}};color: {{field.field_color}};"><p>{{field.field_con | decodeURI}}</p></div>
+	<div ng-if="field.field_style == 'one'"><p style="border-left:3px solid {{field.field_stylecolor}};color: {{field.field_color}};padding-left: 5px;line-height: 1;">{{field.field_con | decodeURI}}</p></div>
+	<div ng-if="field.field_style == 'two'"><p style="border-bottom: 1px solid #eee;padding-bottom: 3px;">
+		<span style="border-bottom: 3px solid {{field.field_stylecolor}};color: {{field.field_color}};padding-bottom: 3px;">{{field.field_con | decodeURI}}</span>
+	</p></div>
+	<div class="title_three" ng-if="field.field_style == 'three'"><span style="
+	position:relative;display: inline-block;background-color: {{field.field_stylecolor}};padding: 0px 10px;
+	height: 30px;line-height: 30px;box-sizing: border-box;color: {{field.field_color}};">{{field.field_con | decodeURI}}</span></div>
+</div>
+
+<!-- 富文本模块 -->
+<div ng-switch-when="richtxt" ng-class="'mag_richtxt mag_richtxt'+field.field_id">
+	<div ng-if="!field.field_richcon" style="padding: 5px 0 5px 10px;">请在右侧编辑内容</div>
+	<div ng-if="field.field_richcon" class="richtxt" ng-bind-html="field.field_richcon | decodeURI"
+		style="background-color: {{field.field_bgcolor}};padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}}"></div>
+</div>
+
+<!-- 轮播图模块 -->
+<div ng-switch-when="carousel" ng-class="'mag_carousel mag_carousel'+field.field_id"
+	style="padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};
+			background-color: {{field.field_bgcolor}};
+  			margin: {{field.field_mt}} 0 {{field.field_mb}} 0;min-height:100px;">
+	<div class="carousel_imgbox"  ng-class="field.field_showtitle">
+		<div class="carousel_img" ng-class="$index == 0 ? 'firstimg' : ''"  ng-repeat="img in field.field_imgs">
+			<img ng-src="{{img.img_url}}">
+			<p class="imgtitle" ng-bind-html="img.img_title | decodeURI"></p>
+		</div>
+		<ul class="carousel_dot">
+			<li ng-repeat="img in field.field_imgs" ng-class="$index == 0 ? 'on' : ''"></li>
+		</ul>
+	</div>
+</div>
+
+<!-- 单图列表模块 -->
+<div ng-switch-when="imglist" ng-class="'mag_imglist mag_imglist'+field.field_id"
+	style="background-color: {{field.field_bgcolor}};
+  			margin: {{field.field_mt}} 0 {{field.field_mb}} 0;padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};">
+	<div class="singleimglist" ng-class="'imglist_'+field.field_arrange" ng-repeat="img in field.field_imgs" 
+	ng-style="{'padding-right' : field.field_arrange != 'one' ? field.field_imgspace : '0'}">
+		<div class="pos_r" style="border-radius: {{field.field_radius}};-webkit-border-radius: {{field.field_radius}};overflow:hidden;">
+			<img ng-src="{{img.img_url}}">
+			<p class="imgtitle" ng-bind-html="img.img_title | decodeURI"   ng-class="field.field_showtitle"></p>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+<!-- 拼图模块 -->
+<div ng-switch-when="puzzle" ng-class="'mag_puzzle mag_puzzle'+field.field_id" magictable>
+	<p ng-if="!field.field_puzzlecon" style="line-height:30px;margin:0;padding-left:10px;">请在右侧完成拼图</p>
+	<div ng-if="field.field_puzzlecon" ng-bind-html="field.field_puzzlecon | decodeURI" style="
+	padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};
+	margin: {{field.field_mt}} 0 {{field.field_mb}} 0;"></div>
+</div>
+
+<!-- 链接按钮模块 -->
+<div ng-switch-when="btnlink" ng-class="'mag_btnlink mag_btnlink'+field.field_id" style="text-align:{{field.field_align}}">
+	<a href="javascript:void(0)" style="
+	font-size:{{field.field_fz}};
+	background-color: {{field.field_bgcolor}};
+	color: {{field.field_color}};
+	border: 1px solid {{field.field_bordercolor}};
+	padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};
+    margin: {{field.field_mt}} {{field.field_mr}} {{field.field_mb}} {{field.field_ml}};
+	text-align: center;display:{{field.field_isblock}};border-radius: {{field.field_radius}};-webkit-border-radius: {{field.field_radius}};
+	">{{field.field_con}}</a>
+</div>
+
+<!-- 分割模块 -->
+<div ng-switch-when="division" ng-class="'mag_division mag_division'+field.field_id" style="background-color:{{$storage.form.bgcolor}};padding:10px 0;">
+	<div style="background-color:{{field.field_bgcolor}}; height: auto;overflow: hidden;">
+		<hr ng-if="field.field_bordertype == 'none'" style=" border:none;height:{{field.field_blank}};margin:0;"></hr>
+		<hr ng-if="field.field_bordertype != 'none'" style="
+		border-top-color:{{field.field_bordercolor}};
+		border-top-style: {{field.field_bordertype}};
+		border-top-width: {{field.field_borderwidth}};
+	    margin: {{field.field_mt}} {{field.field_mr}} {{field.field_mb}} {{field.field_ml}};
+	    border-bottom:none;
+		"></hr>
+	</div>
+</div>
+
+<!-- 公告模块 -->
+<div ng-switch-when="notice" ng-class="'mag_notice mag_notice'+field.field_id">
+	<div style="
+	font-size:{{field.field_fz}};
+	background-color: {{field.field_bgcolor}};
+	color: {{field.field_color}};
+	padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};
+    margin: {{field.field_mt}} 0 {{field.field_mb}} 0;
+	"><marquee scrollamount="3">{{field.field_con| decodeURI}}</marquee></div>
+</div>
+
+<!-- 联系方式模块 -->
+<div ng-switch-when="contact" ng-class="'mag_contact mag_contact'+field.field_id">
+	<div class="contact_modal1" ng-if = "field.field_modal == 1" 
+		style="font-size:{{field.field_fz}};
+		background-color: {{field.field_bgcolor}};
+		color: {{field.field_color}};
+		padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};
+	    margin: {{field.field_mt}} 0 {{field.field_mb}} 0;">
+		<div class="fl"><i class="icon_phone fl"></i>{{field.field_con}}</div><div class="fr" ng-bind="field.field_tel"></div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="contact_modal2" ng-if = "field.field_modal == 2" 
+		style="font-size:{{field.field_fz}};
+		background-color: {{field.field_bgcolor}};
+		color: {{field.field_color}};
+		padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};
+	    margin: {{field.field_mt}} 0 {{field.field_mb}} 0;text-align:center">
+		<i class="icon_phone"></i>{{field.field_con}}
+	</div>
+	<div class="contact_modal3" ng-if = "field.field_modal == 3" 
+		style="font-size:{{field.field_fz}};
+		background-color: {{field.field_bgcolor}};
+		color: {{field.field_color}};
+		padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};
+	    margin: {{field.field_mt}} 0 {{field.field_mb}} 0;">
+		<div class="fl" style="border-right:1px solid {{field.field_color}};width:75%;box-sizing: border-box;">
+			<div ng-bind="field.field_tel" style="font-size:{{field.field_phonefz}};color: {{field.field_phonecolor}};"></div>
+			<div ng-bind="field.field_con"></div>
+		</div>
+		<div class="fr" style="width:25%;text-align:center;"><i class="icon_phone" style="font-size:28px;"></i></div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="contact_modal4" ng-if = "field.field_modal == 4" style="margin: {{field.field_mt}} 0 {{field.field_mb}} 0;">
+		<p ng-if="!field.field_img" style="padding: 10px 0 0 10px;">请在右侧选择一张图片</p>
+		<div ng-if="field.field_img"><img ng-src="{{field.field_img}}"></div>
+	</div>
+</div>
+
+<!-- 菜单模块 -->
+<div ng-switch-when="menu" ng-class="'mag_menu mag_menu'+field.field_id">
+<style>
+.mag_menu{{field.field_id}} .menu_nav li i{font-size:{{field.field_iconsize}};}
+</style>
+	<ul class="menu_nav" style="border-top-color:{{field.field_bordercolor}};
+			background-color:{{field.field_bgcolor}};color:{{field.field_color}};
+			font-size:{{field.field_fz}};padding:{{field.field_pt}} 0 {{field.field_pb}} 0;">
+		<li ng-repeat = "nav in field.field_navs track by $index">
+			<i class="icon_home" ng-if="!nav.nav_imgurl && $index == 0"></i>
+			<i class="icon_classfiy" ng-if="!nav.nav_imgurl && $index == 1"></i>
+			<i class="icon_cart" ng-if="!nav.nav_imgurl && $index == 2"></i>
+			<i class="icon_user" ng-if="!nav.nav_imgurl && $index == 3"></i>
+			<img ng-src="{{nav.nav_imgurl}}" ng-if="nav.nav_imgurl" style="height:{{field.field_imgsize}};">
+			<p style="font-size:{{field.field_fz}};">{{nav.nav_title}}</p>
+		</li>
+	</ul>
+	<p style="margin: 0;background-color: #ff5d5d;color: #fff;padding: 2px 0 2px 12px;">此模块保存后会展示在页面最底部</p>
+</div>
+
+<!-- 分享模块 -->
+<div ng-switch-when="share" ng-class="'mag_share mag_share'+field.field_id">
+	<p ng-if="field.field_style == 'diy' && !field.field_shareimg" style="line-height:30px;margin:0;padding-left:10px;">请在右侧选择分享图片</p>
+	<div ng-if="field.field_style == 'diy' && field.field_shareimg" style="margin:{{field.field_mt}} 0 {{field.field_mb}};padding:0 {{field.field_pr}} 0 {{field.field_pl}};">
+		<img ng-src="{{field.field_shareimg}}">
+	</div>
+	<div class="share-btn" ng-if="field.field_style == 'default'" style="margin:{{field.field_mt}} 0 {{field.field_mb}};padding:0 {{field.field_pr}} 0 {{field.field_pl}};">
+		<span class="btn fl"><img src="{/literal}{$IMAGE_PATH}{literal}/weixin/sites/public/icon_msg.png">发送给朋友</span>
+        <span class="btn fr"><img src="{/literal}{$IMAGE_PATH}{literal}/weixin/sites/public/icon_timeline.png">分享给朋友圈</span>
+	</div>
+</div>
+
+<!-- 商品模块 -->
+<div ng-switch-when="product" ng-class="'mag_product mag_product'+field.field_id">
+<style>
+.mag_product{{field.field_id}} .prd_items{padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}}}
+</style>
+<style ng-if="field.field_prdtheme !== 'defaultskin'">
+.mag_product{{field.field_id}} .mod-two-title li a{padding:{{field.field_prdstyle.bgpadding}};background-color:{{field.field_prdstyle.bgcolor}};overflow: hidden;box-shadow:{{field.field_prdstyle.bgshadow}};
+border-radius:{{field.field_prdstyle.bgradius}};-webkit-border-radius:{{field.field_prdstyle.bgradius}};-moz-border-radius:{{field.field_prdstyle.bgradius}};}
+.mag_product{{field.field_id}} .mod-two-title li .pricebox{background-color:{{field.field_prdstyle.infobgcolor}};padding:{{field.field_prdstyle.infopadding}}}
+.mag_product{{field.field_id}} .mod-two-title li .pricebox .title{-webkit-line-clamp:{{field.field_prdstyle.titleline}};margin:{{field.field_prdstyle.titlemargin}};
+height:{{field.field_prdstyle.titleheight}};line-height:{{field.field_prdstyle.titlelineheight}};text-align:{{field.field_prdstyle.titlealign}};color:{{field.field_prdstyle.titlecolor}};
+font-size:{{field.field_prdstyle.titlesize}};}
+.mag_product{{field.field_id}} .mod-two-title li .pricebox .price{color:{{field.field_prdstyle.pricecolor}};font-size:{{field.field_prdstyle.pricesize}};
+text-align:{{field.field_prdstyle.pricealign}};line-height:{{field.field_prdstyle.pricelineh}};}	    		
+.mag_product{{field.field_id}} .mod-two-title li .pricebox .havecart{background-color:{{field.field_prdstyle.buybgcolor}};border-radius:{{field.field_prdstyle.buyradius}};
+-webkit-border-radius:{{field.field_prdstyle.buyradius}};-moz-border-radius:{{field.field_prdstyle.buyradius}};
+padding:{{field.field_prdstyle.buypadding}};color:{{field.field_prdstyle.buycolor}};font-size:{{field.field_prdstyle.buysize}};}	    		
+.mag_product{{field.field_id}} .mod-two-title li .pricebox .havecart.cartfont{width:{{field.field_prdstyle.buysize}};height:{{field.field_prdstyle.buysize}};
+line-height:{{field.field_prdstyle.buysize}};}	
+.mod-two-title li .pricebox .havecart.cartinfo{line-height: 1;}	    
+.mag_product{{field.field_id}} li.pinkskin a{border-bottom: 3px solid {{field.field_prdstyle.buybgcolor}};}
+li.greenskin .price{width:100%;}										
+li.greenskin .havecart{display: none;}										
+</style>
+	<p ng-if="!field.field_items" style="line-height:30px;margin:0;padding-left:10px;">请在右侧选择商品</p>
+	<div class="prd_itemsbox" ng-if="field.field_items" style="background-color: {{field.field_bgcolor}};margin:{{field.field_mt}} 0 {{field.field_mb}} 0;">
+		<ul class="prd_items {{field.field_makeup}}" ng-class="field.field_class" ng-if="field.field_makeup !== 'mod-two-title'">
+			<li ng-repeat = "item in field.field_items track by $index">
+				<a href="javascript:void(0);">
+					<div class="pic"><img ng-src="{{item.item_pic}}"></div>
+					<div class="pricebox">
+						<div class="title" ng-if="field.field_makeup != 'mod_prd_list'">{{item.item_title|decodeURI}}</div>
+						<span class="fl price">{{item.item_price}}</span>
+						<span class="fr havecart" ng-if="field.field_showcart == 'havecart'"><i class="icon_addcart"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</li>
+		</ul>
+		<ul class="prd_items {{field.field_makeup}}" ng-class="field.field_class" ng-if="field.field_makeup == 'mod-two-title'">
+			<li ng-repeat = "item in field.field_items track by $index" class="{{field.field_prdtheme}}">
+				<a href="javascript:void(0);">
+					<div class="pic"><img ng-src="{{item.item_pic}}"></div>
+					<div class="pricebox">
+						<div class="title" ng-if="field.field_makeup != 'mod_prd_list'">{{item.item_title|decodeURI}}</div>
+						<div class="prdpricebtn">
+							<span class="fl price">{{item.item_price}}</span>
+				        	<span class="fr havecart cartfont" ng-if="field.field_prdtheme == 'defaultskin' && field.field_showcart == 'havecart'">
+						 		<i class="icon_addcart"></i>
+						 	</span>
+				        	<span class="fr havecart cartfont" ng-if="field.field_prdstyle.iscart == '1' && field.field_showcart == 'havecart'">
+						 		<i class="icon_addcart"></i>
+						 	</span>
+				        	<span  class="fr havecart cartinfo" ng-if="field.field_prdstyle.iscart == '2' && field.field_showcart == 'havecart'">
+						 		{{field.field_prdstyle.buyinfo}}
+						 	</span>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- 关联分类模块 -->
+<div ng-switch-when="classfiy" ng-class="'mag_classfiy mag_classfiy'+field.field_id">
+	<p ng-if="!field.field_items" style="line-height:30px;margin:0;padding-left:10px;">请在右侧选择分类</p>
+	<ul class="classfiy_item" ng-if="field.field_items" style="background-color: {{field.field_bgcolor}};margin:{{field.field_mt}} 0 {{field.field_mb}} 0;border-top:1px solid {{field.field_bordercolor}};">
+		<li ng-repeat = "item in field.field_items track by $index" style="border-bottom:1px solid {{field.field_bordercolor}};">
+			<a href="javascript:void(0);" style="line-height:{{field.field_lineh}};
+				font-size:{{field.field_fz}};color:{{field.field_color}};padding:0 {{field.field_pr}} 0 {{field.field_pl}};  
+			">{{item.item_title}}<i class="icon_rightarrow fr"></i></a>
+		</li>
+	</ul>
+</div>
+
+<!-- 商品搜索模块 -->
+<div ng-switch-when="searchprd" ng-class="'mag_searchprd mag_searchprd'+field.field_id">
+	<div class="search-holder searchprdbox" data-role="searchBar" data-search-bar-data="1" 
+		style="padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};background-color: {{field.field_bgcolor}};">
+		<div class="holder-inner"><i class="search-icon"></i> 搜索</div>
+	</div>
+</div>
+
+<!-- tab切换模块 -->
+<div ng-switch-when="navtab" ng-class="'mag_navtab mag_navtab'+field.field_id">
+	<div class="ui-detail-comments ui-tab" id="scrollthis">
+	    <ul class="sticky_div ui-tab-nav">
+			<li class="ui_border_b" ng-repeat="item in field.field_navs track by $index" ng-bind="item.title" ng-class="$index == 0 ? 'current' : ''"></li>
+	    </ul>
+	    <div class="ui-tab-cont">
+        	<ul class="ui-tab-content" ng-style="{'width' : field.field_navs.length*320}">
+				<li ng-repeat="item in field.field_navs" ng-class="$index == 0 ? 'current' : ''" ng-style="{'height' : $index == 0 ? 'auto' : '0'}">
+					<div ng-if="item.type == 'prd'">
+						<ul class="prd_items navtab_prd" ng-class="item.prdtype ? item.prdtype : 'mod-col-list'">
+							<li ng-repeat="x in item.content track by $index">
+								<a href="javascript:void(0);">
+									<div class="pic" style=""><img ng-src="{{x.pic}}"></div>
+									<div class="pricebox">
+										<div class="title" ng-if="item.prdtype != 'mod_prd_list'">{{x.title}}</div>
+										<span class="fl price">￥{{x.price}}</span>
+										<span class="fr" ng-if="item.prdtype != 'mod_prd_list'"><i class="icon_addcart"></i></span>
+										<div class="clearfix"></div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div ng-if="item.type == 'mag'">
+						<ul class="navtabcontentlist">
+							<li ng-repeat="x in item.content track by $index">
+								<a href="javascript:void(0);">
+									<div class="pic"><img ng-src="{{x.img}}"></div>
+									<div class="navtabcon">
+										<div class="title">{{x.title | decodeURI}}</div>
+										<span class="subtitle">{{x.subtitle | decodeURI}}</span>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div ng-if="item.type == 'imgtxt'">
+						<ul class="navtabcontentlist">
+							<li ng-repeat="x in item.content track by $index">
+								<a href="javascript:void(0);">
+									<div class="pic"><img ng-src="{{x.img}}"></div>
+									<div class="navtabcon">
+										<div class="title">{{x.title | decodeURI}}</div>
+										<span class="subtitle">{{x.subtitle | decodeURI}}</span>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+		     </ul> 
+		</div>
+	</div>	
+</div>
+
+<!-- 倒计时模块 -->
+<div ng-switch-when="time" ng-class="'mag_time mag_time'+field.field_id">
+<style>
+.mag_time{{field.field_id}} span{border-radius:100%;-webkit-border-radius:100%;-moz-border-radius:100%;display:inline-block;
+	width:{{field.field_size}};height:{{field.field_size}};line-height:{{field.field_size}};
+	background-color: {{field.field_timebgcolor}};color: {{field.field_timefcolor}};font-size: {{field.field_timefz}};}
+</style>
+	<div style="font-size:{{field.field_fz}};background-color: {{field.field_bgcolor}};color: {{field.field_color}};
+		padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};
+	    margin: {{field.field_mt}} 0 {{field.field_mb}} 0;text-align: center;">{{field.field_con | decodeURI}}
+			<div style="display:inline-block;" ng-if="field.field_time">
+				<span>{{field.field_days}}</span>天
+				<span>{{field.field_hours}}</span>时
+				<span>{{field.field_minutes}}</span>分
+				<span>{{field.field_seconds}}</span>秒
+			</div>
+	</div>
+</div>
+
+<!-- 万能表单模块 -->
+<div ng-switch-when="form" ng-class="'mag_form mag_form'+field.field_id">
+	<p ng-if="!field.field_formid" style="line-height:30px;margin:0;padding-left:10px;">请在右侧选择表单</p>
+	<div class="form_box">
+		<div ng-if="field.field_formid" ng-bind-html="field.field_formcon | decodeURI" id="ywk_form" 
+			style="margin:{{field.field_mt}} 0 {{field.field_mb}};padding:{{field.field_pt}} 0 {{field.field_pb}} 0;"></div>
+		<div class="form_shade"></div>
+	</div>
+</div>
+
+<!-- 视频模块 -->
+<div ng-switch-when="video" ng-class="'mag_video mag_video'+field.field_id">
+	<p ng-if="!field.field_video" style="line-height:30px;margin:0;padding-left:10px;">请在右侧填写视频链接</p>
+	<div ng-if="field.field_video" class='iframe_vediobox'
+		style="margin:{{field.field_mt}} 0 {{field.field_mb}}">
+		<div ng-bind-html="field.field_video | decodeURI" ></div>
+		<div class="video_shade"></div>
+	</div>
+</div>
+
+<!-- 分销二维码模块 -->
+<div ng-switch-when="qrcode" ng-class="'mag_qrcode mag_qrcode'+field.field_id">
+	<div style="text-align: center;background-color: {{field.field_bgcolor}};padding:{{field.field_pt}} 0 {{field.field_pb}} 0;margin: {{field.field_mt}} 0 {{field.field_mb}} 0;">
+		<img ng-src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/qrcode.jpg" ng-if="field.field_isshadow == 1" style="box-shadow: 0 0 {{field.field_shadowsize}} {{field.field_shadowcolor}}">
+		<img ng-src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/qrcode.jpg" ng-if="field.field_isshadow == 0">
+	</div>
+</div>
+
+{/literal}

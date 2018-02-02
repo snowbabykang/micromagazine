@@ -1,0 +1,70 @@
+{literal}
+<div ng-if="field.field_id == '1'" ng-class="'mag_dzp mag_dzp'+field.field_id">
+	<div style="min-height: 375px; position:relative;"  ng-if="field.field_type == 'dazhuanpan'">
+		<img ng-src="{{$storage.form.styles.bgimg}}">
+		<div class="wheel_cont">
+			<div class="j_wheel rAll">
+				<div id="wheel" chart="{}" draw> </div>
+			</div>
+			<div class="pointer-hoder">
+				<a class="pointer-btn" id="startbtn"><span>开始抽奖</span></a>
+			</div>
+		</div>
+		<div class="wheel_chance" ng-style="{'color':$storage.form.styles.color1};">
+			<div style="font-size:18px;">
+				您还有 <span id="count" ng-style="{'color':$storage.form.styles.color2};">{{$storage.form.rules.num}}</span> 次机会
+			</div>
+			<div>已有<span>n</span>人参与活动</div>
+		</div>
+	</div>
+</div>
+	
+<div ng-if="field.field_id == '2'" ng-class="'mag_dzp mag_dzp'+field.field_id">
+	<div ng-if="field.field_prize == '0'" class="dzpprize_space ">这是一个{{$storage.form.rules.name}}的中奖纪录，默认不展示，如需展示，请在右侧设置</div>
+	<div ng-if="field.field_prize == '1'"  ng-class="'mag_dzp'+$storage.form.rules.theme" class="angular_slide">
+		<!-- 获奖列表 -->
+		<div class="info_cont j_winner_list" style="margin-bottom:0px;">
+			<p class="info_title" ng-style="{'color':$storage.form.styles.color2};">中奖的小伙伴</p>
+			<ul class="list_ul">	
+				<li class="list_li" ng-repeat = "x in [1,2,3]">
+					<div class="list_cell small"><div class="img_cont rAll">
+						<img class="rAll" src="{/literal}{$HOST}{literal}/modal/images/a.jpg" alt="">
+					</div></div>
+					<div class = "list_cell">
+						<p><span ng-style="{'color':$storage.form.styles.color2};">谁*** </span><span class="f10 lighter">11-11 11:11</span></p>
+						<p class="f12 lh1" ng-style="{'color':$storage.form.styles.color1};">获得 <span ng-style="{'color':$storage.form.styles.color2};">获奖奖品名称</span></p>
+					</div>
+				</li>
+			</ul>
+			<p class="info_arrow"><span class="icon-chevron-down icon-white"></span></p>
+		</div>
+	</div>
+</div>
+<div ng-if="field.field_id == '3'" ng-class="'mag_dzp mag_dzp'+field.field_id">
+	<div ng-if="field.field_info == 'text'" class="angular_animate">
+		<ul class="j_page_info_div info_cont">
+			<li class="info_li">
+				<h6 ng-style="{'color':$storage.form.styles.color2};">活动奖项:</h6>
+				<p class="info_p" ng-style="{'color':$storage.form.styles.color1};">
+					<span ng-repeat="x in $storage.form.rules.prize" style="display: block;">奖品 {{$index+1}}: {{x.name}}</span>
+				</p>
+			</li>
+			<li class="info_li">
+				<h6 class="" ng-style="{'color':$storage.form.styles.color2};">活动时间:</h6>
+				<p class="info_p" ng-style="{'color':$storage.form.styles.color1};">{{$storage.form.rules.starttime}}至{{$storage.form.rules.endtime}}</p>
+			</li>
+			<li class="info_li">
+				<h6 class="" ng-style="{'color':$storage.form.styles.color2};">活动说明:</h6>
+				<p class="info_p" ng-style="{'color':$storage.form.styles.color1};">
+					每人每次最多允许抽奖{{$storage.form.rules.num}}次，<span ng-if="$storage.form.rules.iscode">，每次消耗{{$storage.form.rules.code}}{$CREDIT}</span>
+					<br/>{{$storage.form.rules.describe}}
+				</p>
+			</li>
+		</ul>
+	</div>
+	<div ng-if="field.field_info == 'img'" class="angular_animate">
+		<img ng-src="{{field.field_infoimg}}">
+	</div>
+	<div class="actfooter" ng-style="{'color':$storage.form.styles.color1};"><span>商城主页</span>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span>中奖纪录</span></div>
+</div>
+{/literal}

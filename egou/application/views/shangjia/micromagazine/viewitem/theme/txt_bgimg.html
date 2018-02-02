@@ -1,0 +1,29 @@
+{literal}
+<div ng-switch-when="txt_bgimg" class="mag_txt_bgimg mag_txt_bgimg{{field.field_id}}">
+	<ul style="background-color:{{field.field_bgcolor}};padding:{{field.field_pd}};" num="{{field.line_num}}">
+		<li ng-repeat="item in field.field_items" style="padding:{{field.item_margin}}">
+			<a class="txtimgbox" href="{{item.linkurl}}" style="background-color:{{item.bgcolor}};border-radius:{{field.item_radius}};">
+				<div class="txtimg_imgbox">
+					<img class="" ng-src="{{item.field_img}}" ng-if="item.is_localimg == '0' && item.field_img" style="border-radius:{{field.item_radius}};">
+					<img class="" ng-src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/{{item.field_img}}" ng-if="item.is_localimg == '1' && item.field_img" 
+					style="border-radius:{{field.item_radius}};">
+				</div>
+				<div class="txtimg_infobox align_{{field.title_align}}" ng-style="{'text-align':field.title_align,'background-color':item.title_bgcolor,
+				'padding':field.title_pd,'border-radius':field.title_radius,'top':field.title_post ? field.title_post+'px' : 'auto',
+										'bottom': field.title_posb ? field.title_posb+'px' : 'auto',
+										'left': field.title_posl ? field.title_posl+'px' : 'auto',
+										'right': field.title_posr ? field.title_posr+'px' : 'auto',}">
+					<div ng-class="field.title_post && field.title_posb ? 'title_middle' : ''"
+					ng-style="{'left' : field.title_post && field.title_posb ? field.title_pd : '','right' : field.title_post && field.title_posb ? field.title_pd : '',}">
+						<div class="txtimg_title" style="color:{{item.title_color}};font-size:{{field.title_fz}};">{{item.title_info}}</div>
+						<div ng-if="field.is_descibe == '1'" class="txtimg_descibe" style="color:{{item.descibe_color}};font-size:{{field.descibe_fz}};">{{item.descibe_info}}</div>
+						<div ng-if="field.is_btn == '1'" class="txtimg_btn" style="color:{{item.btn_color}};font-size:{{field.btn_fz}};border-color:{{item.btn_bordercolor}};
+							background-color:{{item.btn_bgcolor}};border-radius:{{field.btn_radius}}">{{item.btn_info}}
+						</div>
+					</div>
+				</div>
+			</a>
+		</li>
+	</ul>
+</div>
+{/literal}

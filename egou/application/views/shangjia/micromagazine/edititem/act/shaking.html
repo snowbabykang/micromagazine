@@ -1,0 +1,127 @@
+<!-- 摇一摇 -->
+<div class="editmodalbox" style="padding-bottom:5px;" ng-if="field.field_type == 'shaking' && field.field_id == '1'" ng-class="{literal}{'shaking{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《{literal}{{$storage.form.rules.name}}{/literal}样式》</p>
+	<table>
+		<tr>
+			<td class="wdview">摇一摇主题：</td>
+			<td>
+				<label ng-repeat="x in act_themename" style="margin-left: -1px;" class="radiobox" ng-class="{literal}{'{{x.value}}': 'active'}[$storage.form.rules.theme]{/literal}">
+					<input type="radio" ng-value="{literal}{{x.value}}{/literal}" ng-model="$storage.form.rules.theme" ng-click="changeshaketheme($storage.form,x.value)">{literal}{{x.name}}{/literal}
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">背景色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="$storage.form.styles.bgcolor" color="{literal}{{$storage.form.styles.bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="$storage.form.styles.bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{$storage.form.styles.bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="$storage.form.styles.bgcolor" resetcolor color="{literal}{{acttheme[field.field_theme].major.bg_color}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">背景图片：</td>
+			<td> 
+				<div class="img_box selectimage" style="height:110px;line-height: 100px;" selectimage ng-model="$storage.form.styles.bgimg">
+					<img ng-src="{literal}{{$storage.form.styles.bgimg}}{/literal}"><i class="icon_plus" ng-if="!$storage.form.styles.bgimg"></i>
+				</div>
+				<div class="img_info">
+					<div class="alert alert-danger">
+						<div>注意：摇一摇以此背景图作为底图，中间的主体部分的图片距离背景图片底部50px（即只留出【当前还有几次机会】的空间），图片越高，主体部分越相对靠下，请根据实际情况设计元素。</div>
+						<div>建议尺寸：宽度640px，高度900px以上，（不能太高，否则加载会很慢的） </div>
+					</div>
+					<div ng-model="$storage.form.styles.bgimg" resetcolor color="{literal}{{acttheme[field.field_theme].major.bg_img}}{/literal}">
+						<span class="btn btn-primary btn-mini">重置背景</span>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">摇一摇图片：</td>
+			<td> 
+				<div class="img_box selectimage shaking_imgbox" selectimage ng-model="field.field_wheelimg">
+					<img ng-src="{literal}{{field.field_wheelimg}}{/literal}"><i class="icon_plus" ng-if="!field.field_wheelimg"></i>
+					<span class="title">底盘图片</span>
+				</div>
+				<div class="img_box selectimage shaking_imgbox" selectimage ng-model="field.field_shadeimg">
+					<input type="text" ng-model="field.field_shadeimg" style="display: none;">
+					<img ng-src="{literal}{{field.field_shadeimg}}{/literal}"><i class="icon_plus" ng-if="!field.field_shadeimg"></i>
+					<span class="title">遮罩层图片</span>
+				</div>
+				<div class="img_box selectimage shaking_imgbox" selectimage ng-model="field.field_handimg">
+					<img ng-src="{literal}{{field.field_handimg}}{/literal}"><i class="icon_plus" ng-if="!field.field_handimg"></i>
+					<span class="title">手柄图片</span>
+				</div>
+				<p ng-model="field.field_wheelimg" resetcolor color="{literal}{{acttheme[field.field_theme].major.wheel_img}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置底盘图片</span>
+				</p>
+				<p ng-model="field.field_shadeimg" resetcolor color="{literal}{{acttheme[field.field_theme].major.shade_img}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置遮罩图片</span>
+				</p>
+				<p ng-model="field.field_handimg" resetcolor color="{literal}{{acttheme[field.field_theme].major.hand_img}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置手柄图片</span>
+				</p>
+				<!-- <p><span class="btn btn-primary btn-mini" ng-click="resetcolor(field,'field_wheelimg',acttheme[field.field_theme].major.wheel_img)">重置底盘图片</span></p>
+				<p><span class="btn btn-primary btn-mini" ng-click="resetcolor(field,'field_shadeimg',acttheme[field.field_theme].major.shade_img)">重置遮罩图片</span></p>
+				<p><span class="btn btn-primary btn-mini" ng-click="resetcolor(field,'field_handimg',acttheme[field.field_theme].major.hand_img)">重置手柄图片</span></p> -->
+				<div class="clearfix"></div>
+				<div class="img_info" style="margin-left: 0;">
+					<div class="alert alert-danger">
+						<div>注意：摇一摇中间的主体部分分为三张图片，底盘，手柄，遮罩层，三张图片一样大小。请按照顺序排列图片，设计时摆好位置再保存，图片宽度均为100%，请根据实体情况设计图片</div>
+						<div>建议：三张图片一样大小，宽度640px，高度小于背景图片高度，按照位置排列好，才能使图片不错位。PS：图片不宜过大</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">信息背景色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_color1" color="{literal}{{field.field_color1}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_color1"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_color1}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_color1" resetcolor color="{literal}{{acttheme[field.field_theme].major.color_1}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">信息字体色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker colorpicker-reposition="top" ng-model="field.field_color2" color="{literal}{{field.field_color2}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_color2"/>
+				    <span class="input-group-addon"  colorpicker-reposition="top"><i style="background-color: {literal}{{field.field_color2}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_color2" resetcolor color="{literal}{{acttheme[field.field_theme].major.color_2}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">菜单字体色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_color3" color="{literal}{{field.field_color3}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_color3"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_color3}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_color3" resetcolor color="{literal}{{acttheme[field.field_theme].major.color_3}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">分享图片：</td>
+			<td> 
+				<div class="img_box selectimage" style="height:100px;line-height: 100px;" selectimage ng-model="$storage.form.styles.shareimg">
+					<img ng-src="{literal}{{$storage.form.styles.shareimg}}{/literal}"><i class="icon_plus" ng-if="!$storage.form.styles.shareimg"></i>
+				</div>
+				<div class="img_info" style="margin-top:80px;" ng-model="$storage.form.styles.shareimg" resetcolor color="{literal}{{acttheme[field.field_theme].major.share_img}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置图片</span>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

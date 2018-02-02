@@ -1,0 +1,32 @@
+{literal}
+<div ng-switch-when="txt_1_img" class="mag_txt_1_img mag_txt_1_img{{field.field_id}}">
+	<ul style="background-color:{{field.field_bgcolor}};padding:{{field.field_pd}};" num="{{field.line_num}}"  ng-class="field.is_item_border == '1' ? 'hasborder' : ''">
+		<li ng-repeat="item in field.field_items" style="padding:{{field.item_margin}}">
+			<a href="{{item.linkurl}}" style="padding:{{field.item_pd}};background-color:{{item.bgcolor}};border-radius:{{field.item_radius}};border-color:{{field.item_bordercolor}}">
+				<div class="txtimgbox img_{{field.img_position}}">
+					<div class="txtimg_imgbox" ng-if="field.img_position == 'top' || field.img_position == 'left'" 
+					ng-style="{'padding-right':field.img_position == 'left' ? field.titleimg_pd : ''}">
+						<img class="" ng-src="{{item.field_img}}" ng-if="item.is_localimg == '0' && item.field_img">
+						<img class="" ng-src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/{{item.field_img}}" ng-if="item.is_localimg == '1' && item.field_img">
+					</div>
+					<div class="txtimg_infobox align_{{field.title_align}}" ng-style="{'text-align':field.title_align,
+					'padding-top':field.img_position == 'top' || field.img_position == 'bottom' ? field.title_pt : '0px',
+					'padding-bottom':field.img_position == 'top' || field.img_position == 'bottom' ? field.title_pb : '0px',}">
+						<div class="txtimg_title" style="color:{{item.title_color}};font-size:{{field.title_fz}};">{{item.title_info}}</div>
+						<div ng-if="field.is_descibe == '1'" class="txtimg_descibe" style="color:{{item.descibe_color}};font-size:{{field.descibe_fz}};">{{item.descibe_info}}</div>
+						<div ng-if="field.is_btn == '1'" class="txtimg_btn" style="color:{{item.btn_color}};font-size:{{field.btn_fz}};border-color:{{item.btn_bordercolor}};
+							background-color:{{item.btn_bgcolor}};border-radius:{{field.btn_radius}}">{{item.btn_info}}
+						</div>
+					</div>
+					<div class="txtimg_imgbox" ng-if="field.img_position == 'bottom' || field.img_position == 'right'" 
+						ng-style="{'padding-left':field.img_position == 'right' ? field.titleimg_pd : ''}">
+						<img class="" ng-src="{{item.field_img}}" ng-if="item.is_localimg == '0' && item.field_img">
+						<img class="" ng-src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/{{item.field_img}}" ng-if="item.is_localimg == '1' && item.field_img">
+					</div>
+					<div class="clearfix"></div>	
+				</div>
+			</a>
+		</li>
+	</ul>
+</div>
+{/literal}

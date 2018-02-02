@@ -1,0 +1,17 @@
+{literal}
+<div ng-switch-when="icons_menu" ng-class="'mag_icons_menu mag_icons_menu'+field.field_id">
+	<div class="icons_menubox icons_menubox_{{field.field_num}}" style="background-color: {{field.field_bgcolor}}">
+		<ul>
+			<li ng-repeat="item in field.field_items">
+				<a href="javascript:void(0);">
+					<div class="iconmenu_bgbox" style="background-color: {{item.bgcolor}}">
+						<img ng-if="item.is_localimg == '0'" ng-src="{{item.imgurl}}" alt=""/>
+						<img ng-if="item.is_localimg == '1'" ng-src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/icon_svg/{{item.imgurl}}" alt="" />
+					</div>
+					<div class="iconmenu_title" ng-bind="item.title"></div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+{/literal}

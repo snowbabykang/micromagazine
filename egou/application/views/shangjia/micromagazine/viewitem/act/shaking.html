@@ -1,0 +1,20 @@
+{literal}
+<div ng-if="field.field_id == '1'" ng-class="'mag_shaking mag_shaking'+field.field_id">
+	<div class="shaking_con" ng-if="field.field_type == 'shaking'">
+		<img ng-src="{{$storage.form.styles.bgimg}}">
+		<div class="shaking_body">
+			<img ng-src="{{field.field_wheelimg}}" class="shaking_conbg">
+			<img ng-src="{{field.field_handimg}}" class="shaking_hand">
+			<img ng-src="{{field.field_shadeimg}}" class="shaking_shade">
+		</div>
+		<div class="shaking_infobox" style="text-align: center;">
+			<div class="shaking_info" ng-style="{'color':field.field_color2,'background-color':field.field_color1}">你还有{{$storage.form.rules.num}}次机会</div>
+		</div>
+	</div>
+	<div ng-style="{'color':field.field_color3,'text-align':'center','padding':'2px 0'}">
+		<span style="padding:2px 8px;">活动说明</span> |
+		<span style="padding:2px 8px;">商城主页</span> |
+		<span style="padding:2px 8px;">中奖记录</span>
+	</div>
+</div>
+{/literal}

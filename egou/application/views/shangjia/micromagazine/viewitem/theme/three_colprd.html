@@ -1,0 +1,26 @@
+{literal}
+<div ng-if="field.field_type == 'three_colprd'" ng-class="'mag_three_colprd mag_three_colprd'+field.field_id">
+<style>
+.mag_three_colprd{{field.field_id}} .prd_itemsbox{padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};background-color: {{field.field_bgcolor}};}
+.mag_three_colprd{{field.field_id}} li{padding:{{field.prdlipadding}};}
+.mag_three_colprd{{field.field_id}} a{background-color : {{field.prdbgcolor}};padding:{{field.prdpadding}};}
+.mag_three_colprd{{field.field_id}} a .prdinfobox{text-align : {{field.infoalign}};color:{{field.prdboxcolor}};background-color: {{field.prdboxbgcolor}};}
+.mag_three_colprd{{field.field_id}} .title{font-size:{{field.title_fz}};}
+.mag_three_colprd{{field.field_id}} .price{font-size:{{field.price_fz}};}
+</style>
+	<p ng-if="!field.field_items" style="line-height:30px;margin:0;padding-left:10px;">请在右侧选择商品</p>
+	<div class="prd_itemsbox" ng-if="field.field_items">
+		<ul class="prd_items theme_three_colprd">
+			<li ng-repeat = "item in field.field_items track by $index">
+				<a href="javascript:void(0);" ng-style="field.isborder == '1' ? {'border-color' : field.bordercolor} : {'border':'none'}">
+					<div class="pic"  ng-style="field.picradius == '1' ? {'border-radius' : '100%','-webkit-border-radius' : '100%'} : {'border-radius':'none'}"><img ng-src="{{item.item_pic}}"></div>
+					<div class="prdinfobox"  ng-if="field.istitle == '1' || field.isprice == '1'">
+						<div class="title" ng-if="field.istitle == '1'">{{item.item_title}}</div>
+						<div class="price" ng-if="field.isprice == '1'">￥{{item.item_price}}</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+{/literal}

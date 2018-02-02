@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> 
+	<meta name="renderer" content="webkit" /> 
+	<meta charset="utf-8" /> 
+	<title>欢迎来到{$agent.platform}</title> 
+	{include file="shangjia/public/css.html"}
+</head>
+<body> 
+ 	{include file="shangjia/public/body_top.html"}
+	{* 正文开始  *}
+	<div class="main_hd"> 
+		<h2>门店管理</h2>    
+		<ul class="nav nav-tabs">
+		  	<li class=""><a href="{$HOST}/index.php/shangjia/softstore/storelist">门店管理</a></li>
+			<li><a href="{$HOST}/index.php/shangjia/softstore/getstoreprd">商品审核</a></li>
+			<li><a href="{$HOST}/index.php/shangjia/softstore/setup">功能设置</a></li>
+		  	<li class="active"><a href="{$HOST}/index.php/shangjia/diypage/storelist">门店装修</a></li>
+		</ul>
+		<div class="extra_info agent-none">
+			<a href="http://youwuku.cn/egou/index.php/weixin/shop/show?key=Mgz&page=w132:1452068013" target="_blank">帮助<i class="ywkicon icon-questioncircleo ask"></i></a>
+		</div>
+	</div>
+	<div class="main_bd p-t">
+    <div class="extra_info clearfix">
+				<a href="{$HOST}/index.php/shangjia/catslist/micromagazine?type=store" class="btn btn-success fr" onclick="sessionStorage.clear();">新建门店模板</a>
+               
+			</div> 
+		<table class="table m-t-md">
+	    	<tr>
+	    		<th>模板名称</th>
+	    		<th>创建时间</th>
+	    		<th>状态</th>
+	    		<th style="text-align: right;">操作</th>
+	    	</tr>
+	    	{if $data|@count}
+	    	{foreach item=single from=$data}
+	    	<tr>
+	    		<td>{$single.title}</td>
+	    		<td><span class="gray">{$single.time}</span></td>
+	    		<td>
+	    			{if $single.whether_showlist eq 3}<span class="label label-success">使用中</span>{else}-{/if}
+	    			{if $single.whether_index eq 1}<span class="label label-warning">首</span>{/if}
+	    		</td>
+	    		<td>
+	    			<ul class="links links_opt">
+		    			{if $single.whether_showlist eq 3}
+		                <li class="links_item"><a  rel="{$single.id}" href="javascript:void(0)" class="m_cancelstore ">取消门店模板</a></li>
+		                {else}
+		                <li class="links_item"><a  rel="{$single.id}" href="javascript:void(0)" class="m_setstore " >设置为门店模板</a></li>
+		                {/if}
+		                {if $single.whether_index eq 1}
+		    			<li class="links_item"><a  rel="{$single.id}" href="javascript:void(0);" class=" m_cancelindex">取消店铺首页</a></li>
+		                {else}
+		    			<li class="links_item"><a  rel="{$single.id}" href="javascript:void(0);" class=" m_setindex">设置店铺首页</a></li>
+		    			{/if}
+		    			<li class="links_item"><a href="{$HOST}/index.php/shangjia/catslist/wxmagedit?id={$single.id}" class="" title="编辑" onclick="sessionStorage.clear();">编辑</a></li>
+		    			<li class="links_item"><a rel="{$single.id}" {if $single.whether_showlist eq 1} isdelete="1" {else} isdelete= "0" {/if} href="javascript:void(0)" class="m_el" title="删除">删除</a></li>
+					</ul>
+	    		</td>
+	    	</tr>
+	    	{/foreach}
+	    	<tr>
+		        <td colspan="4">
+		       	 {include file="shangjia/public/page.html"}
+		        </td>
+		    </tr>
+		    {else}
+		    <tr>
+		        <td colspan="4">
+		        	<div class="nodatapage"><i class="ywkicon icon-exclamationcircle"></i>未创建门店模板</div>
+		        </td>
+		    </tr>
+		    {/if}
+	    </table>
+	    <input type="hidden" id="showlistid" value='{$showlistid}' />
+	    <input type="hidden" id="indexid" value='{$index_flag}' />
+	</div>
+   {* 正文结束   *}
+   {include file="shangjia/public/body_bottom.html"}
+   {* 中间写自己的js或者引入的js   *}
+{literal}
+<script type="text/javascript">
+var shoptype = {/literal}{$shoptype}{literal};
+$(document).ready(function() {
+	$(".m_cancelstore").click(function() {
+		var id = $(this).attr("rel");
+		if (confirm("确认取消门店模板设置吗？确认后您的门店页面展示将恢复初始状态")) {
+			$.ajax({
+				type: "POST",
+				url: "{/literal}{$HOST}{literal}/index.php/shangjia/diypage/diycancelstorelist",
+				data: {'id': id,'shoptype': shoptype},
+				success: function(msg) {
+					alert(msg);
+					window.location.reload();
+					return false
+				}
+			})
+		} else {
+			return false
+		}
+	});
+	$(".m_setstore").click(function() {
+		var id = $(this).attr("rel");
+		var showlistid = $("#showlistid").val();
+		if (confirm("确认将此页面设置为门店模板？设置成功后，您的门店页面将以此页面形式展示")) {
+			$.ajax({
+				type: "POST",
+				url: "{/literal}{$HOST}{literal}/index.php/shangjia/diypage/diysetstorelist",
+				data: {'id': id,'oldid': showlistid,'shoptype': shoptype},
+				success: function(msg) {
+					alert(msg);
+					window.location.reload();
+					return false
+				}
+			})
+		} else {
+			return false
+		}
+	});
+	$(".m_el").click(function() {
+		var id = $(this).attr("rel");
+		var isdelete = $(this).attr("isdelete");
+		if (isdelete == 0) {
+			if (confirm("确认删除自定义门店模板吗？")) {
+				$.ajax({
+					type: "POST",
+					url: "{/literal}{$HOST}{literal}/index.php/shangjia/diypage/diystoredelete",
+					data: {'id': id},
+					success: function(msg) {
+						var data = eval('(' + msg + ')');
+						if (data['status'] == 1) {
+							window.location.reload();
+							alert(data['reason'])
+						} else {
+							alert(data['reason'])
+						}
+					}
+				})
+			}
+		} else {
+			alert("该自定义门店模板正在使用中，不可以删除，如需删除，取消使用");
+			return false
+		}
+	});
+	/* 设置店铺首页 */
+	$(".m_setindex").live("click",function(){
+		var id=$(this).attr("rel");
+		var indexid = $("#indexid").val();
+		if(confirm("确认将此门店页面设置为店铺首页吗?")){
+			$.ajax({
+				type: "POST",
+				url: "{/literal}{$HOST}{literal}/index.php/shangjia/catslist/wxsetindex",
+				data: {'id':id,'oldid':indexid,"shoptype":2},
+				success: function(msg){
+					alert(msg);
+					window.location.reload();
+					return false;
+				}
+			});
+		}else{
+			return false;
+		}
+	});
+	/* 取消店铺首页 */
+	$(".m_cancelindex").live("click",function(){
+		var id=$(this).attr("rel");
+		var indexid = $("#indexid").val();
+		if(confirm("确认取消首页设置吗，确认后您的店铺首页恢复原始状态?")){
+			$.ajax({
+				type: "POST",
+				url: "{/literal}{$HOST}{literal}/index.php/shangjia/catslist/wxcancelindex",
+				data: {'id':id,'oldid':indexid,"shoptype":2},
+				success: function(msg){
+					alert(msg);
+					window.location.reload();
+					return false;
+				}
+
+			});
+		}else{
+			return false;
+		}
+	});
+});
+</script>
+
+{/literal}
+   
+   {* footer.php一定要放在页面最下端   *}
+   {include file="shangjia/public/footer.html"}
+</body>
+</html>

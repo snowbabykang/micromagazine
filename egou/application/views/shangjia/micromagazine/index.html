@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>自定义微杂志</title>
+{include file="shangjia/public/css.html"}
+{* 合成css  jQuery_ui.css bootstrap-colorpicker.css base.css form.css*}
+<link rel="stylesheet" type="text/css" href="{$IMAGE_PATH}/micromagazine/css/main_20171123.css">
+<link rel="stylesheet" href="{$IMAGE_PATH}/diyform/weixin/css/form_2017.css"/> 
+{if $type eq 'activity'}<link rel="stylesheet" type="text/css" href="{$IMAGE_PATH}/micromagazine/css/act_2017.css">{/if}
+{include file="shangjia/components/css.html"}
+{literal}
+<style>
+.main_con *{box-sizing: content-box;}
+.main_con input[type="text"]{box-sizing: border-box;}
+.modalbox,.leftside *{font-size: 12px;}
+.veiwmovebox .view-title{width: 180px;}
+.accordion-inner ul li{padding:8px 0;}
+.accordion-inner ul li i{ padding-bottom: 5px;line-height: 1;}
+.resetcolor{margin: 0 0 0 5px;}
+.colorpicker-element input{width: 100px;}
+.img_info input[type="text"],.navtabbox input[type="text"]{width:200px;}
+.selecturl{padding:0;}
+.img_info .input-append{display: inline-block;}
+.editmodalbox label.radiobox{height: 24px;line-height: 24px;}
+.prize_awardbox input[type="text"]{width:auto;}
+.prize_awardbox .shortwidth{width:100px!important;margin:0 5px;}
+.prize_awardbox p{margin-bottom: 8px;}
+.Wdate{width:100px!important;}
+.modal.fade.in{top: 10%!important;}
+.share-btn .btn+.btn{margin: 0;}
+.form_btn{box-sizing: border-box;}
+</style>
+{/literal}
+</head>
+<body ng-app="myApp">
+<div class="main_con">
+	<maincon></maincon>
+	<div class="clearfix"></div>
+	{include file="shangjia/micromagazine/preview_mag.html"}
+</div>
+{include file="shangjia/public/js.html"}
+{include file="shangjia/ueditor.html"}
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/js/Sortable.min.js"></script> 
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/js/angular.js"></script> 
+{* js/angular-animate.min.js,js/ngStorage.min.js,js/angular-ui-router.js,js/angular-ueditor.js,js/ng-sortable.js *}
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/js/angular-plug_20170411.js"></script>    <!-- 包括各种组件 -->
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/js/bootstrap-colorpicker_20160114.js"></script>
+<script type="text/javascript" src="{$JS_PATH}/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="{$JS_PATH}/pace.min.js"></script>
+{literal}
+<script>
+//colorpicker插件的图片使用路径
+var IMAGEPATH = "{/literal}{$IMAGE_PATH}{literal}";
+//默认图片：
+var imgError='{/literal}{$IMAGE_PATH}{literal}/business/pic-none-180x180.jpg';
+
+var myApp = angular.module('myApp',['ngAnimate','ngStorage','ng.ueditor','ui.router','ng-sortable']);
+var mag = {
+	HOST : "{/literal}{$HOST}{literal}",
+	sid : "{/literal}{$seller_cookie.sina_uid}{literal}",
+	credit_mark : '{/literal}{$CREDIT}{literal}',
+	templateurl : '{/literal}{$HOST}{literal}/index.php/shangjia/catslist/getmainmagazine?id={/literal}{$id}&type={$type}&act_kind={$act_kind}&themetype={$themetype}{literal}',    //主页面连接
+	magtemplateurl : '{/literal}{$HOST}/index.php/shangjia/mgztheme/getmagazinecreat?id={$id}&type={$type}&act_kind={$act_kind}&configid={$configid}&themetype={$themetype}&thememgz_id={$thememgz_id}{literal}',
+	getrichmodaltempurl : '{/literal}{$HOST}{literal}/index.php/shangjia/catslist/getrichtemplate?type=',    //获取富文本各模块连接
+	geteditmodaltempurl : '{/literal}{$HOST}{literal}/index.php/shangjia/catslist/geteditmodaltemplate?rel=edit&themetype={/literal}{$themetype}{literal}',    //获取编辑各模块连接
+	home_link : '{/literal}{$home_link}{literal}',    //首页
+	shopping_cat_link : '{/literal}{$shopping_cat_link}{literal}',    //购物车
+	personal_link : '{/literal}{$personal_link}{literal}',    //个人中心
+	classify_link : '{/literal}{$classify_link}{literal}',    //分类页面
+	imgError : '{/literal}{$IMAGE_PATH}{literal}/business/pic-none-180x180.jpg',
+	serverTime : {/literal}{$time}{literal} * 1000,
+	savemagazine : '{/literal}{$HOST}{literal}/index.php/shangjia/catslist/newcreatemgz?shoptype=2',    //保存微杂志连接
+	savemagazinetheme : '{/literal}{$HOST}{literal}/index.php/shangjia/mgztheme/savemgztheme',    //保存带配置的微杂志（生成配置微杂志列表，最后发布成主题）
+	saveactivity : '{/literal}{$HOST}{literal}/index.php/shangjia/activity/mgzactivity',    //保存活动
+	previewUrl : "{/literal}{$HOST}{literal}/index.php/shangjia/catslist/preview",  //预览微杂志连接
+	magazinelisturl : '{/literal}{$HOST}{literal}/index.php/shangjia/catslist/custommagazine',    //微杂志列表连接
+	catepagelisturl : '{/literal}{$HOST}{literal}/index.php/shangjia/diypage/diyshowlist?shoptype=2',    //分类页列表连接
+	storelisturl : '{/literal}{$HOST}{literal}/index.php/shangjia/diypage/storelist',    //门店列表连接
+	getprdtheme : '{/literal}{$HOST}{literal}/index.php/shangjia/catslist/getprdtheme',    //获取商品主题文件
+	isedit : '{/literal}{$id}{literal}',          //存在即为编辑
+	data : {/literal}{if $data}{$data}{else}''{/if}{literal},          //编辑状态下的数据
+	isact : {/literal}{if $type eq "activity"}1{else}0{/if}{literal},     //是否是活动
+	iscate : {/literal}{if $type eq "catepage"}1{else}0{/if}{literal},     //是否是自定义分类页
+	isstore : {/literal}{if $type eq "store"}1{else}0{/if}{literal},        //是否是门店
+	ismag : {/literal}{if $type neq "catepage" && $type neq "activity" && $type neq "store"}1{else}0{/if}{literal},     //是否是自定义微杂志
+	act_type : '{/literal}{$act_kind}{literal}',
+	getmainseturl : {/literal}{if $type eq "activity" && $act_kind}'{$HOST}/index.php/shangjia/catslist/getactivitytemp?act_kind={$act_kind}'{else}'{$HOST}/index.php/shangjia/catslist/geteditmodaltemplate?rel=edit&type=setmagazine&diytype={$type}'{/if}{literal},
+	themetype : '{/literal}{$themetype}{literal}',   //微杂志类型：config是管理员创建微杂志作为主题默认模板；theme是商家使用了主题创建微杂志
+	configid : '{/literal}{$configid}{literal}',   //配置id
+	configdata : {/literal}{if $config_data}{$config_data}{else}''{/if}{literal},    //配置的数组
+	configmgzlist : '{/literal}{$HOST}{literal}/index.php/shangjia/mgztheme/themelist?configid={/literal}{$configid}{literal}', //用配置创建的微杂志列表
+	thememgz_id : '{/literal}{$thememgz_id}{literal}',   //主题微杂志id
+	thememgz_data : {/literal}{if $thememgz_data}{$thememgz_data}{else}''{/if}{literal},    //主题微杂志的内容
+	themeimgurl : "{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/",
+	getpreviewthemecode : "{/literal}{$HOST}{literal}/index.php/shangjia/catslist/getnotecode",      //获取预览主题的二维码
+};
+</script>
+{/literal}
+{include file="shangjia/components/plugscommonjs.html"}
+{include file="shangjia/components/selectcomponents.html"}
+{include file="shangjia/components/selectimgaudio.html"}
+{include file="shangjia/common/selectLabel.html"}
+{if $themetype == 'config'}{include file="shangjia/micromagazine/select_testprd.html"}{/if}
+{* 合成js，包括common.js directive.js color_service.js activity_service.js save_service.js index.js video.js puzzle.js *}
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/js/main_20171123.js"></script>
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/jquery-smartMenu.js"></script>
+{*<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/common.js"></script>   
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/router.js"></script>   
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/directive.js"></script>   
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/color_service.js"></script>   
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/product_service.js"></script>   
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/activity_service.js"></script>   
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/save_service_20160105.js"></script> 
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/theme/theme_service.js"></script> 
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/index.js"></script>   
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/video.js"></script>   
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/puzzle.js"></script>
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazineDev/js/limit.js"></script> *}
+{if $type eq 'activity' && $act_kind eq '1'}
+<script type="text/javascript" src="{$IMAGE_PATH}/micromagazine/js/wheel_2016.js"></script>    <!-- 大转盘生成轮盘的方法 -->
+{/if}
+</body>
+</html>

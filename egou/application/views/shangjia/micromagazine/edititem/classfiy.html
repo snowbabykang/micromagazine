@@ -1,0 +1,98 @@
+<div class="editmodalbox" ng-class="{literal}{'classfiy{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《关联分类》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview" style="vertical-align: top;padding-top:15px;">选择分类：</td>
+			<td> 
+				<div>
+					<span class="btn btn-primary getitem" getitem data-type="general" ng-model="field.field_items">选择分类</span>
+					<span ng-if="field.field_items">已经选择{literal}{{field.field_items.length}}{/literal}个分类</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">字体大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="12" max="26" step="2" value="{literal}{{field.field_fz}}{/literal}" ng-model="field.field_fz" slider></div> 
+				<div class="drag_num" ng-bind="field.field_fz">
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">字体行高：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="24" max="50" step="2" value="{literal}{{field.field_lineh}}{/literal}" ng-model="field.field_lineh" slider></div> 
+				<div class="drag_num" ng-bind="field.field_lineh">
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" resetcolor ng-model="field.field_bgcolor" color="{literal}{{color.classfiy.bgcolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">线条颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bordercolor" color="{literal}{{field.field_bordercolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_bordercolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bordercolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" resetcolor ng-model="field.field_bordercolor" color="{literal}{{color.classfiy.bordercolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">字体颜色：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_color" color="{literal}{{field.field_color}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" resetcolor ng-model="field.field_color" color="{literal}{{color.classfiy.color}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pr}}{/literal}" ng-model="field.field_pr" slider></div>
+				<div class="drag_num" ng-bind="field.field_pr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pl}}{/literal}" ng-model="field.field_pl" slider></div>
+				<div class="drag_num" ng-bind="field.field_pl"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">外上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mt}}{/literal}" ng-model="field.field_mt" slider></div>
+				<div class="drag_num" ng-bind="field.field_mt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mb}}{/literal}" ng-model="field.field_mb" slider></div>
+				<div class="drag_num" ng-bind="field.field_mb"></div>
+			</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,96 @@
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading" ng-click="showmodalnav('txtmodals')">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" data-href="txtmodals">
+      		图文模块<i class="icon_rightarrow" ng-class="navtype == 'txtmodals' ? 'rotatedown' : ''"></i>
+      </a>
+    </div>
+    <div id="txtmodals" class="accordion-body collapse" ng-class="{literal}{'txtmodals': 'in'}{/literal}[navtype]">
+      <div class="accordion-inner">
+      		<ul ng-sortable="sortableConfig">
+      			<li ng-repeat="item in modalarr.txtpic track by $index" data-type="{literal}{{item.field_type}}{/literal}" class="leftsinglemodal">
+      				<i ng-class="baseinfo[item.field_type].iconclass"></i>
+      				<span ng-bind="baseinfo[item.field_type].title"></span>
+      				<div class="addbtn" ng-click="addNewField(item.field_type)">添加</div>
+     			</li>
+      		</ul>
+      </div>
+    </div>
+  </div>
+  {if $type neq "store"}
+  <div class="accordion-group">
+    <div class="accordion-heading" ng-click="showmodalnav('prdmodals')">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" data-href="prdmodals">
+        	商品模块<i class="icon_rightarrow" ng-class="navtype == 'prdmodals' ? 'rotatedown' : ''"></i>
+      </a>
+    </div>
+    <div id="prdmodals" class="accordion-body collapse" ng-class="{literal}{'prdmodals': 'in'}{/literal}[navtype]">
+      <div class="accordion-inner">
+      		<ul ng-sortable="sortableConfig">
+      			<li ng-repeat="item in modalarr.prd track by $index" data-type="{literal}{{item.field_type}}{/literal}" class="leftsinglemodal">
+      				<i ng-class="baseinfo[item.field_type].iconclass"></i>
+      				<span ng-bind="baseinfo[item.field_type].title"></span>
+      				<div class="addbtn" ng-click="addNewField(item.field_type)">添加</div>
+     			</li>
+      		</ul>
+      </div>
+    </div>
+  </div>
+  {/if}
+  <div class="accordion-group">
+    <div class="accordion-heading" ng-click="showmodalnav('helpmodals')">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" data-href="helpmodals">
+        	辅助模块<i class="icon_rightarrow" ng-class="navtype == 'helpmodals' ? 'rotatedown' : ''"></i>
+      </a>
+    </div>
+    <div id="helpmodals" class="accordion-body collapse" ng-class="{literal}{'helpmodals': 'in'}{/literal}[navtype]">
+      <div class="accordion-inner">
+      		<ul ng-sortable="sortableConfig">
+      			<li ng-repeat="item in modalarr.help track by $index" data-type="{literal}{{item.field_type}}{/literal}" class="leftsinglemodal">
+      				<i ng-class="baseinfo[item.field_type].iconclass"></i>
+      				<span ng-bind="baseinfo[item.field_type].title"></span>
+      				<div class="addbtn" ng-click="addNewField(item.field_type)">添加</div>
+     			</li>
+      		</ul>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading" ng-click="showmodalnav('seniormodals')">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" data-href="seniormodals">
+        	高级模块<i class="icon_rightarrow" ng-class="navtype == 'seniormodals' ? 'rotatedown' : ''"></i>
+      </a>
+    </div>
+    <div id="seniormodals" class="accordion-body collapse" ng-class="{literal}{'seniormodals': 'in'}{/literal}[navtype]">
+      <div class="accordion-inner">
+      		<ul ng-sortable="sortableConfig">
+      			<li ng-repeat="item in modalarr.senior track by $index" data-type="{literal}{{item.field_type}}{/literal}" class="leftsinglemodal"
+      			 ng-if="{if $type neq 'store'}item.field_type == 'navtab' ||{/if} item.field_type == 'time' || item.field_type == 'video' {if $type neq 'catepage' && $type neq 'store'} || item.field_type == 'form'{/if} {if 'newfenxiao'|in_array:$seller_functions && $type neq 'store'}|| item.field_type == 'qrcode'{/if}">
+      				<i ng-class="baseinfo[item.field_type].iconclass"></i>
+      				<span ng-bind="baseinfo[item.field_type].title"></span>
+      				<div class="addbtn" ng-click="addNewField(item.field_type)">添加</div>
+     			</li>
+      		</ul>
+      </div>
+    </div>
+  </div>
+  {if $type neq 'activity' && $type neq 'catepage' && $type neq 'store'}
+  <div class="accordion-group" ng-if="configid">
+    <div class="accordion-heading" ng-click="showmodalnav('designmodals')">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" data-href="designmodals">
+        	设计模块<i class="icon_rightarrow" ng-class="navtype == 'designmodals' ? 'rotatedown' : ''"></i>
+      </a>
+    </div>
+    <div id="designmodals" class="accordion-body collapse" ng-class="{literal}{'designmodals': 'in'}{/literal}[navtype]">
+      <div class="accordion-inner">
+       		<ul ng-sortable="sortableConfig">
+       			<li ng-repeat="item in modalarr.design track by $index" data-type="{literal}{{item.field_type}}{/literal}" class="leftsinglemodal">
+       				<i ng-class="modalinfo[item.field_type].img"></i>{literal}{{modalinfo[item.field_type].title}}{/literal}
+       				<div class="addbtn" ng-click="addNewField(item.field_type)">添加</div>
+       			</li>
+      		</ul>
+      </div>
+    </div>
+  </div>
+  {/if}
+</div>

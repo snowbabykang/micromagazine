@@ -1,0 +1,75 @@
+<div class="editmodalbox" ng-class="{literal}{'icons_menu{{field.field_id}}': 'show'}[$storage.isShow]{/literal}" >
+	<p class="edit_title">编辑《图标菜单》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr ng-if="themeattr[field.field_type].field_bgcolor.isedit == 1">
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].field_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].field_num.isedit == 1">
+			<td class="wdview">行排列数：</td>
+			<td> 
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'4': 'active'}[field.field_num]{/literal}"><input type="radio" ng-value="'4'" ng-model="field.field_num">一行4个</label>
+					<label class="radiobox" ng-class="{literal}{'5': 'active'}[field.field_num]{/literal}"><input type="radio" ng-value="'5'" ng-model="field.field_num">一行5个</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview" style="vertical-align: top;">菜单块：</td>
+			<td> 
+				<p class="red">菜单图标请选择同尺寸的png图片，建议64px*64px尺寸</p>
+				<ul class="menu_editimgbox" ng-if="field.field_items.length > 0">
+					<li ng-repeat="item in field.field_items track by $index" class="angular_animate editboxlipos">
+						<div class="img_operate">
+							<span class="upmove" ng-click="upmove_modal(field.field_items, $index)"><i class="icon_up"></i></span>
+							<span class="downmove" ng-click="downmove_modal(field.field_items, $index)"><i class="icon_down"></i></span>
+							<span class="delmove" ng-click="del_fielditems(field.field_items, item,1)"><i class="icon_del"></i></span>
+						</div>
+						<div class="fl">
+							<div class="img_box" style="width:75px;float: none;background-color: {literal}{{item.bgcolor}}{/literal}">
+								<div class="selectimage" data-type="iconmenu" title="选择图片" selectimage ng-model="item.imgurl">
+									<img ng-src="{literal}{{item.imgurl}}{/literal}" ng-if="item.is_localimg == '0'">
+									<img ng-src="{$IMAGE_PATH}/micromagazine/img/thememodal/icon_svg/{literal}{{item.imgurl}}{/literal}" ng-if="item.is_localimg == '1'">
+								</div>
+							</div>
+							<span class="btn btn-link mt10" ng-click="selectSystemimg(item)">选择系统图</span>
+						</div>
+						<div class="img_info" style="margin-left: 100px;">
+							<div class="mb10">
+								<span>菜单名称</span>
+								<input type="text" ng-model="item.title" limitcount count="10">
+			    				<span class="count-limit"><span class="remainwords1">5</span>/5</span>
+							</div>
+							<div class="mb10">
+								<span>跳转连接</span>
+								<div class="input-append">
+									<input type="text" readonly size="25" ng-model="item.linktitle">
+									<a href="javascript:void(0);" class="selecturl btn" type="item" selecturl ng-model="item.link"><i class="icon_link"></i></a>
+								</div>
+							</div>
+							<div>
+								<span class="fl" style="line-height: 33px;padding-right: 2px;">背景颜色</span>
+								<div class="input-group fl" colorpicker ng-model="item.bgcolor" color="{literal}{{item.bgcolor}}{/literal}">
+								    <input type="text" class="form-control" ng-model="item.bgcolor"/>
+								    <span class="input-group-addon"><i style="background-color: {literal}{{item.bgcolor}}{/literal};"></i></span>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div ng-if="!field.field_items.length || field.field_items.length < 12">
+					<span class="btn btn-primary" ng-click="add_iconmenu(field.field_items,12)">添加菜单</span>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

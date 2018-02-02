@@ -1,0 +1,23 @@
+{literal}
+<div ng-switch-when="title_sub" ng-class="'mag_title_sub mag_title_sub'+field.field_id"> 
+	<div class="titlesubbox" style="padding:{{field.field_pd}};background-color:{{field.field_bgcolor}};" ng-class="field.is_borderb == '1' ? 'hasborderb' : ''">
+		<a href="javascript:void(0);" style="background-color:{{field.img_bgcolor}};">
+			<img class="titlebgimg" ng-src="{{field.field_bgimg}}" ng-if="field.is_localimg == '0' && field.field_bgimg">
+			<img class="titlebgimg" ng-src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/{{field.field_bgimg}}" ng-if="field.is_localimg == '1' && field.field_bgimg">
+			<div class="titlesub_con{{field.subtitle_float}}" ng-class="field.field_bgimg ? 'titlesub_conimg' : 'titlesub_con'" 
+				style="padding:{{field.titleinfo_pt}} 10px {{field.titleinfo_pb}};">
+				<div class="maintitle" style="font-size: {{field.title_fz}};color:{{field.title_color}};padding-bottom:{{field.title_sub_pd}};text-align:{{field.title_align}};">
+					{{field.title_info}}
+				</div>
+				<div class="subtitle" ng-if="field.is_subtitle == '1'" style="font-size: {{field.subtitle_fz}};color:{{field.subtitle_color}};text-align:{{field.title_align}};">
+					{{field.subtitle_info}}
+				</div>
+				<div class="titlebtn" ng-if="field.is_btn == '1'" style="text-align:{{field.title_align}};">
+					<span style="font-size: {{field.btn_fz}};color:{{field.btn_color}};">{{field.btn_info}}</span>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</a>
+	</div>
+</div>
+{/literal}

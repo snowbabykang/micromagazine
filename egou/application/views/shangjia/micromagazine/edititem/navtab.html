@@ -1,0 +1,66 @@
+<div class="editmodalbox" ng-class="{literal}{'navtab{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《tab切换》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview" style="vertical-align: top;padding-top:15px;">tab分组：</td>
+			<td>
+				<ul class="navtabbox">
+					<li ng-repeat="item in field.field_navs track by $index">
+						<div class="img_operate">
+							<span class="upmove" ng-click="upmove_modal(field.field_navs, $index)"><i class="icon_up"></i></span>
+							<span class="downmove" ng-click="downmove_modal(field.field_navs, $index)"><i class="icon_down"></i></span>
+							<span class="delmove" ng-click="del_navtab(field, item)"><i class="icon_del"></i></span>
+						</div>
+						<table>
+							<tr>
+								<td class="wdview">分组标题：</td>
+								<td><input type="text" ng-model="item.title" limitcount count="8">
+									<span class="count-limit"><span class="remainwords1">1</span>/4</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="wdview">分组类型：</td>
+								<td>
+									<div class="btnlabel-radio">
+									  	<label class="radiobox" ng-class="{literal}{'prd': 'active'}[item.type]{/literal}" ng-click="changetabtype(item)"><input type="radio" ng-value="'prd'" ng-model="item.type">商品</label>
+										<label class="radiobox" ng-class="{literal}{'mag': 'active'}[item.type]{/literal}" ng-click="changetabtype(item)"><input type="radio" ng-value="'mag'" ng-model="item.type">微杂志</label>
+										<label class="radiobox" ng-class="{literal}{'imgtxt': 'active'}[item.type]{/literal}" ng-click="changetabtype(item)"><input type="radio" ng-value="'imgtxt'" ng-model="item.type">普通图文</label>
+									</div>
+								</td>
+							</tr>
+							<tr ng-if="item.type == 'prd'">
+								<td class="wdview">商品排版：</td>
+								<td>
+									<div class="btnlabel-radio">
+										<label class="radiobox" ng-class="{literal}{'mod-two-title': 'active'}[item.prdtype]{/literal}"><input type="radio" ng-value="'mod-two-title'" ng-model="item.prdtype">两列有标题</label>
+										<label class="radiobox" ng-class="{literal}{'mod_prd_list': 'active'}[item.prdtype]{/literal}"><input type="radio" ng-value="'mod_prd_list'" ng-model="item.prdtype">两列无标题</label>
+										<label class="radiobox" ng-class="{literal}{'mod-col-split': 'active'}[item.prdtype]{/literal}"><input type="radio" ng-value="'mod-col-split'" ng-model="item.prdtype">大图展示</label>
+										<label class="radiobox" ng-class="{literal}{'mod-col-list': 'active'}[item.prdtype]{/literal}"><input type="radio" ng-value="'mod-col-list'" ng-model="item.prdtype">列表展示</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="wdview">分组内容：</td>
+								<td>
+									<div class="input-append" ng-if="item.type == 'prd'">
+										<input type="text" name="" id="" ng-model="item.conids" readonly/>
+										<span class="btn" selectnavprd ng-model="item.conids" data-prdid="{literal}{{item.conids}}{/literal}" >选择商品</span>
+									</div>
+									<div class="input-append" ng-if="item.type == 'mag'">
+										<input type="text" name="" id="" ng-model="item.conids" readonly/>
+										<span class="btn" selectnavmag ng-model="item.conids" data-magids="{literal}{{item.conids}}{/literal}">选择微杂志</span>
+									</div>
+									<div class="input-append" ng-if="item.type == 'imgtxt'">
+										<input type="text" name="" id="" ng-model="item.conids" readonly/>
+										<span class="btn" selectnavimgtxt ng-model="item.conids" data-ids="{literal}{{item.conids}}{/literal}">选择普通图文</span>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</li>	
+				</ul>
+				<div ng-if="field.field_navs.length < 4 && field.field_navs.length >= 2"><span class="btn btn-primary" ng-click="addnavtab(field)">添加tab分组</span><span class="gray mlr05">最少2组，最多4组</span></div>
+			</td>
+		</tr>
+	</table>
+</div>

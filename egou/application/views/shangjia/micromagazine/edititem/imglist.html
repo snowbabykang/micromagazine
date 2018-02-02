@@ -1,0 +1,144 @@
+<div class="editmodalbox" ng-class="{literal}{'imglist{{field.field_id}}': 'show'}[$storage.isShow]{/literal}" >
+	<p class="edit_title">编辑《图片列表》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{color.imglist.bgcolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">图片标题展示：</td>
+			<td>
+				<label class="switch_box" ng-class="{literal}{'show': 'on','hide' : 'off'}[field.field_showtitle]{/literal}">
+					<input type="checkbox" ng-true-value="'show'" ng-false-value="'hide'" ng-model="field.field_showtitle">
+					<span class="switch_info" data-oninfo="展示" data-offinfo="隐藏" ng-bind="field.field_showtitle == '2em' ? '展示' : '隐藏'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">圆角弧度：</td>
+			<td>
+				<div class="slide_circle" rel="percent" min="0" max="100" step="0" value="{literal}{{field.field_radius}}{/literal}" ng-model="field.field_radius" slider></div>
+				<div class="drag_num" ng-bind="field.field_radius"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">图片排列：</td>
+			<td>
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'one': 'active'}[field.field_arrange]{/literal}"><input type="radio" ng-value="'one'" ng-model="field.field_arrange">平铺</label>
+					<label class="radiobox" ng-class="{literal}{'two': 'active'}[field.field_arrange]{/literal}"><input type="radio" ng-value="'two'" ng-model="field.field_arrange">一行两图</label>
+					<label class="radiobox" ng-class="{literal}{'three': 'active'}[field.field_arrange]{/literal}"><input type="radio" ng-value="'three'" ng-model="field.field_arrange">一行三图</label>
+					<label class="radiobox" ng-class="{literal}{'four': 'active'}[field.field_arrange]{/literal}"><input type="radio" ng-value="'four'" ng-model="field.field_arrange">一行四图</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">图片尺寸：</td>
+			<td>
+				<span class="red" ng-if="field.field_arrange == 'one'">建议宽度720px，高度自定义</span>
+				<span class="red" ng-if="field.field_arrange == 'two'">建议宽度大于等于360px且必须相等，高度自定义且必须相等</span>
+				<span class="red" ng-if="field.field_arrange == 'three'">建议宽度大于等于240px且必须相等，高度自定义且必须相等</span>
+				<span class="red" ng-if="field.field_arrange == 'four'">建议宽度大于等于180px且必须相等，高度自定义且必须相等</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview" style="vertical-align: top;padding-top:15px;">单图列表：</td>
+			<td> 
+				<ul class="imglist_editimgbox" ng-if="field.field_imgs.length > 0">
+					<li ng-repeat="img in field.field_imgs track by $index" class="angular_animate">
+						<div class="img_box">
+							<div class="selectimage" selectimage ng-model="img.img_url">
+								<img ng-src="{literal}{{img.img_url}}_180x180.jpg{/literal}">
+							</div>
+						</div>
+						<div class="img_info">
+							<div class="mb10">
+								<span>图片标题</span>
+								<input type="text" ng-model="img.img_title" encodeuri value="{literal}{{img.img_title | decodeURI}}{/literal}">
+							</div>
+							<div class="">
+								<span>选择连接</span>
+								<div class="input-append">
+									<input type="text" readonly size="25" ng-model="img.img_linktitle" encodeuri value="{literal}{{img.img_linktitle | decodeURI}}{/literal}">
+									<a href="javascript:void(0);" class="selecturl btn" data-mark="backurl" selecturl ng-model="img.img_link"><i class="icon_link"></i></a>
+								</div>
+								</div>
+							</div>
+						<div class="img_operate">
+							<span class="upmove" ng-click="upmove_modal(field.field_imgs, $index)"><i class="icon_up"></i></span>
+							<span class="downmove" ng-click="downmove_modal(field.field_imgs, $index)"><i class="icon_down"></i></span>
+							<span class="delmove" ng-click="del_carousel(field, img)"><i class="icon_del"></i></span>
+						</div>
+					</li>
+				</ul>
+				<div>
+					<span class="btn btn-primary" ng-click="addcarouselimg(field)">添加图片</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-class="field.field_arrange == 'one' ? 'hide' : ''">
+			<td class="wdview">图片间距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="10" step="1" value="{literal}{{field.field_imgspace}}{/literal}" ng-model="field.field_imgspace" slider></div>
+				<div class="drag_num" ng-bind="field.field_imgspace"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">内上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pt}}{/literal}" ng-model="field.field_pt" slider></div>
+				<div class="drag_num" ng-bind="field.field_pt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pr}}{/literal}" ng-model="field.field_pr" slider></div>
+				<div class="drag_num" ng-bind="field.field_pr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pb}}{/literal}" ng-model="field.field_pb" slider></div>
+				<div class="drag_num" ng-bind="field.field_pb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pl}}{/literal}" ng-model="field.field_pl" slider></div>
+				<div class="drag_num" ng-bind="field.field_pl"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">外上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mt}}{/literal}" ng-model="field.field_mt" slider></div>
+				<div class="drag_num" ng-bind="field.field_mt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mb}}{/literal}" ng-model="field.field_mb" slider></div>
+				<div class="drag_num" ng-bind="field.field_mb"></div>
+			</td>
+		</tr>
+	</table>
+</div>

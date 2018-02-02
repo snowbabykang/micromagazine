@@ -1,0 +1,147 @@
+<div class="editmodalbox" ng-class="{literal}{'btnlink{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《连接按钮》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview">按钮内容：</td>
+			<td><input type="text" name="title_con" ng-model="field.field_con" ></td>
+		</tr>
+		<tr>
+			<td class="wdview">跳转链接：</td>
+			<td>
+				<div class="input-append">
+					<input type="text" readonly size="25" ng-model="field.linkname" encodeuri value="{literal}{{field.linkname | decodeURI}}{/literal}">
+					<a href="javascript:void(0);" class="selecturl btn" type="btnlink" selecturl ng-model="field.linkurl"><i class="icon_link"></i></a>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">字体大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="12" max="26" step="2" value="{literal}{{field.field_fz}}{/literal}" ng-model="field.field_fz" slider></div> 
+				<div class="drag_num" ng-bind="field.field_fz">
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{color.btnlink.bgcolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">字体颜色：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_color" color=" {literal}{{field.field_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" resetcolor ng-model="field.field_color" color=" {literal}{{color.btnlink.color}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">线条颜色：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_bordercolor" color=" {literal}{{field.field_bordercolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bordercolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bordercolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" resetcolor ng-model="field.field_bordercolor" color="{literal}{{color.btnlink.bordercolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">圆角弧度：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="60" step="0" value="{literal}{{field.field_radius}}{/literal}" ng-model="field.field_radius" slider></div>
+				<div class="drag_num" ng-bind="field.field_radius"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">按钮大小：</td>
+			<td>
+				<label class="switch_box" ng-class="{literal}{'block': 'on','inline-block' : 'off'}[field.field_isblock]{/literal}">
+					<input type="checkbox" ng-true-value="'block'" ng-false-value="'inline-block'" ng-model="field.field_isblock">
+					<span class="switch_info" data-oninfo="通栏" data-offinfo="正常" ng-bind="field.field_isblock == 'block' ? '通栏' : '正常'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr ng-class="field.field_isblock == 'inline-block' ? '' : 'hide'">
+			<td class="wdview">按钮对齐：</td>
+			<td>
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'left': 'active'}[field.field_align]{/literal}"><input type="radio" ng-value="'left'" ng-model="field.field_align">居左</label>
+					<label class="radiobox" ng-class="{literal}{'center': 'active'}[field.field_align]{/literal}"><input type="radio" ng-value="'center'" ng-model="field.field_align">居中</label>
+					<label class="radiobox" ng-class="{literal}{'right': 'active'}[field.field_align]{/literal}"><input type="radio" ng-value="'right'" ng-model="field.field_align">居右</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pt}}{/literal}" ng-model="field.field_pt" slider></div>
+				<div class="drag_num" ng-bind="field.field_pt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="100" step="1" value="{literal}{{field.field_pr}}{/literal}" ng-model="field.field_pr" slider></div>
+				<div class="drag_num" ng-bind="field.field_pr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pb}}{/literal}" ng-model="field.field_pb" slider></div>
+				<div class="drag_num" ng-bind="field.field_pb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="100" step="1" value="{literal}{{field.field_pl}}{/literal}" ng-model="field.field_pl" slider></div>
+				<div class="drag_num" ng-bind="field.field_pl"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">外上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mt}}{/literal}" ng-model="field.field_mt" slider></div>
+				<div class="drag_num" ng-bind="field.field_mt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mr}}{/literal}" ng-model="field.field_mr" slider></div>
+				<div class="drag_num" ng-bind="field.field_mr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mb}}{/literal}" ng-model="field.field_mb" slider></div>
+				<div class="drag_num" ng-bind="field.field_mb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_ml}}{/literal}" ng-model="field.field_ml" slider></div>
+				<div class="drag_num" ng-bind="field.field_ml"></div>
+			</td>
+		</tr>
+	</table>
+</div>

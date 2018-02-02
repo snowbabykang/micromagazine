@@ -1,0 +1,48 @@
+<div id="select_sampleprdmodal" class="modal hide fade"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button " class="close closebtn" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>选择示例商品</h3><span class="red"><!-- 可选择本地提供的商品图，也可以选择微相册图片，选择微相册图片最好保证图片不被删除 --></span>
+	</div>
+	<div class="modal-body">
+		<table ng-init="{literal}sampleprd = {item_prdid:1,item_title:'这里是示例商品标题',item_price:'￥99.00'};sampleprd_num = 4;{/literal}">
+			<tr>
+				<td>商品图</td>
+				<td>
+					<ul class="sampleprdimgslist">
+						<li ng-repeat="item in sampleprdimgs" setsampleprdimg ng-class="{literal}{'{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/{{item}}': 'active'}[sampleprd.item_pic]{/literal}" 
+						ng-model="sampleprd.item_pic" img="{$IMAGE_PATH}/micromagazine/img/thememodal/{literal}{{item}}{/literal}">
+							<img ng-src="{$IMAGE_PATH}/micromagazine/img/thememodal/{literal}{{item}}{/literal}" title="系统图">
+						</li>
+						<!-- <li ng-if="sampleprd_albumpic"  setsampleprdimg ng-class="{literal}{sampleprd_albumpic: 'active'}[sampleprd.item_pic]{/literal}"
+							ng-model="sampleprd.item_pic" img="{literal}{{sampleprd_albumpic}}{/literal}">
+							<img ng-src="{literal}{{sampleprd_albumpic}}{/literal}" title="相册图">
+						</li>
+						<li>
+							<div class="img_box selectimage" selectimage style="width:75px;" ng-model="sampleprd_albumpic">
+								<i class="icon_plus"></i>
+							</div>
+						</li> -->
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>商品标题</td>
+				<td><input type="text" ng-model="sampleprd.item_title" placeholder="这里是示例商品标题"/></td>
+			</tr>
+			<tr>
+				<td>商品价格</td>
+				<td><input type="text" ng-model="sampleprd.item_price" placeholder="￥99.00"/></td>
+			</tr>
+			<tr>
+				<td>商品数目</td>
+				<td>
+					<input type="number" ng-model="sampleprd_num" placeholder="4"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+    <div class="modal-footer">
+		<span class="btn closebtn" data-dismiss="modal" aria-hidden="true">关闭</span>
+		<span class="btn btn-primary" ng-click="confirm_sampleprd(sampleprd,sampleprd_num)">确定生成</span>
+	</div>
+</div>

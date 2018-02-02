@@ -1,0 +1,16 @@
+<div class="editmodalbox" ng-if="field.field_type == 'store'" ng-class="{literal}{'store{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">门店店招占位模块</p>
+	<div class="alert">当前模块是门店店招的占位模块，店招内容可以再门店管理中编辑</div>
+	<table>
+		<tr>
+			<td class="wdview">是否展示模块：</td>
+			<td>
+				<label class="switch_box" ng-class="{literal}{'1': 'on','0' : 'off'}[field.field_isshow]{/literal}">
+					<input type="checkbox" ng-true-value="'1'" ng-false-value="'0'" ng-model="field.field_isshow">
+					<span class="switch_info" data-oninfo="展示" data-offinfo="隐藏" ng-bind="field.field_isshow == '1' ? '展示' : '隐藏'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+	</table>
+</div>

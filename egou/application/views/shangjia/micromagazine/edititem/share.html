@@ -1,0 +1,59 @@
+<div class="editmodalbox" ng-class="{literal}{'share{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《分享》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview">分享样式：</td>
+			<td>
+				<label class="switch_box" ng-class="{literal}{'diy': 'on','default' : 'off'}[field.field_style]{/literal}">
+					<input type="checkbox" ng-true-value="'diy'" ng-false-value="'default'" ng-model="field.field_style">
+					<span class="switch_info" data-oninfo="自定义" data-offinfo="默认" ng-bind="field.field_style == 'diy' ? '自定义' : '默认'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr ng-class="field.field_style == 'diy' ? '' : 'hide'">
+			<td class="wdview">分享图片：</td>
+			<td> 
+				<p>分享展示的图片，点击引导分享<span class="red">---建议图片宽度720px，高度自定义</span></p>
+				<div class="img_box selectimage" data-spec="640" selectimage ng-model="field.field_shareimg">
+					<img ng-if="field.field_shareimg" ng-src="{literal}{{field.field_shareimg}}{/literal}">
+					<i class="icon_plus" ng-if="!field.field_shareimg"></i>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pr}}{/literal}" ng-model="field.field_pr" slider></div>
+				<div class="drag_num" ng-bind="field.field_pr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pl}}{/literal}" ng-model="field.field_pl" slider></div>
+				<div class="drag_num" ng-bind="field.field_pl"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">外上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mt}}{/literal}" ng-model="field.field_mt" slider></div>
+				<div class="drag_num" ng-bind="field.field_mt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mb}}{/literal}" ng-model="field.field_mb" slider></div>
+				<div class="drag_num" ng-bind="field.field_mb"></div>
+			</td>
+		</tr>
+	</table>
+</div>

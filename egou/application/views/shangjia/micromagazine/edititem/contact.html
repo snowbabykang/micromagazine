@@ -1,0 +1,133 @@
+<div class="editmodalbox" ng-class="{literal}{'contact{{field.field_id}}': 'show'}[$storage.isShow]{/literal}" >
+	<p class="edit_title">编辑《联系方式》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview">模块版式：</td>
+			<td>
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'1': 'active'}[field.field_modal]{/literal}"><input type="radio" ng-value="'1'" ng-model="field.field_modal">版式一</label>
+					<label class="radiobox" ng-class="{literal}{'2': 'active'}[field.field_modal]{/literal}"><input type="radio" ng-value="'2'" ng-model="field.field_modal">版式二</label>
+					<label class="radiobox" ng-class="{literal}{'3': 'active'}[field.field_modal]{/literal}"><input type="radio" ng-value="'3'" ng-model="field.field_modal">版式三</label>
+					<label class="radiobox" ng-class="{literal}{'4': 'active'}[field.field_modal]{/literal}"><input type="radio" ng-value="'4'" ng-model="field.field_modal">自定义图片</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">电话号码：</td>
+			<td><input type="text" name="title_con" ng-model="field.field_tel"></td>
+		</tr>
+		<tr ng-if="field.field_modal == '4'">
+			<td class="wdview">选择图片：</td>
+			<td> 
+				<div class="img_box selectimage" data-spec="640" selectimage ng-model="field.field_img">
+					<img ng-if="field.field_img" ng-src="{literal}{{field.field_img}}{/literal}">
+					<i class="icon_plus" ng-if="!field.field_img"></i>
+				</div>
+				<div class="red fl" style="margin: 58px 0 0 10px;">
+					建议图片宽度为720px，高度自定义
+				</div>
+			</td>
+		</tr>
+		<tbody ng-if="field.field_modal !== '4'">
+		<tr>
+			<td class="wdview">说明文字：</td>
+			<td><input type="text" name="title_con" ng-model="field.field_con"></td>
+		</tr>
+		<tr>
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color:{literal}{{field.field_bgcolor}}{/literal}"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{color.contact.bgcolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">文字颜色：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_color" color="{literal}{{field.field_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_color"/>
+				    <span class="input-group-addon"><i style="background-color:{literal}{{field.field_color}}{/literal}"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_color" resetcolor color="{literal}{{color.contact.color}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">文字大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="12" max="26" step="2" value="{literal}{{field.field_fz}}{/literal}" ng-model="field.field_fz" slider></div> 
+				<div class="drag_num" ng-bind="field.field_fz">
+			</td>
+		</tr>
+		<tr ng-class="field.field_modal == '3' ? '' : 'hide'">
+			<td class="wdview">电话字体颜色：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_phonecolor" color="{literal}{{field.field_phonecolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_phonecolor"/>
+				    <span class="input-group-addon"><i style="background-color:{literal}{{field.field_phonecolor}}{/literal}"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_phonecolor" resetcolor color="{literal}{{color.contact.phonecolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-class="field.field_modal == '3' ? '' : 'hide'">
+			<td class="wdview">电话字体大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="12" max="26" step="2" value="{literal}{{field.field_phonefz}}{/literal}" ng-model="field.field_phonefz" slider></div> 
+				<div class="drag_num" ng-bind="field.field_phonefz">
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pt}}{/literal}" ng-model="field.field_pt" slider></div>
+				<div class="drag_num" ng-bind="field.field_pt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pr}}{/literal}" ng-model="field.field_pr" slider></div>
+				<div class="drag_num" ng-bind="field.field_pr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pb}}{/literal}" ng-model="field.field_pb" slider></div>
+				<div class="drag_num" ng-bind="field.field_pb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pl}}{/literal}" ng-model="field.field_pl" slider></div>
+				<div class="drag_num" ng-bind="field.field_pl"></div>
+			</td>
+		</tr>
+		</tbody>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">外上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mt}}{/literal}" ng-model="field.field_mt" slider></div>
+				<div class="drag_num" ng-bind="field.field_mt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mb}}{/literal}" ng-model="field.field_mb" slider></div>
+				<div class="drag_num" ng-bind="field.field_mb"></div>
+			</td>
+		</tr>
+	</table>
+</div>

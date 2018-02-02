@@ -1,0 +1,172 @@
+<div class="editmodalbox" ng-class="{literal}{'product{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	{if $type eq 'catepage'}
+	<p class="edit_title" ng-if="field.field_id == 1">编辑分类页商品列表</p>
+	<p class="edit_title" ng-if="field.field_id !== 1 && field.field_id !== '1'">编辑《分类商品》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	{else}
+	<p class="edit_title">编辑《商品》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	{/if}
+	<table>
+		{if $type eq 'catepage'}
+		<tr ng-if="field.field_id !== 1 && field.field_id !== '1'">
+			<td class="wdview" style="vertical-align: top;padding-top:15px;">选择商品：</td>
+			<td> 
+				<div>
+					<span class="btn btn-primary selprdbygroup" selprdbygroup ng-model="field.field_prdids" data-ids="{literal}{{field.field_prdids}}{/literal}"  data-prdid="{literal}{{field.field_prdids}}{/literal}">选择商品</span>
+					<span ng-if="field.field_items">已经选择{literal}{{field.field_items.length}}{/literal}件商品</span>
+				</div>
+			</td>
+		</tr>
+		{else}
+		<tr>
+			<td class="wdview" style="vertical-align: top;padding-top:15px;">选择商品：</td>
+			<td> 
+				{if $themetype == 'config'}
+				<span class="btn btn-primary" ng-click="select_sampleprd(field)">选择虚拟商品</span>
+				{else}
+				<div>
+					<span class="btn btn-primary selprdbygroup" selprdbygroup ng-model="field.field_prdids" data-ids="{literal}{{field.field_prdids}}{/literal}" data-prdid="{literal}{{field.field_prdids}}{/literal}">选择商品</span>
+					<span ng-if="field.field_items">已经选择{literal}{{field.field_items.length}}{/literal}件商品</span>
+				</div>
+				{/if}
+			</td>
+		</tr>
+		{/if}
+		<tr>
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{color.product.bgcolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">商品排版：</td>
+			<td>
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'mod-two-title': 'active'}[field.field_makeup]{/literal}"><input type="radio" ng-value="'mod-two-title'" ng-model="field.field_makeup">两列有标题</label>
+					<label class="radiobox" ng-class="{literal}{'mod_prd_list': 'active'}[field.field_makeup]{/literal}"><input type="radio" ng-value="'mod_prd_list'" ng-model="field.field_makeup">两列无标题</label>
+					<label class="radiobox" ng-class="{literal}{'mod-col-split': 'active'}[field.field_makeup]{/literal}"><input type="radio" ng-value="'mod-col-split'" ng-model="field.field_makeup">大图展示</label>
+					<label class="radiobox" ng-class="{literal}{'mod-col-list': 'active'}[field.field_makeup]{/literal}"><input type="radio" ng-value="'mod-col-list'" ng-model="field.field_makeup">列表展示</label>
+				</div>
+			</td>
+		</tr>
+		<tr ng-class="field.field_makeup == 'mod-two-title' ? '' : 'hide'">
+			<td class="wdview">列表主题：</td>
+			<td> 
+				<div class="input-append">
+				  <input type="text" ng-model="field.field_themetitle" ng-value="field.field_themetitle" readonly data-val = "{literal}{{field.field_prdtheme}}{/literal}">
+				  <span class="btn" ng-click="selectprdtheme(field)">选择主题</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-class="field.field_prdstyle.iscart !== '0' ? '' : 'hide'">
+			<td class="wdview">购物车/按钮：</td>
+			<td>
+				<label class="switch_box" ng-class="{literal}{'havecart': 'on','nocart' : 'off'}[field.field_showcart]{/literal}">
+					<input type="checkbox" ng-true-value="'havecart'" ng-false-value="'nocart'" ng-model="field.field_showcart">
+					<span class="switch_info" data-oninfo="展示" data-offinfo="隐藏" ng-bind="field.field_showcart == 'havecart' ? '展示' : '隐藏'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr ng-class="prdcanedittheme.iscart[field.field_prdtheme] ? '' : 'hide'">
+			<td class="wdview">购买按钮文字：</td>
+			<td><input type="text" ng-model="field.field_prdstyle.buyinfo" ></td>
+		</tr>
+		<tr ng-class="prdcanedittheme.bgcolor[field.field_prdtheme] ? '' : 'hide'">
+			<td class="wdview">商品背景：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_prdstyle.bgcolor" color="{literal}{{field.field_prdstyle.bgcolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_prdstyle.bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_prdstyle.bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_prdstyle.bgcolor" resetcolor color="{literal}{{prdcanedittheme.bgcolor[field.field_prdtheme]}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-class="prdcanedittheme.infobgcolor[field.field_prdtheme] ? '' : 'hide'">
+			<td class="wdview">标题框背景：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_prdstyle.infobgcolor" color="{literal}{{field.field_prdstyle.infobgcolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_prdstyle.infobgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_prdstyle.infobgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor"><span class="btn btn-primary btn-mini" ng-click="resetcolor(field.field_prdstyle,'infobgcolor',prdcanedittheme.infobgcolor[field.field_prdtheme])">重置颜色</span></div>
+			</td>
+		</tr>
+		<tr ng-class="prdcanedittheme.pricecolor[field.field_prdtheme] ? '' : 'hide'">
+			<td class="wdview">价钱颜色：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_prdstyle.pricecolor" color="{literal}{{field.field_prdstyle.pricecolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_prdstyle.pricecolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_prdstyle.pricecolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_prdstyle.pricecolor" resetcolor color="{literal}{{prdcanedittheme.pricecolor[field.field_prdtheme]}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-class="prdcanedittheme.buybgcolor[field.field_prdtheme] ? '' : 'hide'">
+			<td class="wdview">购物按钮背景：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_prdstyle.buybgcolor" color="{literal}{{field.field_prdstyle.buybgcolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_prdstyle.buybgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_prdstyle.buybgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_prdstyle.buybgcolor" resetcolor color="{literal}{{prdcanedittheme.buybgcolor[field.field_prdtheme]}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pt}}{/literal}" ng-model="field.field_pt" slider></div>
+				<div class="drag_num" ng-bind="field.field_pt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pr}}{/literal}" ng-model="field.field_pr" slider></div>
+				<div class="drag_num" ng-bind="field.field_pr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pb}}{/literal}" ng-model="field.field_pb" slider></div>
+				<div class="drag_num" ng-bind="field.field_pb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pl}}{/literal}" ng-model="field.field_pl" slider></div>
+				<div class="drag_num" ng-bind="field.field_pl"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">外上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mt}}{/literal}" ng-model="field.field_mt" slider></div>
+				<div class="drag_num" ng-bind="field.field_mt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mb}}{/literal}" ng-model="field.field_mb" slider></div>
+				<div class="drag_num" ng-bind="field.field_mb"></div>
+			</td>
+		</tr>
+	</table>
+</div>

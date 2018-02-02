@@ -1,0 +1,38 @@
+<!-- 自定义微杂志模块 -->
+{include file="shangjia/micromagazine/viewitem/normal_modal.html"}
+<!--门店占位模块 -->
+{include file="shangjia/micromagazine/viewitem/storestatic.html"}
+<!-- 活动模块 -->
+{if $type eq 'activity'}
+	{if $act_kind eq '1'}
+		{include file="shangjia/micromagazine/viewitem/act/dazhuanpan.html"}
+	{elseif $act_kind eq '3'}
+		{include file="shangjia/micromagazine/viewitem/act/goldegg.html"}
+	{elseif $act_kind eq '4'}
+		{include file="shangjia/micromagazine/viewitem/act/tiger.html"}
+	{elseif $act_kind eq '7'}
+		{include file="shangjia/micromagazine/viewitem/act/shaking.html"}
+	{/if}
+{/if}
+<!-- 主题模块 -->
+{if $configid}
+<!-- 横向商品列表1 -->
+{include file="shangjia/micromagazine/viewitem/theme/h_1_product.html"}
+<!-- 竖向商品列表1 -->
+{include file="shangjia/micromagazine/viewitem/theme/s_1_product.html"}
+<!-- 商城联系方式 -->
+{include file="shangjia/micromagazine/viewitem/theme/shopping_contact.html"}
+<!-- 图标菜单 -->
+{include file="shangjia/micromagazine/viewitem/theme/icons_menu.html"}
+<!-- 正副标题 -->
+{include file="shangjia/micromagazine/viewitem/theme/title_sub.html"}
+<!-- 图片贴纸 -->
+{include file="shangjia/micromagazine/viewitem/theme/pic_sticker.html"}
+<!-- 图文模块 1 图片可上下左右排列-->
+{include file="shangjia/micromagazine/viewitem/theme/txt_1_img.html"}
+<!-- 图文模块2  固定板式-->
+{include file="shangjia/micromagazine/viewitem/theme/txt_2_img.html"}
+<!-- 背景图文模块-->
+{include file="shangjia/micromagazine/viewitem/theme/txt_bgimg.html"}
+{/if}
+

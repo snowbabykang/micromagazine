@@ -1,0 +1,23 @@
+{literal}
+<div ng-switch-when="txt_2_img" class="mag_txt_2_img mag_txt_2_img{{field.field_id}}">
+	<ul style="background-color:{{field.field_bgcolor}};" num="{{field.field_num}}">
+		<li ng-repeat="item in field.field_items track by $index" ng-if="$index < field.field_num" class="li{{$index+1}}" 
+			ng-style="{'height' : $index == '0' ? '253px' : '126px','border-color':field.item_bordercolor}">
+			<a href="{{item.linkurl}}">
+				<div class="txtimgbox">
+					<div class="txtimg_infobox">
+						<div class="txtimg_title" style="color:{{item.title_color}};font-size:{{field.title_fz}};">{{item.title_info}}</div>
+						<div class="txtimg_descibe" style="color:{{item.descibe_color}};font-size:{{field.descibe_fz}};">{{item.descibe_info}}</div>
+					</div>
+					<div class="txtimg_imgbox">
+						<img class="" ng-src="{{item.field_img}}" ng-if="item.is_localimg == '0' && item.field_img">
+						<img class="" ng-src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/{{item.field_img}}" ng-if="item.is_localimg == '1' && item.field_img">
+					</div>
+					<div class="clearfix"></div>	
+				</div>
+			</a>
+		</li>
+		<div class="clearfix"></div>
+	</ul>
+</div>
+{/literal}

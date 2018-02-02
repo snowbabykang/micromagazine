@@ -1,0 +1,13 @@
+<div class="prdtheme_con">
+	<div class="edit_title">
+		选择商品列表主题
+		<div class="fr" ng-click="closeprdtheme()"><i class="icon_cross"></i></div>
+	</div>
+	<ul>
+		<li ng-repeat="x in prdthemetitle" data-val = "{literal}{{x.value}}{/literal}" ng-click="confirmprdtheme(x.value,x.name,x.bgcolor)">
+			<div class="prdtheme_img"><img ng-src="{literal}{{x.img}}{/literal}"></div>
+			<div class="prdtheme_title" ng-bind = "x.name"></div>
+		</li>
+		<div class="clearfix"></div>
+	</ul>
+</div>

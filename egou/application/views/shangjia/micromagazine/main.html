@@ -1,0 +1,51 @@
+<div ng-cloak class="angular_animate">
+	<div class="public_nav" style="padding-bottom: 6px;">
+		{if $themetype == 'config'}
+			<span class="font16">当前正在创建主题模板<span style="font-weight: normal;font-size: 12px;padding-left: 5px;">创建后发布生成主题；商家使用该主题时默认展示这个微杂志</span></span>
+		{else}
+			{if $type eq 'activity'}
+			<a href="{$HOST}/index.php/shangjia/activity/actlist?sid={$sid}&type={$act_kind}" class="font16" style="line-height: 27px;" ng-click="clearsession()"><span ng-bind="actnamez[{$act_kind}]"></span>列表&nbsp;&nbsp;/&nbsp;&nbsp;</a>
+			<span class="font16">自定义<span ng-bind="actnamez[{$act_kind}]"></span></span>
+			{elseif $type eq 'catepage'}
+			<a href="{$HOST}/index.php/shangjia/diypage/diyshowlist?shoptype=2" class="font16" style="line-height: 27px;" ng-click="clearsession()">自定义分类页列表&nbsp;&nbsp;/&nbsp;&nbsp;</a>
+			<span class="font16">自定义分类页</span>
+			{elseif $type eq 'store'}
+			<a href="{$HOST}/index.php/shangjia/diypage/storelist" class="font16" ng-click="clearsession()" style="padding-top: 4px;">门店模板列表&nbsp;&nbsp;/&nbsp;&nbsp;</a>
+			<span class="font16">自定义门店模板</span>
+			{else}
+			<a href="{$HOST}/index.php/shangjia/catslist/custommagazine#/columnid/0/page/1/search/" style="line-height: 27px;" class="font16" ng-click="clearsession()">微杂志列表&nbsp;&nbsp;/&nbsp;&nbsp;</a>
+			<span class="font16">自定义微杂志</span>
+			{/if}
+			{if $id}<span class="label label-success" style="margin-left:10px;">正在编辑</span>{/if}
+		{/if}
+		<div class="fr">
+			{if $type neq 'activity' && $type neq 'catepage'}<span class="btn previewmagazine" ng-click="previewmagazine()">预览</span>{/if}
+			<span class="btn btn-success savemagazine" ng-click="savemagazine()">保存</span>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="leftside">
+		<ul>
+			<li ui-sref="index.mainset" {literal}ng-class="{'active':$state.includes('index')}"{/literal}>当前模板</li>	
+			{* 活动，门店，分类页装修时不展示；编辑微杂志时不展示，管理员创建主题模板时不展示  *}	
+			{if $seller_cookie.sina_uid eq 'w132' || $seller_cookie.sina_uid eq 'w11067' || $seller_cookie.sina_uid eq 'w30415'}
+			{if $type neq 'activity' && $type neq 'catepage' && $type neq 'store'}{if $id || $themetype == 'config'}{else}<li ui-sref="selecttheme" ui-sref-active="active">装修模板</li>{/if}{/if}	
+			{/if}
+		</ul>
+	</div>
+	<div ui-view="" class="mag_theme_tab"></div>
+	<div class="clearfix"></div>
+	<div id="item_delete" class="item_delete" {literal}ng-class="{true: 'show'}[showdelmodal]" ng-style="{'top':clientY,'left':clientX}"{/literal}>
+		<p>确定删除这个模块？</p>
+		<span class="del_modal" ng-click="deleteField()">删除</span>
+		<span class="cancle_del_modal" ng-click="cancledeleteField()">取消</span>
+	</div>
+	<div class="loading_tips"><i class="ui-loading-bright"></i><div>保存中，请稍后...</div></div>
+	<!-- 选择商品的主题 -->
+	<div class="prdthemebox" ng-controller="productCtr" ng-class="{literal}{true: 'show'}{/literal}[showprdtheme]">
+		{include file="shangjia/micromagazine/prdthemebox.html"}
+		<!-- <prdthemecon></prdthemecon> -->
+	</div>
+	<!-- 选择各种系统图文件 -->
+	{include file="shangjia/micromagazine/selectSystemimg.html"}
+</div>

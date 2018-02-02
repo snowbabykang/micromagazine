@@ -1,0 +1,38 @@
+{literal}
+<div ng-switch-when="s_1_product" ng-class="'mag_s_1_product mag_s_1_product'+field.field_id">
+	<p ng-if="!field.field_items" class="selectnonebox">请在右侧选择商品</p>
+	<div class="prd_itemsbox" ng-if="field.field_items" ng-style="{'background-color' : field.field_bgcolor,'padding-top':field.main_pt,'padding-bottom':field.main_pb}">
+		<ul class="prd_items theme_s_1_product">
+			<li ng-repeat = "item in field.field_items track by $index" style="padding:{{field.li_pt}} {{field.li_pr}} {{field.li_pb}} {{field.li_pl}};
+					border-bottom-width:{{field.li_borderb_width}};border-bottom-color:{{field.li_borderb_color}}">
+				<a href="javascript:void(0);" style="background-color: {{field.prd_bgcolor}};">
+					<div class="prdpic" ng-style="{'padding' : field.img_pd}">
+						<div class="prdimgposr">
+							<img ng-src="{{item.item_pic}}">
+							<div class="prdtaglabel prdtaglabel{{field.tag_type}} prdtaglabel_{{field.tag_position}}" ng-style="{'background-color' : field.tag_bgcolor,'color' : field.tag_color}">
+								<span class="prdtaglabel_info">预售</span>
+							</div>
+						</div>
+					</div>
+					<div class="prdinfobox prdinfobox_{{field.prdinfo_align}}" ng-style="{'text-align' : field.prdinfo_align,'padding-right' : field.prdinfo_pr,'padding-left' :field.prdinfo_pl}">
+						<div class="prdtitle" style="color: {{field.prdtitle_color}};">{{item.item_title}}</div>
+						<div class="pricebox" >
+							<div class="price" ng-style="{'color' : field.price_color}">
+								<sub>￥</sub><span>{{item.item_price}}</span>
+							</div>
+							<div class="pastprice" ng-if="!(field.prdinfo_align == 'left' && field.is_btn == '1')">￥xxx.xx</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="prdbuybtn  prdbuybtn_{{field.prdinfo_align}}" ng-if="field.is_btn == '1'"
+						 ng-style="{'background-color' : field.btn_bgcolor,'color' : field.btn_color,'width': field.btn_width,'border-radius':field.btn_radius,'line-height': field.btn_height}">
+							<span ng-if="field.btn_info == 'cart'" class="prd_iconcart"><img src="{/literal}{$IMAGE_PATH}{literal}/micromagazine/img/thememodal/icon_svg/cart.svg"></span>
+							<span ng-if="field.btn_info !== 'cart'">{{field.btn_info}}</span>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+{/literal}

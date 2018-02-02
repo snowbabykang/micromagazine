@@ -1,0 +1,120 @@
+<div class="editmodalbox" ng-class="{literal}{'menu{{field.field_id}}': 'show'}[$storage.isShow]{/literal}" >
+	<p class="edit_title">编辑《菜单》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview" style="vertical-align: top;">菜单块：</td>
+			<td> 
+				<p class="red">菜单图标请选择同尺寸的png图片，建议64px*64px尺寸</p>
+				<ul class="menu_editimgbox" ng-if="field.field_navs.length > 0">
+					<li ng-repeat="nav in field.field_navs track by $index" class="angular_animate">
+						<div class="img_box">
+							<div class="selectimage" data-type="menu" selectimage ng-model="nav.nav_imgurl">
+								<img ng-src="{literal}{{nav.nav_imgurl}}{/literal}" ng-if="nav.nav_imgurl">
+								<i class="icon_home" ng-if="!nav.nav_imgurl && $index == 0"></i>
+								<i class="icon_classfiy" ng-if="!nav.nav_imgurl && $index == 1"></i>
+								<i class="icon_cart" ng-if="!nav.nav_imgurl && $index == 2"></i>
+								<i class="icon_user" ng-if="!nav.nav_imgurl && $index == 3"></i>
+							</div>
+							</div>
+						<div class="img_info">
+							<div class="mb10">
+								<span>菜单名称</span>
+								<input type="text" ng-model="nav.nav_title">
+							</div>
+							<div class="">
+								<span>跳转连接</span>
+								<div class="input-append">
+									<input type="text" readonly size="25" ng-model="nav.nav_linktitle" encodeuri value="{literal}{{nav.nav_linktitle | decodeURI}}{/literal}">
+									<a href="javascript:void(0);" class="selecturl btn" type="menu" selecturl ng-model="nav.nav_link"><i class="icon_link"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="img_operate">
+							<span ng-click="menu_restoreicon(nav)" ng-if="nav.nav_imgurl" title="回复默认图标"><i class="icon_undo"></i></span>
+							<span class="upmove" ng-click="upmove_modal(field.field_navs, $index)"><i class="icon_up"></i></span>
+							<span class="downmove" ng-click="downmove_modal(field.field_navs, $index)"><i class="icon_down"></i></span>
+							<span class="delmove" ng-click="del_nav(field, nav)"><i class="icon_del"></i></span>
+						</div>
+					</li>
+				</ul>
+				<div ng-if="!field.field_navs.length || field.field_navs.length < 4">
+					<span class="btn btn-primary" ng-click="addmenu_nav(field)">添加菜单</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{color.menu.bgcolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">字体颜色：</td>
+			<td>
+				<div class="input-group fl" colorpicker ng-model="field.field_color" color="{literal}{{field.field_color}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_color" resetcolor color="{literal}{{color.menu.color}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<!-- <tr>
+			<td class="wdview">边框颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bordercolor" color="{literal}{{field.field_bordercolor}}{/literal};">
+				    <input type="text" class="form-control" ng-model="field.field_bordercolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bordercolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bordercolor" resetcolor color="{literal}{{color.menu.bordercolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr> -->
+		<tr>
+			<td class="wdview">字体大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="10" max="16" step="2" value="{literal}{{field.field_fz}}{/literal}" ng-model="field.field_fz" slider></div> 
+				<div class="drag_num" ng-bind="field.field_fz">
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">图标大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="20" max="30" step="1" value="{literal}{{field.field_iconsize}}{/literal}" ng-model="field.field_iconsize" slider></div> 
+				<div class="drag_num" ng-bind="field.field_iconsize">
+			</td>
+		</tr>
+		<tr ng-if="field.is_imgsize">
+			<td class="wdview">图片高度：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="20" max="30" step="1" value="{literal}{{field.field_imgsize}}{/literal}" ng-model="field.field_imgsize" slider></div> 
+				<div class="drag_num" ng-bind="field.field_imgsize">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">内上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pt}}{/literal}" ng-model="field.field_pt" slider></div>
+				<div class="drag_num" ng-bind="field.field_pt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pb}}{/literal}" ng-model="field.field_pb" slider></div>
+				<div class="drag_num" ng-bind="field.field_pb"></div>
+			</td>
+		</tr>
+	</table>
+</div>

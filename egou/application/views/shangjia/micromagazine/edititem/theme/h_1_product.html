@@ -1,0 +1,268 @@
+<div class="editmodalbox" ng-class="{literal}{'h_1_product{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《排列商品》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview" style="vertical-align: top;padding-top:15px;">选择商品：</td>
+			<td> 
+				{if $themetype == 'config'}
+					<div class="slide_circle" rel="modhd" min="1" max="12" step="1" value="{literal}{{field.field_items.length}}{/literal}" ng-model="field.field_items.length" sliderprd dataval="{literal}{{field.field_items[0]}}{/literal}"></div>
+					<div class="drag_num">{literal}{{field.field_items.length}}{/literal}个示例商品</div>
+				{else}
+				<div>
+					<span class="btn btn-primary selprdbygroup" selprdbygroup ng-model="field.field_prdids" data-ids="{literal}{{field.field_prdids}}{/literal}" data-prev="1" data-prdid="{literal}{{field.field_prdids}}{/literal}">选择商品</span>
+					<span ng-if="field.field_items">已经选择{literal}{{field.field_items.length}}{/literal}件商品</span>
+				</div>
+				{/if}
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].field_bgcolor.isedit == 1">
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].field_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].price_color.isedit == 1">
+			<td class="wdview">价格颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.price_color" color="{literal}{{field.price_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.price_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.price_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.price_color" resetcolor color="{literal}{{themeattr[field.field_type].price_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_bgcolor.isedit == 1">
+			<td class="wdview">按钮背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.btn_bgcolor" color="{literal}{{field.btn_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.btn_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.btn_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.btn_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].btn_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_color.isedit == 1">
+			<td class="wdview">按钮字体颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.btn_color" color="{literal}{{field.btn_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.btn_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.btn_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.btn_color" resetcolor color="{literal}{{themeattr[field.field_type].btn_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].tag_bgcolor.isedit == 1">
+			<td class="wdview">标签背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.tag_bgcolor" color="{literal}{{field.tag_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.tag_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.tag_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.tag_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].tag_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].tag_color.isedit == 1">
+			<td class="wdview">标签颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.tag_color" color="{literal}{{field.tag_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.tag_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.tag_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.tag_color" resetcolor color="{literal}{{themeattr[field.field_type].tag_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_info.isedit == 1">
+			<td class="wdview">按钮内容：</td>
+			<td> 
+			    <input type="text" class="form-control" ng-model="field.btn_info" limitcount count="8"/>
+			    <span class="count-limit"><span class="remainwords1">4</span>/4</span>
+			</td>
+		</tr>
+		<!-- 暂时不会修改的 -->
+		<tr ng-if="themeattr[field.field_type].prd_bgcolor.isedit == 1">
+			<td class="wdview">商品块背景色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.prd_bgcolor" color="{literal}{{field.prd_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.prd_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.prd_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.prd_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].prd_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].prdtitle_color.isedit == 1">
+			<td class="wdview">商品标题颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.prdtitle_color" color="{literal}{{field.prdtitle_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.prdtitle_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.prdtitle_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.prdtitle_color" resetcolor color="{literal}{{themeattr[field.field_type].prdtitle_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].prdinfo_align.isedit == 1">
+			<td class="wdview">商品内容对齐：</td>
+			<td> 
+				<label class="switch_box" ng-class="{literal}{'left': 'on','center' : 'off'}[field.prdinfo_align]{/literal}">
+					<input type="checkbox" ng-true-value="'left'" ng-false-value="'center'" ng-model="field.prdinfo_align">
+					<span class="switch_info" data-oninfo="居左" data-offinfo="居中" ng-bind="field.prdinfo_align == 'left' ? '居左' : '居中'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].main_pt.isedit == 1">
+			<td class="wdview">内上边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.main_pt}}{/literal}" ng-model="field.main_pt" slider></div>
+				<div class="drag_num" ng-bind="field.main_pt"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].main_pb.isedit == 1">
+			<td class="wdview">内下边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.main_pb}}{/literal}" ng-model="field.main_pb" slider></div>
+				<div class="drag_num" ng-bind="field.main_pb"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_float.isedit == 1">
+			<td class="wdview">按钮对齐：</td>
+			<td> 
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'left': 'active'}[field.btn_float]{/literal}"><input type="radio" ng-value="'left'" ng-model="field.btn_float">居左</label>
+					<label class="radiobox" ng-class="{literal}{'none': 'active'}[field.btn_float]{/literal}"><input type="radio" ng-value="'none'" ng-model="field.btn_float">居中</label>
+					<label class="radiobox" ng-class="{literal}{'right': 'active'}[field.btn_float]{/literal}"><input type="radio" ng-value="'right'" ng-model="field.btn_float">居右</label>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_radius.isedit == 1">
+			<td class="wdview">按钮弧度：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.btn_radius}}{/literal}" ng-model="field.btn_radius" slider></div>
+				<div class="drag_num" ng-bind="field.btn_radius"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].tag_type.isedit == 1">
+			<td class="wdview">标签样式：</td>
+			<td> 
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'1': 'active'}[field.tag_type]{/literal}"><input type="radio" ng-value="'1'" ng-model="field.tag_type">条形标签</label>
+					<label class="radiobox" ng-class="{literal}{'2': 'active'}[field.tag_type]{/literal}"><input type="radio" ng-value="'2'" ng-model="field.tag_type">半弧形标签</label>
+					<label class="radiobox" ng-class="{literal}{'3': 'active'}[field.tag_type]{/literal}"><input type="radio" ng-value="'3'" ng-model="field.tag_type">斜三角标签</label>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].tag_position.isedit == 1">
+			<td class="wdview">标签位置：</td>
+			<td> 
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'left': 'active'}[field.tag_position]{/literal}"><input type="radio" ng-value="'left'" ng-model="field.tag_position">居左</label>
+					<label class="radiobox" ng-class="{literal}{'right': 'active'}[field.tag_position]{/literal}"><input type="radio" ng-value="'right'" ng-model="field.tag_position">居右</label>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_width.isedit == 1">
+			<td class="wdview">按钮宽度：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="60" max="120" step="1" value="{literal}{{field.btn_width}}{/literal}" ng-model="field.btn_width" slider></div>
+				<div class="drag_num" ng-bind="field.btn_width"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_height.isedit == 1">
+			<td class="wdview">按钮高度：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="18" max="26" step="1" value="{literal}{{field.btn_height}}{/literal}" ng-model="field.btn_height" slider></div>
+				<div class="drag_num" ng-bind="field.btn_height"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].li_pt.isedit == 1">
+			<td class="wdview">商品块上边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.li_pt}}{/literal}" ng-model="field.li_pt" slider></div>
+				<div class="drag_num" ng-bind="field.li_pt"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].li_pb.isedit == 1">
+			<td class="wdview">商品块下边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.li_pb}}{/literal}" ng-model="field.li_pb" slider></div>
+				<div class="drag_num" ng-bind="field.li_pb"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].li_pl.isedit == 1">
+			<td class="wdview">商品块左边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.li_pl}}{/literal}" ng-model="field.li_pl" slider></div>
+				<div class="drag_num" ng-bind="field.li_pl"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].li_pr.isedit == 1">
+			<td class="wdview">商品块右边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.li_pr}}{/literal}" ng-model="field.li_pr" slider></div>
+				<div class="drag_num" ng-bind="field.li_pr"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].prdinfo_pl.isedit == 1">
+			<td class="wdview">文字块左边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="12" step="1" value="{literal}{{field.prdinfo_pl}}{/literal}" ng-model="field.prdinfo_pl" slider></div>
+				<div class="drag_num" ng-bind="field.prdinfo_pl"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].prdinfo_pr.isedit == 1">
+			<td class="wdview">文字块右边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="12" step="1" value="{literal}{{field.prdinfo_pr}}{/literal}" ng-model="field.prdinfo_pr" slider></div>
+				<div class="drag_num" ng-bind="field.prdinfo_pr"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].img_pd.isedit == 1">
+			<td class="wdview">图片块内边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="10" step="1" value="{literal}{{field.img_pd}}{/literal}" ng-model="field.img_pd" slider></div>
+				<div class="drag_num" ng-bind="field.img_pd"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].li_borderb_width.isedit == 1">
+			<td class="wdview" style="vertical-align: top;">商品底边线宽度：</td>
+			<td> 
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'0px': 'active'}[field.li_borderb_width]{/literal}"><input type="radio" ng-value="'0px'" ng-model="field.li_borderb_width">无边线</label>
+					<label class="radiobox" ng-class="{literal}{'1px': 'active'}[field.li_borderb_width]{/literal}"><input type="radio" ng-value="'1px'" ng-model="field.li_borderb_width">有边线</label>
+				</div>
+				<div class="gray m-t">设置底边线时，商品块所有边距应设为0，设置一个图片块内边距才可看到效果</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].li_borderb_color.isedit == 1">
+			<td class="wdview">商品底边线颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.li_borderb_color" color="{literal}{{field.li_borderb_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.li_borderb_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.li_borderb_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.li_borderb_color" resetcolor color="{literal}{{themeattr[field.field_type].li_borderb_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>

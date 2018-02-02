@@ -1,0 +1,15 @@
+{literal}
+<div ng-if="field.field_type == 'txtimg'" ng-class="'mag_txtimg mag_txtimg'+field.field_id"
+ng-style="{'padding-top':field.field_pt,'padding-bottom':field.field_pb,'padding-left':field.field_pl,'padding-right':field.field_pr,'background-color' : field.field_bgcolor}">
+	<div ng-class="field.txtimgfloat == 'right' ? 'fl' : 'fr'" class="txtimg_infobox" ng-style="{'padding-left':field.txtimgfloat == 'right' ? '0px' : '8px'}">
+		<div ng-if="field.is_title == '1'" class="txtimg_title" ng-bind="field.field_title" ng-style="{'color':field.title_color,'font-size':field.title_fz}"></div>
+		<div ng-if="field.is_descibe == '1'" class="txtimg_descibe" ng-bind="field.field_descibe" ng-style="{'color':field.descibe_color,'font-size':field.descibe_fz}"></div>
+		<div ng-if="field.is_btn == '1'" class="txtimg_btn" ng-bind="field.field_btn" ng-style="{'color':field.btn_color,'font-size':field.btn_fz,'border-color':field.btn_color}"></div>
+	</div>
+	<div class="txtimg_imgbox" ng-class="field.txtimgfloat == 'right' ? 'fr' : 'fl'" 
+	ng-style="field.is_border == '1' ? {'border-color': field.border_color ,'padding': '5px'} : {'border': 'none' ,'padding': '0px'}">
+		<img ng-src="{{field.imgurl}}">
+	</div>
+	<div class="clearfix"></div>	
+</div>
+{/literal}

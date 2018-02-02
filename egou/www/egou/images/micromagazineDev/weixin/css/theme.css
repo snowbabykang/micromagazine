@@ -1,0 +1,37 @@
+/* 主题模块 */
+/* 图文模块     txtimg*/
+.mag_txtimg .txtimg_infobox{width:66%;box-sizing: border-box;}
+.mag_txtimg .txtimg_imgbox{border:1px solid transparent;width:33%;box-sizing: border-box;}
+.mag_txtimg .txtimg_btn{display: inline-block;padding: 1px 15px;border: 1px solid transparent;margin-top: 3px;}
+.mag_txtimg .txtimg_title{text-overflow: ellipsis;word-break: break-all;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;padding: 0;overflow: hidden;}
+/* 商品列表模块    prd_1_list */
+.theme_prd_1_list li{position: relative;overflow: hidden;}
+.theme_prd_1_list li:last-child{margin-bottom:0;}
+.theme_prd_1_list li a{border:3px solid transparent;  display: block;}
+.theme_prd_1_list .pic{/* float: left; */width:50%;position: relative;padding:25% 0;}
+.theme_prd_1_list .pic img{position: absolute;top: 0;left: 0;right: 0;}
+.theme_prd_1_list .prdinfobox{float: left;width:50%;}
+.theme_prd_1_list .prdinfobox .title{padding: 20px 5px 0px 10px;}
+.theme_prd_1_list .pricebox{height: 28px;line-height: 28px;margin:10px 5px 3px 0;position: relative;overflow: hidden;}
+.theme_prd_1_list .pricebox .price{padding-left: 10px;position: absolute;left:0;top:0;bottom:0;z-index: 1;width: 100%;  box-sizing: border-box;}
+.theme_prd_1_list .pricebox .prdbuybtn{padding:0 5px;text-align: center;position: absolute;width:auto;z-index: 2;right:0;top:0;bottom:0;font-weight: bold;}
+.theme_prd_1_list .pricebox .prdbuybtn:before{content: "";height: 0px;width: 0px;position: absolute;top: 0%;left: -14px;margin-top: -14px;
+z-index: 1;border-top: 14px solid transparent;border-bottom: 14px solid transparent;border-right: 14px solid #ffdf28;}
+.theme_prd_1_list .pricebox .prdbuybtn:after{content: "";height: 0px;width: 0px;position: absolute;bottom: -50%;left: -14px;
+margin-top: -14px;z-index: 1;border-top: 14px solid transparent;border-bottom: 14px solid transparent;border-right: 14px solid #ffdf28;}
+.theme_prd_1_list .pricebox .price_arrowr{width:0; height:0; border-top: 14px solid #eb266b;border-bottom: 14px solid #eb266b;
+border-left: 15px solid #690080;position: absolute;right:0;top:0;bottom:0;z-index: 10;}
+.theme_prd_1_list .pastprice{padding-left: 10px;text-decoration: line-through;opacity: 0.8;}
+.theme_prd_1_list .prdtaglabel{position: absolute;right: -27px;bottom: -19px;display:inline-block;
+transform:rotate(-45deg);-ms-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);
+-o-transform:rotate(-45deg);  padding: 0 20px 30px;text-align: center;font-weight: bold;}
+.theme_prd_1_list .shopbuybtn{display: inline-block;padding:0 10px;margin-left: 10px;border:1px solid transparent;}
+/* 商品列表模块  three_colprd */
+.theme_three_colprd{height: auto;overflow: hidden;}
+.theme_three_colprd li{float: left;width:33.33%;box-sizing:border-box;}
+.theme_three_colprd a{border:1px solid transparent;display: block;}
+.theme_three_colprd .title{-webkit-line-clamp: 1;}
+.theme_three_colprd .pic{width:100%;position: relative;padding:50% 0;overflow: hidden;}
+.theme_three_colprd .pic img{position: absolute;top: 0;left: 0;right: 0;}
+.theme_three_colprd .prdinfobox{padding:3px 0;}
+

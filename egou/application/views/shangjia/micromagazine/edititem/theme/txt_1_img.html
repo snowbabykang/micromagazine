@@ -1,0 +1,298 @@
+<div class="editmodalbox" ng-if="field.field_type == 'txt_1_img'" ng-class="{literal}{'txt_1_img{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《图文列表》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview" style="vertical-align: top;">图文列表：</td>
+			<td>
+				<div class="gray">图片大小必须一样，根据排列需求自行定义大小</div>
+				<ul class="menu_editimgbox" ng-if="field.field_items.length > 0">
+					<li ng-repeat="item in field.field_items track by $index" class="angular_animate editboxlipos">
+						<div class="img_operate">
+							<span class="upmove" ng-click="upmove_modal(field.field_items, $index)"><i class="icon_up"></i></span>
+							<span class="downmove" ng-click="downmove_modal(field.field_items, $index)"><i class="icon_down"></i></span>
+							<span class="delmove" ng-click="del_fielditems(field.field_items, item,1)"><i class="icon_del"></i></span>
+						</div>
+						<div class="editimgbox">
+							<div class="img_box" style="width:75px;float: none;" ng-class="item.field_img ? 'hasimg' : ''">
+								<div class="selectimage" data-type="iconmenu" title="选择图片" selectimage ng-model="item.field_img">
+									<img ng-src="{literal}{{item.field_img}}{/literal}" ng-if="item.is_localimg == '0'">
+									<img ng-src="{$IMAGE_PATH}/micromagazine/img/thememodal/{literal}{{item.field_img}}{/literal}" ng-if="item.is_localimg == '1'">
+								</div>
+							</div>
+						</div>
+						<div class="editinfobox">
+							<div class="line_info">
+								<span class="infotitle">背景色：</span>
+								<div class="infocontent">
+				    				<div class="input-group fl" colorpicker ng-model="item.bgcolor" color=" {literal}{{item.bgcolor}}{/literal}">
+									    <input type="text" class="form-control" ng-model="item.bgcolor" style="min-width:100px;"/>
+									    <span class="input-group-addon"><i style="background-color: {literal}{{item.bgcolor}}{/literal};"></i></span>
+									</div>
+									<div class="fl resetcolor" ng-model="item.bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].item_bgcolor.value}}{/literal}">
+										<span class="btn btn-primary btn-mini">重置颜色</span>
+									</div>
+								</div>
+							</div>
+							<div class="line_info">
+								<span class="infotitle">跳转链接：</span>
+								<div class="infocontent">
+									<div class="input-append">
+										<input type="text" readonly size="25" ng-model="item.linkname">
+										<a href="javascript:void(0);" class="selecturl btn" selecturl type="btnlink" data-mark="backurl" ng-model="item.linkurl"><i class="icon_link"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="editinfobox" style="margin:10px 0 0 0;">
+							<div class="line_info">
+								<span class="infotitle">标题内容：</span>
+								<div class="infocontent">
+									<div class="fl mr10">
+										<input type="text" ng-model="item.title_info">
+									</div>
+				    				<div class="input-group fl" colorpicker ng-model="item.title_color" color=" {literal}{{item.title_color}}{/literal}">
+									    <input type="text" class="form-control colorinput" ng-model="item.title_color"/>
+									    <span class="input-group-addon"><i style="background-color: {literal}{{item.title_color}}{/literal};"></i></span>
+									</div>
+									<div class="fl resetcolor" ng-model="item.title_color" resetcolor color="{literal}{{themeattr[field.field_type].title_color.value}}{/literal}">
+										<span class="btn btn-primary btn-mini">重置颜色</span>
+									</div>
+								</div>
+							</div>
+							<div class="line_info" ng-if="field.is_descibe == '1'">
+								<span class="infotitle">描述内容：</span>
+								<div class="infocontent">
+									<div class="fl mr10"><input type="text" ng-model="item.descibe_info" /></div>
+									<div class="input-group fl" colorpicker ng-model="item.descibe_color" color=" {literal}{{item.descibe_color}}{/literal}">
+									    <input type="text" class="form-control colorinput" ng-model="item.descibe_color"/>
+									    <span class="input-group-addon"><i style="background-color: {literal}{{item.descibe_color}}{/literal};"></i></span>
+									</div>
+									<div class="fl resetcolor" ng-model="item.descibe_color" resetcolor color="{literal}{{themeattr[field.field_type].descibe_color.value}}{/literal}">
+										<span class="btn btn-primary btn-mini">重置颜色</span>
+									</div>
+								</div>
+							</div>
+							<div class="line_info" ng-if="field.is_btn == '1'">
+								<span class="infotitle">按钮内容：</span>
+								<div class="infocontent">
+									<div class="fl mr10"><input type="text" name="title_con" ng-model="item.btn_info"></div>
+									<div class="input-group fl" colorpicker ng-model="item.btn_color" color=" {literal}{{item.btn_color}}{/literal}">
+									    <input type="text" class="form-control colorinput" ng-model="item.btn_color"/>
+									    <span class="input-group-addon"><i style="background-color: {literal}{{item.btn_color}}{/literal};"></i></span>
+									</div>
+									<div class="fl resetcolor" ng-model="item.btn_color" resetcolor color="{literal}{{themeattr[field.field_type].btn_color.value}}{/literal}">
+										<span class="btn btn-primary btn-mini">重置颜色</span>
+									</div>
+								</div>
+							</div>
+							<div class="line_info" ng-if="field.is_btn == '1'">
+								<span class="infotitle">按钮背景色：</span>
+								<div class="infocontent">
+									<div class="input-group fl" colorpicker ng-model="item.btn_bgcolor" color=" {literal}{{item.btn_bgcolor}}{/literal}">
+									    <input type="text" class="form-control colorinput" ng-model="item.btn_bgcolor"/>
+									    <span class="input-group-addon"><i style="background-color: {literal}{{item.btn_bgcolor}}{/literal};"></i></span>
+									</div>
+									<div class="fl resetcolor" ng-model="item.btn_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].btn_bgcolor.value}}{/literal}">
+										<span class="btn btn-primary btn-mini">重置颜色</span>
+									</div>
+									<span class="infotitle" style="margin-left: 5px;">边框色：</span>
+									<div class="input-group fl" colorpicker ng-model="item.btn_bordercolor" color=" {literal}{{item.btn_bordercolor}}{/literal}">
+									    <input type="text" class="form-control colorinput" ng-model="item.btn_bordercolor"/>
+									    <span class="input-group-addon"><i style="background-color: {literal}{{item.btn_bordercolor}}{/literal};"></i></span>
+									</div>
+									<div class="fl resetcolor" ng-model="item.btn_bordercolor" resetcolor color="{literal}{{themeattr[field.field_type].btn_bordercolor.value}}{/literal}">
+										<span class="btn btn-primary btn-mini">重置颜色</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div>
+					<span class="btn btn-primary" ng-click="add_txtimg(field.field_items,12)">添加图文项</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].line_num.isedit == 1">
+			<td class="wdview" style="vertical-align: top;">行排列数：</td>
+			<td>
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'1': 'active'}[field.line_num]{/literal}"><input type="radio" ng-value="'1'" ng-model="field.line_num">一行一个</label>
+					<label class="radiobox" ng-class="{literal}{'2': 'active'}[field.line_num]{/literal}"><input type="radio" ng-value="'2'" ng-model="field.line_num">一行两个</label>
+					<label class="radiobox" ng-class="{literal}{'3': 'active'}[field.line_num]{/literal}"><input type="radio" ng-value="'3'" ng-model="field.line_num">一行三个</label>
+					<label class="radiobox" ng-class="{literal}{'4': 'active'}[field.line_num]{/literal}"><input type="radio" ng-value="'4'" ng-model="field.line_num">一行四个</label>
+				</div>
+				<div class="gray mt10" ng-if="field.line_num !== '1'">如果一行排列多个，请确保图片大小一致，多个时上下排列比较好</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].img_position.isedit == 1">
+			<td class="wdview" style="vertical-align: top;">图片位置：</td>
+			<td>
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'left': 'active'}[field.img_position]{/literal}"><input type="radio" ng-value="'left'" ng-model="field.img_position">左图右文</label>
+					<label class="radiobox" ng-class="{literal}{'right': 'active'}[field.img_position]{/literal}"><input type="radio" ng-value="'right'" ng-model="field.img_position">左文右图</label>
+					<label class="radiobox" ng-class="{literal}{'top': 'active'}[field.img_position]{/literal}"><input type="radio" ng-value="'top'" ng-model="field.img_position">上图下文</label>
+					<label class="radiobox" ng-class="{literal}{'bottom': 'active'}[field.img_position]{/literal}"><input type="radio" ng-value="'bottom'" ng-model="field.img_position">上文下图</label>
+				</div>
+				<div class="gray mt10" ng-if="field.img_position == 'left' || field.img_position == 'right'">图文左右排列：图片与文字各占50%的宽度，请合理设计图片</div>
+				<div class="gray mt10" ng-if="field.img_position == 'top' || field.img_position == 'bottom'">图文上下排列：可以调整文字上下高度，注意控制文字长度</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].title_align.isedit == 1">
+			<td class="wdview">文字对齐：</td>
+			<td>
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'left': 'active'}[field.title_align]{/literal}"><input type="radio" ng-value="'left'" ng-model="field.title_align">左对齐</label>
+					<label class="radiobox" ng-class="{literal}{'center': 'active'}[field.title_align]{/literal}"><input type="radio" ng-value="'center'" ng-model="field.title_align">居中</label>
+					<label class="radiobox" ng-class="{literal}{'right': 'active'}[field.title_align]{/literal}"><input type="radio" ng-value="'right'" ng-model="field.title_align">右对齐</label>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].is_descibe.isedit == 1">
+			<td class="wdview">是否有描述：</td>
+			<td>
+				<label class="switch_box" ng-class="{literal}{'1': 'on','0' : 'off'}[field.is_descibe]{/literal}">
+					<input type="checkbox" ng-true-value="'1'" ng-false-value="'0'" ng-model="field.is_descibe">
+					<span class="switch_info" data-oninfo="保留" data-offinfo="移除" ng-bind="field.is_descibe == '1' ? '保留' : '移除'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].is_btn.isedit == 1">
+			<td class="wdview">是否有按钮：</td>
+			<td>
+				<label class="switch_box" ng-class="{literal}{'1': 'on','0' : 'off'}[field.is_btn]{/literal}">
+					<input type="checkbox" ng-true-value="'1'" ng-false-value="'0'" ng-model="field.is_btn">
+					<span class="switch_info" data-oninfo="保留" data-offinfo="移除" ng-bind="field.is_btn == '1' ? '保留' : '移除'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].field_bgcolor.isedit == 1">
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].field_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].is_item_border.isedit == 1">
+			<td class="wdview">是否有边框：</td>
+			<td>
+				<label class="switch_box fl" ng-class="{literal}{'1': 'on','0' : 'off'}[field.is_item_border]{/literal}">
+					<input type="checkbox" ng-true-value="'1'" ng-false-value="'0'" ng-model="field.is_item_border">
+					<span class="switch_info" data-oninfo="保留" data-offinfo="移除" ng-bind="field.is_item_border == '1' ? '保留' : '移除'"></span>
+					<span class="switch_btn"></span>
+				</label>
+				<div class="gray fl" style="margin:4px 0 0 10px;">保留边框时建议图文块间距，整体内边距设为0</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].field_bgcolor.isedit == 1 && field.is_item_border == '1'">
+			<td class="wdview">边框颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.item_bordercolor" color="{literal}{{field.item_bordercolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.item_bordercolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.item_bordercolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.item_bordercolor" resetcolor color="{literal}{{themeattr[field.field_type].item_bordercolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].title_fz.isedit == 1">
+			<td class="wdview">标题字体大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="12" max="20" step="1" value="{literal}{{field.title_fz}}{/literal}" ng-model="field.title_fz" slider></div> 
+				<div class="drag_num" ng-bind="field.title_fz">
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].descibe_fz.isedit == 1 && field.is_descibe == '1'">
+			<td class="wdview">描述字体大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="10" max="16" step="1" value="{literal}{{field.descibe_fz}}{/literal}" ng-model="field.descibe_fz" slider></div> 
+				<div class="drag_num" ng-bind="field.descibe_fz">
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_fz.isedit == 1 && field.is_btn == '1'">
+			<td class="wdview">按钮字体大小：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="10" max="14" step="1" value="{literal}{{field.btn_fz}}{/literal}" ng-model="field.btn_fz" slider></div> 
+				<div class="drag_num" ng-bind="field.btn_fz">
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_radius.isedit == 1 && field.is_btn == '1'">
+			<td class="wdview">按钮弧度：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.btn_radius}}{/literal}" ng-model="field.btn_radius" slider></div> 
+				<div class="drag_num" ng-bind="field.btn_radius">
+			</td>
+		</tr>
+		<tr ng-if="field.theme == 'default_theme'">
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].title_pt.isedit == 1 && (field.img_position == 'top' || field.img_position == 'bottom')">
+			<td class="wdview">文字上间距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.title_pt}}{/literal}" ng-model="field.title_pt" slider></div>
+				<div class="drag_num" ng-bind="field.title_pt"></div>
+				<div class="gray" style="margin-top:5px;">当图文上下排列时，文字块的上间距，图文左右排列时是上下居中的</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].title_pb.isedit == 1 && (field.img_position == 'top' || field.img_position == 'bottom')">
+			<td class="wdview">文字下间距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.title_pb}}{/literal}" ng-model="field.title_pb" slider></div>
+				<div class="drag_num" ng-bind="field.title_pb"></div>
+				<div class="gray" style="margin-top:5px;">当图文上下排列时，文字块的下间距，图文左右排列时是上下居中的</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].titleimg_pd.isedit == 1 && (field.img_position == 'left' || field.img_position == 'right')">
+			<td class="wdview">图片与文字间距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.titleimg_pd}}{/literal}" ng-model="field.titleimg_pd" slider></div>
+				<div class="drag_num" ng-bind="field.titleimg_pd"></div>
+				<div class="gray" style="margin-top:5px;">当图文左右排列时，图片与文字的间距</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].item_margin.isedit == 1">
+			<td class="wdview">图文块间距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="10" step="1" value="{literal}{{field.item_margin}}{/literal}" ng-model="field.item_margin" slider></div>
+				<div class="drag_num" ng-bind="field.item_margin"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].item_radius.isedit == 1">
+			<td class="wdview">图文块弧度：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.item_radius}}{/literal}" ng-model="field.item_radius" slider></div> 
+				<div class="drag_num" ng-bind="field.item_radius">
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].item_pd.isedit == 1">
+			<td class="wdview">图文内边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="10" step="1" value="{literal}{{field.item_pd}}{/literal}" ng-model="field.item_pd" slider></div>
+				<div class="drag_num" ng-bind="field.item_pd"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].field_pd.isedit == 1">
+			<td class="wdview">整体内边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="10" step="1" value="{literal}{{field.field_pd}}{/literal}" ng-model="field.field_pd" slider></div>
+				<div class="drag_num" ng-bind="field.field_pd"></div>
+			</td>
+		</tr>
+		
+	</table>
+</div>

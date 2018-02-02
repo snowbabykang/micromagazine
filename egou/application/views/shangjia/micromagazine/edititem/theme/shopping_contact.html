@@ -1,0 +1,60 @@
+<div class="editmodalbox" ng-class="{literal}{'shopping_contact{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《商城-联系方式》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr ng-if="themeattr[field.field_type].contact_info.isedit == 1">
+			<td class="wdview">联系内容：</td>
+			<td> 
+			    <input type="text" class="form-control" ng-model="field.contact_info" limitcount count="8"/>
+			    <span class="count-limit"><span class="remainwords1">4</span>/4</span>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].contact_phone.isedit == 1">
+			<td class="wdview">联系电话：</td>
+			<td> 
+			    <input type="text" class="form-control" ng-model="field.contact_phone"/>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].field_bgcolor.isedit == 1">
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].field_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].phone_color.isedit == 1">
+			<td class="wdview">电话图标颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.phone_color" color="{literal}{{field.phone_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.phone_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.phone_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.phone_color" resetcolor color="{literal}{{themeattr[field.field_type].phone_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].fz_color.isedit == 1">
+			<td class="wdview">字体颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.fz_color" color="{literal}{{field.fz_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.fz_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.fz_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.fz_color" resetcolor color="{literal}{{themeattr[field.field_type].fz_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview"></td>
+			<td> 
+			    <div class="alert">左侧会自动获取商城图标和名称</div>
+			</td>
+		</tr>
+	</table>
+</div>

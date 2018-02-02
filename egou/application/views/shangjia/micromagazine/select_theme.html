@@ -1,0 +1,131 @@
+{if $themetype eq 'config'}
+	<div style="text-align:center;line-height:200px;">当前在创建主题模板</div>
+{else}
+<div class="magthemelist">
+	{if $data}
+	<ul>
+		{foreach item=item from=$data key=key}
+		<li>
+			<div class="themebox">
+				<div ng-click="showthemedetail({$key})">
+					<div class="theme_img">
+						<img src = "{$item.releaseData.coverimg}" data-preview="{$item.releaseData.preview_img}">
+						<div class="themealertinfo">
+							当前模板不能使用，联系客服购买
+						</div>			
+					</div>
+					<div class="themeinfo">
+						<div class="theme_title" title="{$item.releaseData.title}">
+							<div class="fl"><div class="themetitle">{$item.releaseData.title}</div></div>
+							<div class="fr">
+								{if $item.releaseData.mgz_id eq $thememgz_id}<span class="usedbtn">使用中</span>{/if}
+							</div>
+						</div>
+						<div class="theme_descibe">
+							{if $item.releaseData.is_free}
+							<span class="label">免费</span>
+							{else}
+								{if $item.payArr.is_useable == '1'}
+								<span class="label label-success" title="{foreach item=fee from=$item.releaseData.fee_rule}{if $fee.time == '1'}{$fee.text}：￥{$fee.price}&nbsp;&nbsp;&nbsp;&nbsp;{/if}{/foreach}">已付费</span>
+								{else}
+								<span class="label label-important" title="{foreach item=fee from=$item.releaseData.fee_rule}{if $fee.time == '1'}{$fee.text}：￥{$fee.price}&nbsp;&nbsp;&nbsp;&nbsp;{/if}{/foreach}">收费</span>
+								{/if}
+							{/if}
+							<span title="{$item.releaseData.overview}">{$item.releaseData.overview}</span>
+						</div>
+					</div>
+				</div>
+				<div class="usethemebtn"  ng-click="usethemeCreatmgz({$item.config_id},{$item.id},{$item.payArr.is_useable})">使用该模板创建页面>></div>
+			</div>
+		</li>
+		{/foreach}
+		<div class="clearfix"></div>
+	</ul>
+	<div class="theme_pagation">
+		<span style="border:none;">共{$pageData.totalnum}条，第{$pageData.pagenow}/{$pageData.pagenum}页</span>
+		{if $pageData.pagenow == 1}
+		<span>首页</span><span>上一页</span>
+		{else}
+		<a ui-sref="selecttheme({literal}{page:{/literal}{$pageData.pagefirst}{literal}}{/literal})" class="btn-link">首页</a>
+		<a ui-sref="selecttheme({literal}{page:{/literal}{$pageData.pagepre}{literal}}{/literal})" class="btn-link">上一页</a>
+		{/if}
+		{if $pageData.pagenow >= $pageData.pagenum}
+		<span>下一页</span><span>尾页</span>
+		{else}
+		<a ui-sref="selecttheme({literal}{page:{/literal}{$pageData.pagenext}{literal}}{/literal})" class="btn-link">下一页</a>
+		<a ui-sref="selecttheme({literal}{page:{/literal}{$pageData.pagelast}{literal}}{/literal})" class="btn-link">尾页</a>
+		{/if}
+	</div>
+	{else}
+	<div style="text-align:center;line-height:200px;">主题模块正在搭建中……</div>
+	{/if}
+</div>
+{literal}
+<div id="themeinfomodal" class="modal hide fade">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 class="fl" ng-bind="showthemeinfo.releaseData.title"></h3>
+		<div class="btn btn-success fr" style="margin-right: 10px;" ng-click="usethemeCreatmgz(showthemeinfo.config_id,showthemeinfo.id,showthemeinfo.payArr.is_useable)">
+			使用该模板创建页面
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="modal-body">
+		<blockquote ng-bind="showthemeinfo.releaseData.overview"></blockquote>
+		<table class="editmodalbox" style="display: block;">
+			<tr ng-if="showthemeinfo.releaseData.is_free == '0'">
+				<td>使用状态</td>
+				<td>
+					<span ng-if="showthemeinfo.payArr.is_useable == '1'" ng-cloak class="label label-success">已付费</span>
+					<span ng-if="showthemeinfo.payArr.is_useable == '0'" ng-cloak>
+						<span class="label label-important">未付费</span>
+						可联系客服购买使用
+					</span>
+				</td>
+			</tr>
+			<tr ng-if="showthemeinfo.releaseData.is_free == '0' && showthemeinfo.payArr.is_useable == '1'" ng-cloak>
+				<td>到期时间：</td>
+				<td>
+					<span ng-bind="showthemeinfo.payArr.buy_duration"></span>
+				</td>
+			</tr>
+			<tr ng-if="showthemeinfo.releaseData.is_free == '0'">
+				<td>使用周期：</td>
+				<td>
+					<div class="btnlabel-radio themefeechange">
+						<label class="radiobox" ng-repeat = "fee in showthemeinfo.releaseData.fee_rule track by $index" ng-if="fee.time == '1'" 
+							ng-click="changethemefee(fee.price)" ng-class="($index == 0 && !showcurrentprice) || showcurrentprice == fee.price ? 'active' : ''">
+						  	{{fee.text}}
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>模板价格：</td>
+				<td>
+					<span class="themeprice" ng-repeat = "fee in showthemeinfo.releaseData.fee_rule track by $index" ng-if="fee.time == '1'" 
+					ng-style="($index == 0 && !showcurrentprice) || showcurrentprice == fee.price ? {'display':'block'} : {'display':'none'}">
+						<b>￥{{fee.price}}</b>/{{fee.text}}
+					</span>
+					<span class="label" ng-if="showthemeinfo.releaseData.is_free == '1'" >免费</span>
+				</td>
+			</tr>
+		</table>
+		<div class="" style="border-top:1px solid #eee;">
+			<div class="fl">
+				<img style="width:376px;border: 1px solid #eee;border-top:none;" ng-src = "{{showthemeinfo.releaseData.preview_img}}">
+			</div>
+			<div class="fr theme_ewcodebox">
+				<img ng-src="{{showthemeinfo.codeimg}}" alt="" />
+				<div>微信扫一扫，预览主题效果</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+var theme = {
+	themelist : {/literal}{if $dataJson}{$dataJson}{else}''{/if}{literal},    //主题列表
+};
+</script>
+{/literal}
+{/if}

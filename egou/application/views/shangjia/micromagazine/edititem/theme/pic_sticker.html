@@ -1,0 +1,206 @@
+<div class="editmodalbox" ng-class="{literal}{'pic_sticker{{field.field_id}}': 'show'}[$storage.isShow]{/literal}" >
+	<p class="edit_title">编辑《图片贴纸》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr ng-if="themeattr[field.field_type].title_info.isedit == 1">
+			<td class="wdview">正标题内容：</td>
+			<td> 
+			    <input type="text" class="form-control" ng-model="field.title_info"/><span class="mlr05">建议控制字数，保持在一行</span>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].is_subtitle.isedit == 1">
+			<td class="wdview">是否有副标题：</td>
+			<td> 
+				<label class="switch_box" ng-class="{literal}{'1': 'on','0' : 'off'}[field.is_subtitle]{/literal}">
+					<input type="checkbox" ng-true-value="'1'" ng-false-value="'0'" ng-model="field.is_subtitle">
+					<span class="switch_info" data-oninfo="保留" data-offinfo="移除" ng-bind="field.is_subtitle == '1' ? '保留' : '移除'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].subtitle_info.isedit == 1 && field.is_subtitle == '1'">
+			<td class="wdview">副标题内容：</td>
+			<td> 
+			    <input type="text" class="form-control" ng-model="field.subtitle_info"/>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].is_btn.isedit == 1">
+			<td class="wdview">是否有按钮：</td>
+			<td> 
+				<label class="switch_box" ng-class="{literal}{'1': 'on','0' : 'off'}[field.is_btn]{/literal}">
+					<input type="checkbox" ng-true-value="'1'" ng-false-value="'0'" ng-model="field.is_btn">
+					<span class="switch_info" data-oninfo="保留" data-offinfo="移除" ng-bind="field.is_btn == '1' ? '保留' : '移除'"></span>
+					<span class="switch_btn"></span>
+				</label>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_info.isedit == 1 && field.is_btn == '1'">
+			<td class="wdview">按钮内容：</td>
+			<td> 
+			    <input type="text" class="form-control" ng-model="field.btn_info"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">跳转链接：</td>
+			<td>
+				<div class="input-append">
+					<input type="text" readonly size="25" ng-model="field.linkname">
+					<a href="javascript:void(0);" class="selecturl btn" type="btnlink" selecturl ng-model="field.linkurl"><i class="icon_link"></i></a>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<dotted></dotted>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].field_bgcolor.isedit == 1">
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].field_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].field_bgimg.isedit == 1">
+			<td class="wdview">背景图：</td>
+			<td> 
+				<p>建议图片宽度640px，高度自定义，正副标题会上下居中</span></p>
+				<div class="img_box selectimage" data-type="pic_sticker" selectimage ng-model="field.field_bgimg">
+					<img ng-if="field.is_localimg == '0' && field.field_bgimg" ng-src="{literal}{{field.field_bgimg}}{/literal}">
+					<img class="bgimg" ng-src="{$IMAGE_PATH}/micromagazine/img/thememodal/{literal}{{field.field_bgimg}}{/literal}" ng-if="field.is_localimg == '1' && field.field_bgimg">
+					<i class="icon_plus" ng-if="!field.field_bgimg"></i>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].con_bgcolor.isedit == 1">
+			<td class="wdview">内容块背景色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.con_bgcolor" color="{literal}{{field.con_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.con_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.con_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.con_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].con_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].con_bordercolor.isedit == 1">
+			<td class="wdview">内容块边框色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.con_bordercolor" color="{literal}{{field.con_bordercolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.con_bordercolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.con_bordercolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.con_bordercolor" resetcolor color="{literal}{{themeattr[field.field_type].con_bordercolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<dotted></dotted>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].title_color.isedit == 1">
+			<td class="wdview">正标题颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.title_color" color="{literal}{{field.title_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.title_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.title_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.title_color" resetcolor color="{literal}{{themeattr[field.field_type].title_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].title_fz.isedit == 1">
+			<td class="wdview">正标题大小：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="14" max="30" step="2" value="{literal}{{field.title_fz}}{/literal}" ng-model="field.title_fz" slider></div>
+				<div class="drag_num" ng-bind="field.title_fz"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].subtitle_color.isedit == 1 && field.is_subtitle == '1'">
+			<td class="wdview">副标题颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.subtitle_color" color="{literal}{{field.subtitle_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.subtitle_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.subtitle_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.subtitle_color" resetcolor color="{literal}{{themeattr[field.field_type].subtitle_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].subtitle_fz.isedit == 1 && field.is_subtitle == '1'">
+			<td class="wdview">副标题大小：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="10" max="26" step="2" value="{literal}{{field.subtitle_fz}}{/literal}" ng-model="field.subtitle_fz" slider></div>
+				<div class="drag_num" ng-bind="field.subtitle_fz"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_bgcolor.isedit == 1 && field.is_btn == '1'">
+			<td class="wdview">按钮背景色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.btn_bgcolor" color="{literal}{{field.btn_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.btn_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.btn_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.btn_bgcolor" resetcolor color="{literal}{{themeattr[field.field_type].btn_bgcolor.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_color.isedit == 1 && field.is_btn == '1'">
+			<td class="wdview">按钮字体色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.btn_color" color="{literal}{{field.btn_color}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.btn_color"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.btn_color}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.btn_color" resetcolor color="{literal}{{themeattr[field.field_type].btn_color.value}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].btn_fz.isedit == 1 && field.is_btn == '1'">
+			<td class="wdview">按钮字体大小：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="10" max="16" step="1" value="{literal}{{field.btn_fz}}{/literal}" ng-model="field.btn_fz" slider></div>
+				<div class="drag_num" ng-bind="field.btn_fz"></div>
+			</td>
+		</tr>
+		<!-- <tr ng-if="themeattr[field.field_type].pic_sticker_pd.isedit == 1 && field.is_subtitle == '1'">
+			<td class="wdview">标题间距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.pic_sticker_pd}}{/literal}" ng-model="field.pic_sticker_pd" slider></div>
+				<div class="drag_num" ng-bind="field.pic_sticker_pd"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].titleinfo_pt.isedit == 1">
+			<td class="wdview">标题上边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.titleinfo_pt}}{/literal}" ng-model="field.titleinfo_pt" slider></div>
+				<div class="drag_num" ng-bind="field.titleinfo_pt"></div>
+			</td>
+		</tr>
+		<tr ng-if="themeattr[field.field_type].titleinfo_pb.isedit == 1">
+			<td class="wdview">标题下边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.titleinfo_pb}}{/literal}" ng-model="field.titleinfo_pb" slider></div>
+				<div class="drag_num" ng-bind="field.titleinfo_pb"></div>
+			</td>
+		</tr> -->
+		<tr ng-if="themeattr[field.field_type].field_pd.isedit == 1">
+			<td class="wdview">模块内边距：</td>
+			<td> 
+				<div class="slide_circle" rel="modhd" min="0" max="20" step="1" value="{literal}{{field.field_pd}}{/literal}" ng-model="field.field_pd" slider></div>
+				<div class="drag_num" ng-bind="field.field_pd"></div>
+			</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,75 @@
+#ywk_form{background: #fff;}
+.form-elements .control-group{margin: 10px 0;}
+.form-elements .control-group .control-label{color:#999;display:inline-block;width: 100%; margin-bottom: 5px;padding: 0 10px;}
+#content_form_name{display: none;} 
+#ywk_form .form-horizontal .controls {position: relative;margin-left: 0;}
+#ywk_form .form-horizontal .controls em {font-style: normal;position: absolute;right: 0px;font-size: 12px;top: -25px;color: red;}
+/* input */ 
+#ywk_form .control-group input[type=text],#ywk_form .control-group select,#ywk_form .control-group textarea{padding: 0px 10px;text-indent: 1px;font-size: 14px;line-height: 20px;vertical-align: middle;border: none;border-top: 1px solid #e5e5e5;border-bottom: 1px solid #e5e5e5;outline: none;
+box-shadow: none!important;width: 100%; box-sizing: border-box;height: 100%;margin:0;-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none;appearance: none;min-height:44px;border-radius:0px;background: #fff;}
+#ywk_form .control-group textarea{height: 100px;resize: none;padding:10px;}
+
+/* 单选多选 */  
+.checkbox .controls,.radio .controls{border-top: 1px solid #e5e5e5;border-bottom: 1px solid #e5e5e5;background:#fff;height: auto;overflow: hidden;}
+.controls label.checkbox,.controls label.radio{border-bottom:1px solid #e5e5e5;margin:0 0 0 10px;display:block;box-sizing:border-box;padding:0 20px 0 2px;width:100%;height:44px;line-height:44px;}
+.controls label.checkbox:last-child,.controls label.radio:last-child{border:none;}
+.controls label.checkbox input[type=checkbox],.controls label.radio input[type=radio]{ float: right;outline: 0;margin: 0;bottom: 0;line-height: 44px;font-size: 22px;color: #e5e5e5;width: 40px;text-align: center;}
+.controls label.radio input[type=radio]{font-size:20px;}
+
+/* 图片单选多选 */
+.checkboxpic,.radiopic{ position: relative;float: left;width: 33.33%;padding: 10px;box-sizing: border-box;}
+.checkbox .checkboxpic input,.radio .radiopic input{opacity: 0;display: block;position: absolute;width: 100%;height: 100%;z-index: 100;margin: 0;}
+.checkboxpic .imgpic,.radiopic .imgpic{}
+.checkboxpic .imgpic .single_img,.radiopic .imgpic .single_img{padding: 50% 0;position: relative;width: 100%;overflow: hidden;display: block;font-size: 14px;}
+.checkboxpic .imgpic .single_img img,.radiopic .imgpic .single_img img{width: 100%;position: absolute;top: 50%;left: 0;right: 0;transform: translateY(-50%);-webkit-transform: translateY(-50%);}
+.checkboxpic .imgpic .single_img span,.radiopic .imgpic .single_img span{position: absolute;text-overflow: ellipsis;word-break: break-all;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;padding: 0;overflow: hidden;text-align: center;font-size: 14px;
+width: 100%;color: #fff;background: rgba(0,0,0,0.6);bottom: 0;line-height: 28px;}
+.checkboxpic .imgpic,.radiopic .imgpic{position:relative;}
+.radiopic input:checked+.imgpic:after,.checkboxpic input:checked+.imgpic:after{ position: absolute;bottom: 5px;right: 5px;line-height: 1;content: "\e900";font-size: 22px;color: #09bb07;}
+
+
+/* 选择商品 */
+.checkboxprd,.radioprd{position: relative;border-bottom:1px solid #e5e5e5;margin:0 0 0 10px;display:block;box-sizing:border-box;padding:10px 20px 10px 0;width:100%;height:auto;overflow: hidden;}
+.controls label.checkboxprd:last-child,.controls label.radioprd:last-child{border:none;}
+.checkboxprd input[type=checkbox],.radioprd input[type=radio]{ display: block;position: absolute;right: 20px;margin: 0;z-index: 100;line-height: 47px;font-size: 22px;color: #e5e5e5;width: 40px;text-align: center;}
+.checkboxprd .mod-col-list,.radioprd .mod-col-list{padding:0;padding-right: 45px;}
+.checkboxprd .mod-col-list a,.radioprd .mod-col-list a{display:block;font-size: 14px;}
+.checkboxprd .mod-col-list .prdinfo,.radioprd .mod-col-list .prdinfo{display:table;box-sizing:border-box;width:100%}
+.checkboxprd .mod-col-list .prdinfo .pic,.radioprd .mod-col-list .prdinfo .pic{padding:20px 0;position:relative;width:40px;overflow:hidden;display:table-cell;height: auto;min-height: auto;}
+.checkboxprd .mod-col-list .prdinfo .pic img,.radioprd .mod-col-list .prdinfo .pic img{width:100%;position:absolute;top:50%;left:0;right:0;transform:translateY(-50%)}
+.checkboxprd .mod-col-list .prdinfo .prd-des,.radioprd .mod-col-list .prdinfo .prd-des{padding:0 5px 0 10px;display:table-cell;vertical-align:middle}
+.checkboxprd .mod-col-list .prdinfo .prd-des p.title,.radioprd .mod-col-list .prdinfo .prd-des p.title{font-size: 15px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;margin:0 0 2px;padding:0}
+.checkboxprd .mod-col-list .prdinfo .prd-des p.price,.radioprd .mod-col-list .prdinfo .prd-des p.price{ color: #ff5722;padding: 0;margin: 0;font-size: 12px;}
+
+/* 按钮 */
+#ywk_form .form-actions {padding: 0;border: none;margin: 0;}
+.form-submit{padding:10px;}
+#savewxform{padding: 0;width:100%;display:inline-block;text-align:center;line-height:44px;font-size:14px;border-radius:5px;background:#06bf04;color:#fff;border:none;opacity:1;}
+
+/* 弹窗 */	
+.dialog,.dialog__overlay {width: 100%;height: 100%;top: 0;left: 0;}
+.dialog {position: fixed;display: none; width:100%; height:100%; z-index:111}
+.dialog .iconxclose{position: absolute;display: block;right: 10px;top:5px;width: 22px; color: #777;font-size: 21px;}
+.dialog__overlay {position: absolute;z-index: 1;background: rgba(0,0,0,.4);opacity: 0;-webkit-transition: opacity 0.3s;transition: opacity 0.3s;-webkit-backface-visibility: hidden;}
+.dialog--open .dialog__overlay {opacity: 1;pointer-events: auto;}
+.dialog__content {width:270px;max-width: 560px;min-width: 270px; background:#fff;text-align: center;position: relative;z-index: 115;opacity: 0;border-radius:6px;left: 50%;
+top: 50%;
+margin-left: -135px; margin-top:-80px;}
+.dialog--open .dialog__content {pointer-events: auto;}
+.dialog-footer{height: 42px;line-height: 42px;color: #00a5e0;text-align: center;
+font-size: 16px; width: 100%;border-top: 1px solid #eee;}
+.dialog-footer a{ display:block;}
+.dialog-txt{ padding:40px 15px 20px}
+.dialog-txt .red-font{color:#f24f50}
+/* Content */ 
+.dialog--open{ display:block}
+.dialog.dialog--open .dialog__content,
+.dialog.dialog--close .dialog__content {-webkit-animation-duration: 0.3s;animation-duration: 0.3s;-webkit-animation-fill-mode: forwards;animation-fill-mode: forwards;}
+.dialog.dialog--open .dialog__content {-webkit-animation-name: anim-open;animation-name: anim-open;}
+.dialog.dialog--close .dialog__content {-webkit-animation-name: anim-close;animation-name: anim-close;}
+
+@-webkit-keyframes anim-open {0% { opacity: 0; -webkit-transform: scale3d(1.1, 1.1, 1); }100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); }}
+@keyframes anim-open {0% { opacity: 0; -webkit-transform: scale3d(1.1, 1.1, 1); transform: scale3d(1.1, 1.1, 1); }100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1); }}
+@-webkit-keyframes anim-close {0% { opacity: 1; }100% { opacity: 0; -webkit-transform: scale3d(0.9, 0.9, 1); }}
+@keyframes anim-close {0% { opacity: 1; }100% { opacity: 0; -webkit-transform: scale3d(0.9, 0.9, 1); transform: scale3d(0.9, 0.9, 1); }}
+	

@@ -1,0 +1,74 @@
+<div class="editmodalbox" ng-class="{literal}{'richtxt{{field.field_id}}': 'show'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《富文本》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td class="wdview">背景颜色：</td>
+			<td> 
+				<div class="input-group fl" colorpicker ng-model="field.field_bgcolor" color="{literal}{{field.field_bgcolor}}{/literal}">
+				    <input type="text" class="form-control" ng-model="field.field_bgcolor"/>
+				    <span class="input-group-addon"><i style="background-color: {literal}{{field.field_bgcolor}}{/literal};"></i></span>
+				</div>
+				<div class="fl resetcolor" ng-model="field.field_bgcolor" resetcolor color="{literal}{{color.richtxt.bgcolor}}{/literal}">
+					<span class="btn btn-primary btn-mini">重置颜色</span>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">选择元素：</td>
+			<td>
+				<div class="btnlabel-radio">
+					<label class="radiobox" ui-sref="index.richtxt.title" ui-sref-active="active">标题</label>
+					<label class="radiobox" ui-sref="index.richtxt.content" ui-sref-active="active">正文</label>
+					<label class="radiobox" ui-sref="index.richtxt.attention" ui-sref-active="active">关注</label>
+					<label class="radiobox" ui-sref="index.richtxt.readmore" ui-sref-active="active">阅读全文</label>
+					<label class="radiobox" ui-sref="index.richtxt.line" ui-sref-active="active">分割线</label>
+					<label class="radiobox" ui-sref="index.richtxt.share" ui-sref-active="active">分享</label>
+					<label class="radiobox" ui-sref="index.richtxt.pushother" ui-sref-active="active">互推</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+	</table>
+	<div class="fl">   
+		<script type="text/plain" class="ueditor" id="ueditor_{literal}{{field.field_id}}{/literal}" ng-model="field.field_richcon" ready="ready" config="_simpleConfig"></script>
+	</div>
+	<div class="fr" style="width:300px;padding-left:10px;">
+		<div ui-view="richmodal" class="angular_animate"/>
+	</div>
+	<div class="clearfix"></div>
+	<table>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">内上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pt}}{/literal}" ng-model="field.field_pt" slider></div>
+				<div class="drag_num" ng-bind="field.field_pt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pr}}{/literal}" ng-model="field.field_pr" slider></div>
+				<div class="drag_num" ng-bind="field.field_pr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pb}}{/literal}" ng-model="field.field_pb" slider></div>
+				<div class="drag_num" ng-bind="field.field_pb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pl}}{/literal}" ng-model="field.field_pl" slider></div>
+				<div class="drag_num" ng-bind="field.field_pl"></div>
+			</td>
+		</tr>
+	</table>
+</div>

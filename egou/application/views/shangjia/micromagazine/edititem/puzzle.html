@@ -1,0 +1,126 @@
+<div class="editmodalbox" ng-class="{literal}{'puzzle{{field.field_id}}': 'show puzzle{{field.field_id}}'}[$storage.isShow]{/literal}">
+	<p class="edit_title">编辑《拼图》模块<span class="btn fr" ng-click="IsdeleteField($event,field.field_id)">删除</span></p>
+	<table>
+		<tr>
+			<td>选择模块：</td>
+			<td>
+				<div class="btnlabel-radio">
+					<label class="radiobox" ng-class="{literal}{'3': 'active'}[field.field_style]{/literal}" ng-click="changepuzzle(field,3)">3x3</label>
+					<label class="radiobox" ng-class="{literal}{'4': 'active'}[field.field_style]{/literal}" ng-click="changepuzzle(field,4)">4x4</label>
+				</div>
+				<span class="red">未点击生成的拼图切换后将不保存</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">拼图：</td>
+			<td>
+				<div class="magic_container" ng-style="{literal}{'height':field.field_style *100 +2 +'px'}{/literal}">
+					<table class="magictable" magictable ng-if="(!field.field_puzzlecon || !(field.field_puzzlecon && checkpuzzlestyle(field))) && field.field_style == '4'">
+						<tr>
+							<td class="empty" data-x="0" data-y="0"></td>
+							<td class="empty" data-x="1" data-y="0"></td>
+							<td class="empty" data-x="2" data-y="0"></td>
+							<td class="empty" data-x="3" data-y="0"></td>
+						</tr>
+						<tr>
+							<td class="empty" data-x="0" data-y="1"></td>
+							<td class="empty" data-x="1" data-y="1"></td>
+							<td class="empty" data-x="2" data-y="1"></td>
+							<td class="empty" data-x="3" data-y="1"></td>
+						</tr>
+						<tr>
+							<td class="empty" data-x="0" data-y="2"></td>
+							<td class="empty" data-x="1" data-y="2"></td>
+							<td class="empty" data-x="2" data-y="2"></td>
+							<td class="empty" data-x="3" data-y="2"></td>
+						</tr>
+						<tr>
+							<td class="empty" data-x="0" data-y="3"></td>
+							<td class="empty" data-x="1" data-y="3"></td>
+							<td class="empty" data-x="2" data-y="3"></td>
+							<td class="empty" data-x="3" data-y="3"></td>
+						</tr>
+					</table>
+					<table class="magictable" magictable ng-if="(!field.field_puzzlecon || !(field.field_puzzlecon && checkpuzzlestyle(field))) && field.field_style == '3'">
+						<tr>
+							<td class="empty" data-x="0" data-y="0"></td>
+							<td class="empty" data-x="1" data-y="0"></td>
+							<td class="empty" data-x="2" data-y="0"></td>
+						</tr>
+						<tr>
+							<td class="empty" data-x="0" data-y="1"></td>
+							<td class="empty" data-x="1" data-y="1"></td>
+							<td class="empty" data-x="2" data-y="1"></td>
+						</tr>
+						<tr>
+							<td class="empty" data-x="0" data-y="2"></td>
+							<td class="empty" data-x="1" data-y="2"></td>
+							<td class="empty" data-x="2" data-y="2"></td>
+						</tr>
+					</table>
+					<table class="magictable" magictable ng-if="field.field_puzzlecon && checkpuzzlestyle(field)" ng-bind-html="field.field_puzzlecon | setpuzzle"></table>
+					<div class="ui-widget-content resizable" resizable count="{literal}{{field.field_id}}{/literal}">
+						<div style="padding:10px;text-align: center;"><span class="red">拖动区域</span><br/>请拖动右下角选择区域，双击确定选择</div>
+					</div>
+				</div>		
+				<span class="btn btn-primary" ng-click="creatpuzzleimgs($event,field)">生成拼图</span>
+				<span class="red" style="padding-left:10px;">如果改变了拼图请一定要生成才会生效</span>
+				<div class="alert mt10" style="margin-bottom:10px;">
+					<div class="fl">操作说明：</div>
+					<ul style="margin-left:5em;">
+						<li>拖动区域可以右键选择大小，直接确定区域</li>
+						<li>拖动区域可以拖动右下角选择区域，双击确定</li>
+						<li>请按照提示的最佳比例设计图片，整张图大小最小尺寸是720px宽度</li>
+						<li>修改拼图后一定要点击生成按钮，否则将不会保存</li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pt}}{/literal}" ng-model="field.field_pt" slider></div>
+				<div class="drag_num" ng-bind="field.field_pt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内右边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pr}}{/literal}" ng-model="field.field_pr" slider></div>
+				<div class="drag_num" ng-bind="field.field_pr"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pb}}{/literal}" ng-model="field.field_pb" slider></div>
+				<div class="drag_num" ng-bind="field.field_pb"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">内左边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_pl}}{/literal}" ng-model="field.field_pl" slider></div>
+				<div class="drag_num" ng-bind="field.field_pl"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><dotted></dotted></td>
+		</tr>
+		<tr>
+			<td class="wdview">外上边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mt}}{/literal}" ng-model="field.field_mt" slider></div>
+				<div class="drag_num" ng-bind="field.field_mt"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="wdview">外下边距：</td>
+			<td>
+				<div class="slide_circle" rel="modhd" min="0" max="30" step="1" value="{literal}{{field.field_mb}}{/literal}" ng-model="field.field_mb" slider></div>
+				<div class="drag_num" ng-bind="field.field_mb"></div>
+			</td>
+		</tr>
+	</table>
+</div>

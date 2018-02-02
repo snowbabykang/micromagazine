@@ -1,0 +1,49 @@
+<div id="previewmag" class="modal hide fade"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button " class="close closebtn" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>发送预览</h3>
+	</div>
+	<div class="modal-body">
+		<div class="ac" style="padding:30px 30px 20px;">
+			<p style="margin-bottom:20px;font-size:14px;">请输入昵称，此图文将发送至该昵称预览。</p>
+			<input type="text" id="wx_nick" placeholder="请输入昵称" size="30" ng-model="nick" style="margin:0;"/>
+			<span class="" ng-show="previewtip" ng-bind="previewinfo" style="padding-left: 10px;" ng-class="previewstatus"></span>
+			<p class="prenoticebox"><span class="red fl">注意：</span><span class="fl al">(1)该功能仅限认证的服务号使用。<br/>(2)该功能仅能给48小时内活跃的粉丝下发预览消息。</span></p>
+		</div>
+	</div>
+    <div class="modal-footer">
+	    <span class="btn btn-primary" id="preview_btn" ng-click="confirm_preview()">确定</span>
+		<span class="btn closebtn" data-dismiss="modal" aria-hidden="true">取消</span>
+	</div>
+</div>
+{* <div id="choicemaglanmu" class="modal hide fade"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button " class="close closebtn" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>选择栏目</h3>
+	</div>
+	<div class="modal-body">
+		<table class="classify_listtab table table-bordered" ng-if="lanmulists">
+	    	<tr class="lanmunav">
+	    		<th>选择</th>
+				<th>栏目</th>
+			</tr>
+	        <tr ng-repeat="x in lanmulists">
+	            <td>
+	                <label><input type="checkbox" class="classify_cbox" checked="{{x.checked}}"  ng-model="{{x.id}}"/></label>
+	            </td>
+	            <td class="txt_l">{{x.cats_name}}</td>
+	        </tr>
+	  </table>
+	   <div style="padding:50px 0;text-align: center;" ng-if="!lanmulists">
+		 <p>您还没有设置微杂志栏目</p>
+		 <div class="input-append">
+		 	<input class="span2" id="magname" type="text">
+		  	<span class="btn" id="savelanmu">创建栏目</span>
+		 </div>
+		</div>
+	</div>
+    <div class="modal-footer">
+	    <span class="btn btn-primary" id="choicelanmu_btn" ng-click="confirm_choicelanmu()">确定</span>
+		<span class="btn closebtn" data-dismiss="modal" aria-hidden="true">取消</span>
+	</div>
+</div> *}

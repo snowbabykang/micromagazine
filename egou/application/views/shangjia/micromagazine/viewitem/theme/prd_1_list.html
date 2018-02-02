@@ -1,0 +1,41 @@
+{literal}
+<div ng-if="field.field_type == 'prd_1_list'" ng-class="'mag_prd_1_list mag_prd_1_list'+field.field_id">
+<style>
+.mag_prd_1_list{{field.field_id}} .prd_itemsbox{padding:{{field.field_pt}} {{field.field_pr}} {{field.field_pb}} {{field.field_pl}};background-color: {{field.field_bgcolor}};}
+.mag_prd_1_list{{field.field_id}} li{margin-bottom:{{field.prd_mb}};}
+.mag_prd_1_list{{field.field_id}} a{background-color : {{field.prdbgcolor}};}
+.mag_prd_1_list{{field.field_id}} a .pic{float : {{field.picfloat}};}
+.mag_prd_1_list{{field.field_id}} a .prdinfobox{text-align : {{field.infoalign}};}
+.mag_prd_1_list{{field.field_id}} .title{color:{{field.titlecolor}};font-size:{{field.title_fz}};}
+.mag_prd_1_list{{field.field_id}} .price{color:{{field.pricecolor}};font-size:{{field.price_fz}};background-color: {{field.pricebgcolor}};}
+.mag_prd_1_list{{field.field_id}} .prdbuybtn{color:{{field.buycolor}};font-size:{{field.buy_fz}};background-color: {{field.buybgcolor}};}
+.mag_prd_1_list{{field.field_id}} .pricebox .prdbuybtn:before,.mag_prd_1_list{{field.field_id}} .pricebox .prdbuybtn:after{border-right-color:{{field.buybgcolor}};}
+.mag_prd_1_list{{field.field_id}} .pricebox .price_arrowr{border-top-color:{{field.prdbgcolor}};border-bottom-color:{{field.prdbgcolor}};border-left-color:{{field.pricebgcolor}};}
+.mag_prd_1_list{{field.field_id}} .pastprice{color:{{field.pricecolor}};}
+.mag_prd_1_list{{field.field_id}} .prdtaglabel{color:{{field.hotcolor}};background-color: {{field.hotbgcolor}};}
+.mag_prd_1_list{{field.field_id}} .shopbuybtn{color:{{field.shopcolor}};background-color: {{field.shopbgcolor}};border-color: {{field.shopbordercolor}};font-size:{{field.shop_fz}};}
+</style>
+	<p ng-if="!field.field_items" style="line-height:30px;margin:0;padding-left:10px;">请在右侧选择商品</p>
+	<div class="prd_itemsbox" ng-if="field.field_items">
+		<ul class="prd_items theme_prd_1_list">
+			<li ng-repeat = "item in field.field_items track by $index">
+				<a href="javascript:void(0);" ng-style="field.isborder == '1' ? {'border-color' : field.bordercolor} : {'border':'none'}">
+					<div class="pic"  ng-style="field.picradius == '1' ? {'border-radius' : '100%'} : {'border-radius':'none'}"><img ng-src="{{item.item_pic}}"></div>
+					<div class="prdinfobox">
+						<div class="title">{{item.item_title}}</div>
+						<div class="pricebox">
+							<div class="price"><span ng-style="{'font-size':field.priceprefix_fz,}">{{field.priceprefix}}</span>{{item.item_price}}</div>
+							<div ng-if="field.isbuy !== '1'" class="price_arrowr"></div>
+							<div class="prdbuybtn" ng-if="field.isbuy == '1'">{{field.buycon}}</div>
+						</div>
+						<div class="pastprice">原价：￥xxxx</div>
+						<div ng-if="field.isshopbtn == '1'" class="shopbuybtn">{{field.shopcon}}</div>
+					</div>
+					<div class="clearfix"></div>
+				</a>
+				<div class="prdtaglabel" ng-if="field.ishot == '1'">{{field.hotcon}}</div>
+			</li>
+		</ul>
+	</div>
+</div>
+{/literal}

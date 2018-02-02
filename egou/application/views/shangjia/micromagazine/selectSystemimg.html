@@ -1,0 +1,51 @@
+<!-- 选系统图标 png图片 -->
+<div id="systemiconsmodal" class="modal hide fade"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button " class="close closebtn" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>选择系统图</h3>
+	</div>
+	<div class="modal-body">
+		<ul class="systemiconslist">
+			<li ng-repeat="item in systemicons" ng-click="confirm_selecticon(item)">
+				<img ng-src="{$IMAGE_PATH}/micromagazine/img/thememodal/icon_svg/{literal}{{item}}{/literal}"/>
+			</li>
+		</ul>
+	</div>
+    <div class="modal-footer">
+		<span class="btn closebtn" data-dismiss="modal" aria-hidden="true">关闭</span>
+	</div>
+</div>
+<!-- 正副标题模块选系统背景图 -->
+<div id="titlebgimgsmodal" class="modal hide fade"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button " class="close closebtn" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>选择系统图</h3><span class="red">以下图片均为透明图，灰色只是背景</span>
+	</div>
+	<div class="modal-body">
+		<ul class="titlebgimgslist">
+			<li ng-repeat="item in titlebgimgs" ng-click="confirm_titlebgimg(item)">
+				<img ng-src="{$IMAGE_PATH}/micromagazine/img/thememodal/titlebgpic/{literal}{{item}}{/literal}"/>
+			</li>
+		</ul>
+	</div>
+    <div class="modal-footer">
+		<span class="btn closebtn" data-dismiss="modal" aria-hidden="true">关闭</span>
+	</div>
+</div>
+<!-- 选择系统的商品主图 -->
+<div id="systemprdimgsmodal" class="modal hide fade"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button " class="close closebtn" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>选择系统图</h3>
+	</div>
+	<div class="modal-body">
+		<ul class="sampleprdimgslist">
+			<li ng-repeat="item in sampleprdimgs" ng-click="confirm_prdimg(item)" >
+				<img ng-src="{$IMAGE_PATH}/micromagazine/img/thememodal/{literal}{{item}}{/literal}" title="系统图">
+			</li>
+		</ul>
+	</div>
+    <div class="modal-footer">
+		<span class="btn closebtn" data-dismiss="modal" aria-hidden="true">关闭</span>
+	</div>
+</div>
